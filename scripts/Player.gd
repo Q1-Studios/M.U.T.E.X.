@@ -44,9 +44,5 @@ func _physics_process(delta):
 	velocity.x = input_dir.x * SPEED
 	velocity.z = input_dir.y * SPEED
 	velocity.y = vertical_dir * SPEED
-	
-	if (velocity != Vector3.ZERO):
-		var my_id = multiplayer.get_unique_id()
-		print("[%s] Moving Player: %s" % [my_id, name])
 
 	move_and_slide()

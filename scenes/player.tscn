@@ -58,3 +58,5 @@ transform = Transform3D(0.00646594, 0, -0.069700725, 0, 0.07, 0, 0.069700725, 0,
 visible = false
 material_override = SubResource("StandardMaterial3D_qhqgy")
 mesh = ExtResource("3_qlg0r")
+
+[node name="movementController" type="Node3D" parent="."]

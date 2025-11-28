@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://curg5wfwg0y3w"]
+[gd_scene load_steps=9 format=3 uid="uid://curg5wfwg0y3w"]
 
 [ext_resource type="Script" uid="uid://b0g8rxgtpwr8c" path="res://scripts/levelScript.gd" id="1_in5yg"]
 [ext_resource type="PackedScene" uid="uid://c111b6l8it2x6" path="res://scenes/player.tscn" id="2_dfg5a"]
@@ -13,6 +13,13 @@ albedo_color = Color(0.91224825, 0.4228835, 0.76278186, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_y8gwd"]
 material = SubResource("StandardMaterial3D_dfg5a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8gwd"]
+albedo_color = Color(0.6048855, 0, 0.035501916, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lpkg1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n4611"]
 
 [node name="LevelScene" type="Node3D"]
 script = ExtResource("1_in5yg")
@@ -30,8 +37,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.270752)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dfg5a")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Wall" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
 transform = Transform3D(23.047922, 0, 0, 0, 10.132043, 0, 0, 0, 1, 18.303036, 3.0949965, -13.6137085)
 mesh = SubResource("BoxMesh_y8gwd")
+
+[node name="Opponent" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.05, 0, 0, 0, 4.05, 0, 0, 0, 4.05, -2.0117016, 0.7571354, -26.930803)
+material_override = SubResource("StandardMaterial3D_y8gwd")
+mesh = SubResource("CapsuleMesh_lpkg1")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Opponent"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Opponent/RigidBody3D"]
+transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_n4611")
