@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var gun_ray = $RayCast3D
 
-var bulletScene = load("res://scenes/HomingMissile.tscn")
+var bulletScene = load("res://scenes/Missile.tscn")
 var bulletObject
 var is_shooting = false
 
