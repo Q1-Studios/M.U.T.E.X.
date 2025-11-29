@@ -25,7 +25,7 @@ properties/2/replication_mode = 1
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tuyoq"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_smehm"]
-viewport_path = NodePath("HUD/SubViewport")
+viewport_path = NodePath("ModelContainer/HUD/SubViewport")
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("movement_controller", "camera_controller", "camera") groups=["Players"]]
 collision_layer = 2
@@ -67,6 +67,23 @@ thrusterLeft = NodePath("ThrusterExhaust2")
 thrusterRight = NodePath("ThrusterExhaust3")
 movement = NodePath("../movementController")
 
+[node name="HUD" type="Node3D" parent="ModelContainer"]
+
+[node name="SubViewport" type="SubViewport" parent="ModelContainer/HUD"]
+transparent_bg = true
+
+[node name="HUD SVG" type="TextureRect" parent="ModelContainer/HUD/SubViewport" node_paths=PackedStringArray("player")]
+offset_right = 400.0
+offset_bottom = 2000.0
+texture = ExtResource("7_fjrip")
+stretch_mode = 1
+script = ExtResource("8_smehm")
+player = NodePath("../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="ModelContainer/HUD"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.664, 0, -11.829)
+texture = SubResource("ViewportTexture_smehm")
+
 [node name="ThrusterExhaust" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
 transform = Transform3D(0.445, 0, 0, 0, 0.0102358, 0.212942, 0, -0.439881, 0.00495504, -0.130108, 0.251334, 2.23022)
 
@@ -95,23 +112,6 @@ shape = SubResource("CapsuleShape3D_tuyoq")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="ModelContainer"]
 transform = Transform3D(5.95371, 0, 5.05552e-08, 0, 0.279729, 0, 1.53151e-06, 0, 1.3531, -0.07686, 0.058098, 1.39981)
 shape = SubResource("CapsuleShape3D_tuyoq")
-
-[node name="HUD" type="Node3D" parent="."]
-
-[node name="SubViewport" type="SubViewport" parent="HUD"]
-transparent_bg = true
-
-[node name="HUD SVG" type="TextureRect" parent="HUD/SubViewport" node_paths=PackedStringArray("player")]
-offset_right = 400.0
-offset_bottom = 2000.0
-texture = ExtResource("7_fjrip")
-stretch_mode = 1
-script = ExtResource("8_smehm")
-player = NodePath("../../..")
-
-[node name="Sprite3D" type="Sprite3D" parent="HUD"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.664, 0, -11.829)
-texture = SubResource("ViewportTexture_smehm")
 
 [connection signal="max_Speed" from="movementController" to="ModelContainer" method="_on_movement_controller_max_speed"]
 
