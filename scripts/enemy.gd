@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var health
+var health = 100
 
 @export_group("Movement Settings")
 @export var MOVEMENT_SPEED = 15.0
@@ -207,3 +207,10 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 		target_player = null
 		current_state = PATROLLING
 		print("Player lost! Returning to patrol")
+		
+
+#Chris injected low quality code here
+func take_damage(damage):
+	health = health - damage
+	if health <= 0:
+		queue_free()

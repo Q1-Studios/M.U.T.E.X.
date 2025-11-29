@@ -6,6 +6,7 @@ extends Node3D
 
 var speed = 30
 var target: Node3D = null
+var damage = 50
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,7 @@ func enemyHit():
 		#print(collider)
 		if ray.get_collider().is_in_group("enemies"):
 			print("hit")
+			
 			mesh.visible = false
 			ray.enabled = false
 			queue_free()
@@ -47,3 +49,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		if body == null:
 			return
 		target = body
+		
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+
+ 
