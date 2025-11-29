@@ -3,10 +3,17 @@ extends CharacterBody3D
 var health = 100
 var typeId: int; # 1 -> Seen by Host/Shot by Client, 2 -> Seen by Client/Shot by Host
 
+@export var model_container: Node3D
+
 @export_group("Movement Settings")
-@export var MOVEMENT_SPEED = 15.0
-@export var ROTATION_SPEED = 3.0
-@export var WAYPOINT_REACH_DISTANCE = 5.0
+@export var MOVEMENT_SPEED = 60.0
+@export var ROTATION_SPEED = 1.5
+@export var WAYPOINT_REACH_DISTANCE = 20.0
+
+@export_group("Visual Banking")
+@export var max_bank_angle := 70.0
+@export var bank_smoothness := 5.0 
+@export var max_pitch_angle := 45.0 
 
 @export_group("Combat Settings")
 @export var ATTACK_RANGE = 40.0
@@ -14,10 +21,11 @@ var typeId: int; # 1 -> Seen by Host/Shot by Client, 2 -> Seen by Client/Shot by
 @export var DETECTION_RANGE = 50.0
 
 @export_group("Obstacle Avoidance")
-@export var OBSTACLE_DETECT_DISTANCE = 25.0
-@export var AVOIDANCE_FORCE = 2.0
-@export var RAYCAST_COUNT = 5 
+@export var OBSTACLE_DETECT_DISTANCE = 50.0 # How far ahead are obstacles detected
+@export var AVOIDANCE_FORCE = 1.0 # how strong should the avoidance movement be
+@export var RAYCAST_COUNT = 30 # how many directions are tested for collision avoidance
 @export var ASTEROID_COLLISION_LAYER = 1
+@export var ENEMY_COLLISION_LAYERS = [2, 3]  # Layers for enemy types
 
 @export_group("Path Settings")
 @export var PATROL_PATH_GROUP_NAME = "PatrolPaths"
@@ -33,6 +41,9 @@ var current_patrol_index = 0
 
 # Target Tracking
 var target_player: CharacterBody3D = null
+
+var smooth_avoidance: Vector3 = Vector3.ZERO
+var smooth_velocity: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	if not is_multiplayer_authority():
@@ -104,6 +115,11 @@ func patrol(delta: float) -> void:
 		return
 	
 	var target_point = patrol_points[current_patrol_index]
+	
+	if global_position.distance_to(target_point) < WAYPOINT_REACH_DISTANCE:
+		current_patrol_index = (current_patrol_index + 1) % patrol_points.size()
+		target_point = patrol_points[current_patrol_index]
+	
 	var desired_direction = (target_point - global_position).normalized()
 	
 	# detect obstacles
@@ -112,9 +128,7 @@ func patrol(delta: float) -> void:
 	
 	move_in_direction(final_direction, delta)
 	
-	if global_position.distance_to(target_point) < WAYPOINT_REACH_DISTANCE:
-		current_patrol_index = (current_patrol_index + 1) % patrol_points.size()
-		# print("Reached waypoint %d, moving to next" % current_patrol_index)
+	
 
 func chase_player(delta: float) -> void:
 	if not target_player or not is_instance_valid(target_player):
@@ -160,24 +174,30 @@ func attack_player(delta: float) -> void:
 func detect_obstacles(desired_direction: Vector3) -> Vector3:
 	var avoidance_vector = Vector3.ZERO
 	
-	var front_clear = check_asteroid_ray(global_position, desired_direction, OBSTACLE_DETECT_DISTANCE)
+	# Check for both asteroids and other enemies
+	var asteroid_clear = check_asteroid_ray(global_position, desired_direction, OBSTACLE_DETECT_DISTANCE)
+	var enemy_clear = check_enemy_ray(global_position, desired_direction, OBSTACLE_DETECT_DISTANCE * 0.6)  # shorter distance for enemies
+	
+	var front_clear = asteroid_clear and enemy_clear
 	
 	if not front_clear:
-		# Hindernisse in Hauptrichtung - suche freien Weg
 		var best_direction = Vector3.ZERO
 		var best_score = -1.0
 		
-		# Shoot RAYCAST_COUNT amount of ray casts to check multiple directions around the obstacle
 		for i in range(RAYCAST_COUNT):
-			var angle = (i - RAYCAST_COUNT / 2.0) * 30.0  # ±60° Spread
+			var angle = (i - RAYCAST_COUNT / 2.0) * 30.0
 			var test_direction = desired_direction.rotated(Vector3.UP, deg_to_rad(angle))
 			
-			# Check vertical avoidance manevour
-			var vertical_angle = (i % 2) * 30.0 - 15.0
-			test_direction = test_direction.rotated(test_direction.cross(Vector3.UP).normalized(), deg_to_rad(vertical_angle))
+			var vertical_angle = clampf((i % 2) * 90.0 - 45.0, -30, +30)
+			var side_axis = test_direction.cross(Vector3.UP).normalized()
+			if side_axis.length_squared() > 0.001:
+				test_direction = test_direction.rotated(side_axis, deg_to_rad(vertical_angle))
 			
-			if check_asteroid_ray(global_position, test_direction, OBSTACLE_DETECT_DISTANCE):
-				# found unobstructed way
+			# Check again for both if path is clear
+			var test_asteroid_clear = check_asteroid_ray(global_position, test_direction, OBSTACLE_DETECT_DISTANCE)
+			var test_enemy_clear = check_enemy_ray(global_position, test_direction, OBSTACLE_DETECT_DISTANCE * 0.6)
+			
+			if test_asteroid_clear and test_enemy_clear:
 				var score = test_direction.dot(desired_direction)
 				if score > best_score:
 					best_score = score
@@ -186,7 +206,8 @@ func detect_obstacles(desired_direction: Vector3) -> Vector3:
 		if best_direction != Vector3.ZERO:
 			avoidance_vector = (best_direction - desired_direction) * AVOIDANCE_FORCE
 	
-	return avoidance_vector
+	smooth_avoidance = smooth_avoidance.lerp(avoidance_vector, 0.15)
+	return smooth_avoidance
 
 func check_asteroid_ray(from: Vector3, direction: Vector3, distance: float) -> bool:
 	# Shoots RayCast to check if something is in the way
@@ -201,25 +222,83 @@ func check_asteroid_ray(from: Vector3, direction: Vector3, distance: float) -> b
 	var result = space_state.intersect_ray(query)
 	return result.is_empty()
 	
-func check_player_ray(from: Vector3, direction: Vector3, distance: float) -> bool:
-	var space_state = get_world_3d().direct_space_state
-	return true #TODO implement
+func is_player_in_sight(current_direction: Vector3) -> bool:
+	for i in range(RAYCAST_COUNT):
+		var angle = (i - RAYCAST_COUNT / 2.0) * 30.0
+		var test_direction = current_direction.rotated(Vector3.UP, deg_to_rad(angle))
+		
+		var vertical_angle = clampf((i % 2) * 90.0 - 45.0, -30, +30)
+		var side_axis = test_direction.cross(Vector3.UP).normalized()
+		if side_axis.length_squared() > 0.001:
+			test_direction = test_direction.rotated(side_axis, deg_to_rad(vertical_angle))
+		
+		# Check again for both if path is clear
+		var test_asteroid_clear = check_asteroid_ray(global_position, test_direction, OBSTACLE_DETECT_DISTANCE)
+	#TODO: lookup
+	return false
 
 func move_in_direction(direction: Vector3, delta: float) -> void:
 	if direction.length_squared() > 0.001:
 		rotate_towards(direction, delta)
-		velocity = direction * MOVEMENT_SPEED
+		
+		# Smooth velocity changes
+		var target_velocity = direction * MOVEMENT_SPEED
+		smooth_velocity = smooth_velocity.lerp(target_velocity, 8.0 * delta)
+		velocity = smooth_velocity
 	else:
-		velocity = Vector3.ZERO
-	
+		smooth_velocity = smooth_velocity.lerp(Vector3.ZERO, 8.0 * delta)
+		velocity = smooth_velocity
+		
 	move_and_slide()
 
 func rotate_towards(direction: Vector3, delta: float) -> void:
 	if direction.length_squared() < 0.001:
+		model_container.rotation.z = lerp(model_container.rotation.z, 0.0, delta * bank_smoothness)
+		model_container.rotation.x = lerp(model_container.rotation.x, 0.0, delta * bank_smoothness)
 		return
 	
 	var target_basis = Basis.looking_at(direction, Vector3.UP)
+	
+	# Berechne Rotationsdifferenz
+	var current_forward = -basis.z.normalized()
+	var target_forward = direction.normalized()
+	var rotation_axis = current_forward.cross(target_forward)
+	
+	# Banking mit Geschwindigkeitseinfluss
+	var bank_amount = 0.0
+	if rotation_axis.length_squared() > 0.001:
+		var turn_rate = rotation_axis.length();
+		bank_amount = rotation_axis.y * max_bank_angle * turn_rate
+		bank_amount = clampf(bank_amount, -max_bank_angle, max_bank_angle)
+	
+	# Pitch
+	# Pitch with ease-out Kurve
+	var vertical_direction = direction.y
+	var normalized_pitch = clampf(vertical_direction, -1.0, 1.0)
+	
+	# Ease-out of pitch
+	var eased_pitch = sign(normalized_pitch) * sqrt(abs(normalized_pitch))
+	var pitch_amount = eased_pitch * max_pitch_angle * 0.6
+	
+	# Apply smooth rotation
+	model_container.rotation.z = lerp(model_container.rotation.z, deg_to_rad(bank_amount), delta * bank_smoothness)
+	model_container.rotation.x = lerp(model_container.rotation.x, deg_to_rad(pitch_amount), delta * bank_smoothness)
+	
 	basis = basis.slerp(target_basis, ROTATION_SPEED * delta)
+	
+func check_enemy_ray(from: Vector3, direction: Vector3, distance: float) -> bool:
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(
+		from,
+		from + direction.normalized() * distance
+	)
+	query.exclude = [self]
+	
+	# Prüfe nur Enemy Layers (2 und 3)
+	query.collision_mask = (1 << 1) | (1 << 2)  # Layer 2 + 3
+	
+	var result = space_state.intersect_ray(query)
+	return result.is_empty()
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	# print("Something entered detection: ", body.name, " Groups: ", body.get_groups())

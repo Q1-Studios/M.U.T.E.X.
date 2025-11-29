@@ -36,7 +36,7 @@ func remove_player(peer_id):
 		player.queue_free()
 		
 func spawn_enemy(): 
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or $Enemies.get_child_count() >= 10:
 		# Only host may spawn enemies
 		return;
 		
