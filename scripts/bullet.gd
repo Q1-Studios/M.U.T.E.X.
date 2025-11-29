@@ -35,9 +35,9 @@ func homing(delta):
 
 	if target == null:
 		return
-	look_at(target.global_position, Vector3(1,1,1))
+	var target_transform = global_transform.looking_at(target.global_position, Vector3(0,1,0))
 	#position = position.move_toward(target.global_position, 0.1 * speed * delta)
-
+	global_transform = global_transform.interpolate_with(target_transform, 30 * delta)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemies"):
