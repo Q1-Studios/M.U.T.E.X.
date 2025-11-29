@@ -1,48 +1,25 @@
+# Player.gd
 extends CharacterBody3D
 
-const SPEED = 10.0
-
+@export var movement_controller: Node3D
 @onready var camera = $Camera3D
 
 func _enter_tree():
-	# 1. AUTHORITY SETUP
-	# This ensures Player 1 controls "Player 1", and Player 2 controls "Player 2"
+	# 1. Set Authority based on Name (Standard stuff)
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
-	# DEBUG PRINT
-	# Shows: [My Peer ID] Player Name: X | Authority: Y
-	var my_id = multiplayer.get_unique_id()
-	var owner_id = get_multiplayer_authority()
-	print("[%s] Spawned Player: %s | Authority is: %s" % [my_id, name, owner_id])
-
-	# 2. CAMERA SETUP
+	# 2. DECIDE WHO IS IN CONTROL
 	if is_multiplayer_authority():
+		# This is MY player. 
+		# Enable Camera.
 		camera.current = true
+		# Enable Movement Controller.
+		movement_controller.set_physics_process(true)
 	else:
+		# This is SOMEONE ELSE'S player.
+		# Disable Camera.
 		camera.current = false
-
-func _physics_process(delta):
-	# 3. INPUT SECURITY
-	# If this character does not belong to me, stop running code here.
-	# The MultiplayerSynchronizer will handle moving the other players.
-	if not is_multiplayer_authority():
-		return
-
-	# 4. ZERO-G MOVEMENT
-	# Horizontal (X / Z)
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
-	# Vertical (Y) - Using Space for Up, Shift for Down
-	var vertical_dir = 0.0
-	if Input.is_action_pressed("ui_accept"): # Default Spacebar
-		vertical_dir = 1.0
-	if Input.is_key_pressed(KEY_SHIFT):
-		vertical_dir = -1.0
-
-	# Apply Velocity directly
-	velocity.x = input_dir.x * SPEED
-	velocity.z = input_dir.y * SPEED
-	velocity.y = vertical_dir * SPEED
-
-	move_and_slide()
+		# KILL THE CONTROLLER. 
+		# We do not want to process inputs for other people's players.
+		movement_controller.set_physics_process(false)

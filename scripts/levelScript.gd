@@ -16,7 +16,7 @@ func _ready():
 		for id in multiplayer.get_peers():
 			add_player(id)
 
-func add_player(peer_id, player_info = {}):
+func add_player(peer_id, _player_info = {}):
 	print("Adding Player to Scene " + str(peer_id))
 	# Instantiate the player
 	var player = player_scene.instantiate()

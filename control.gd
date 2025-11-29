@@ -1,6 +1,7 @@
 extends Control
 
-
+func _ready() -> void:
+	_on_host_pressed()
 
 func _on_host_pressed() -> void:
 	print("Host Pressed")
