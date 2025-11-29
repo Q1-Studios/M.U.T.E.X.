@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://curg5wfwg0y3w"]
+[gd_scene load_steps=17 format=3 uid="uid://curg5wfwg0y3w"]
 
 [ext_resource type="Script" uid="uid://b0g8rxgtpwr8c" path="res://scripts/levelScript.gd" id="1_in5yg"]
 [ext_resource type="PackedScene" uid="uid://c111b6l8it2x6" path="res://scenes/player.tscn" id="2_dfg5a"]
@@ -17,13 +17,12 @@ background_mode = 2
 sky = SubResource("Sky_bevc7")
 ambient_light_source = 3
 reflected_light_source = 2
-ssr_enabled = true
 glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.005
+volumetric_fog_density = 0.001
 volumetric_fog_albedo = Color(0.46618086, 0.4661808, 0.4661808, 1)
-volumetric_fog_emission = Color(0.17805454, 0.06473716, 1.8049032e-08, 1)
-volumetric_fog_emission_energy = 13.05
+volumetric_fog_emission = Color(0.87311625, 0.4314523, 1.1551381e-06, 1)
+volumetric_fog_emission_energy = 5.0
 
 [sub_resource type="Animation" id="Animation_vle45"]
 length = 0.001
