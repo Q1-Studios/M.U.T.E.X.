@@ -55,13 +55,13 @@ shape = SubResource("CapsuleShape3D_tuyoq")
 [node name="ModelContainer" type="Node3D" parent="."]
 
 [node name="ThrusterExhaust" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
-transform = Transform3D(0.445, 0, 0, 0, 0.010235764, 0.21294236, 0, -0.43988094, 0.0049550403, 0, 0.17720568, 2.230224)
+transform = Transform3D(0.445, 0, 0, 0, 0.010235764, 0.21294236, 0, -0.43988094, 0.0049550403, -0.13010788, 0.2513337, 2.230224)
 
 [node name="ThrusterExhaust2" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
-transform = Transform3D(0.43191287, 0.10589531, -0.0011928582, 0, 0.010235766, 0.21294239, 0.10712765, -0.42694435, 0.0048093162, 1.2663579, 0.046215594, 1.9760575)
+transform = Transform3D(0.43191287, 0.10589531, -0.0011928582, 0, 0.010235766, 0.21294239, 0.10712765, -0.42694435, 0.0048093162, 1.1940761, 0.1329537, 1.9760575)
 
 [node name="ThrusterExhaust3" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
-transform = Transform3D(0.4298149, -0.11393116, 0.001283378, 0, 0.010235766, 0.21294239, -0.11525702, -0.42487055, 0.0047859554, -1.2936997, 0.046215594, 1.9760575)
+transform = Transform3D(0.4298149, -0.11393116, 0.001283378, 0, 0.010235766, 0.21294239, -0.11525702, -0.42487055, 0.0047859554, -1.4816318, 0.1474101, 1.9760575)
 
 [node name="ShipModel" parent="ModelContainer" instance=ExtResource("4_qlg0r")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
