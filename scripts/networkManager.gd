@@ -1,8 +1,8 @@
 extends Node
 
 # NetworkManager.gd
-const PORT = 7000
-const DEFAULT_SERVER_IP = "127.0.0.1" # Localhost
+const PORT = 8080
+const DEFAULT_SERVER_IP = "192.168.1.143" # Localhost
 
 const LEVEL_SCENE_PATH = "res://scenes/LevelScene.tscn" 
 
