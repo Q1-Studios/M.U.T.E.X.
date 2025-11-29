@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuyyf2weq0thj"]
+[gd_scene load_steps=10 format=3 uid="uid://cuyyf2weq0thj"]
 
 [ext_resource type="Script" uid="uid://tfednihsjjtl" path="res://scripts/enemy.gd" id="1_7p1mj"]
 [ext_resource type="ArrayMesh" uid="uid://c8ywj02dkssvf" path="res://assets/models/ship/Spaceship_Player.obj" id="2_md0e3"]
-[ext_resource type="Script" uid="uid://cindsixiocgcm" path="res://scripts/enemyVisibility.gd" id="3_4ra3w"]
+[ext_resource type="Script" path="res://scripts/enemyVisibility.gd" id="3_4ra3w"]
+[ext_resource type="PackedScene" uid="uid://dls7354f4iw2m" path="res://scenes/enemy_gun.tscn" id="3_5uy6h"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8tegq"]
 properties/0/path = NodePath(".:position")
@@ -69,6 +70,8 @@ transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7
 material_override = SubResource("StandardMaterial3D_8tegq")
 mesh = ExtResource("2_md0e3")
 skeleton = NodePath("../..")
+
+[node name="EnemyGun" parent="Visuals" instance=ExtResource("3_5uy6h")]
 
 [node name="VisibilityConstroller" type="Node3D" parent="." node_paths=PackedStringArray("visuals_node")]
 script = ExtResource("3_4ra3w")
