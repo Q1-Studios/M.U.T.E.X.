@@ -45,7 +45,7 @@ func spawn_enemy():
 	
 	var enemyTypes = [1,2]
 	var enemy_instance = enemy_scene.instantiate();
-
+	enemy_instance.name = "Enemy_%d%d" % Time.get_ticks_usec() % randi() 
 	$Enemies.add_child(enemy_instance)
 	enemy_instance.set_multiplayer_authority(1)
 	
