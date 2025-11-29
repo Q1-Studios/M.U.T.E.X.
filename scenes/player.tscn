@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://b4rer4p7cpwlv" path="res://scripts/cameraController.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://t5w0edulbr26" path="res://scripts/playerMovement.gd" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://84qcf0s50w45" path="res://assets/models/thruster_exhaust/ship_model.tscn" id="4_qlg0r"]
-[ext_resource type="Script" uid="uid://sdinj12j5eet" path="res://scripts/Thurstes.gd" id="4_y4r1p"]
+[ext_resource type="Script" uid="uid://c5nc1c4n64d8p" path="res://scenes/Thurstes.gd" id="4_y4r1p"]
 [ext_resource type="PackedScene" uid="uid://d2snjgmsw07qr" path="res://scenes/gun.tscn" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://bdfw8wp21jlmh" path="res://scenes/thruster_exhaust.tscn" id="5_tuyoq"]
 [ext_resource type="Material" uid="uid://bm06tepcpvlcd" path="res://assets/models/thruster_exhaust/outline_shader.tres" id="6_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://qymy4et4jfcg" path="res://assets/sprites/svgviewer-output.svg" id="7_fjrip"]
-[ext_resource type="Script" uid="uid://bckvg3syriw3r" path="res://scripts/texture_rect.gd" id="8_smehm"]
-[ext_resource type="PackedScene" uid="uid://m2myyhjhyqn4" path="res://scenes/thruster_particles.tscn" id="11_d2wvv"]
+[ext_resource type="Script" path="res://scenes/texture_rect.gd" id="8_smehm"]
+[ext_resource type="PackedScene" uid="uid://cduaufs6120d2" path="res://scenes/thruster_particles.tscn" id="11_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://dqwa42jtr1sqb" path="res://assets/models/thruster_exhaust/particle1.png" id="12_3v2ag"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qhqgy"]
@@ -32,12 +32,10 @@ properties/3/replication_mode = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_smehm"]
 viewport_path = NodePath("ModelContainer/HUD/SubViewport")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tuyoq"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bjf3"]
 transparency = 1
 cull_mode = 2
-albedo_color = Color(0.49803922, 0.2784314, 0.16078432, 0.24705882)
+albedo_color = Color(0.498039, 0.278431, 0.160784, 0.247059)
 albedo_texture = ExtResource("12_3v2ag")
 billboard_mode = 2
 distance_fade_mode = 1
@@ -63,10 +61,12 @@ script = ExtResource("4_dqkch")
 player = NodePath("..")
 model_container = NodePath("../ModelContainer")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9512666, 0.30836952, 0, -0.30836952, 0.9512666, 0, 0, 0)
+[node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("camera", "player")]
+transform = Transform3D(1, 0, 0, 0, 0.951267, 0.30837, 0, -0.30837, 0.951267, 0, 0, 0)
 spring_length = 14.0
 script = ExtResource("3_tuyoq")
+camera = NodePath("Camera3D")
+player = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 
@@ -137,10 +137,10 @@ transform = Transform3D(5.95371, 0, 5.05552e-08, 0, 0.279729, 0, 1.53151e-06, 0,
 shape = SubResource("CapsuleShape3D_tuyoq")
 
 [node name="CPUParticles3D" parent="." instance=ExtResource("11_d2wvv")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.13459074, 0.34027657, 2.237)
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.134591, 0.340277, 2.237)
 
 [node name="shield_scannerparticle_try" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.9536644, 0.30087233, 0, -0.30087233, -0.9536644, -0.04056084, -0.5556205, 1.4151232)
+transform = Transform3D(1, 0, 0, 0, -0.953664, 0.300872, 0, -0.300872, -0.953664, -0.0405608, -0.55562, 1.41512)
 visible = false
 amount = 762
 lifetime = 0.06
@@ -165,6 +165,7 @@ angle_max = 25.0
 scale_amount_min = 9.58
 scale_amount_max = 9.58
 
+[connection signal="max_Speed" from="movementController" to="SpringArm3D" method="_on_movement_controller_max_speed"]
 [connection signal="max_Speed" from="movementController" to="ModelContainer" method="_on_movement_controller_max_speed"]
 
 [editable path="ModelContainer/ShipModel"]

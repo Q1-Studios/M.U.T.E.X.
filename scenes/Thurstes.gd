@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var velocity=player.velocity.length();
-	print(velocity)
 	
 	if(velocity> maxSpeed):
 		max_scale_z=max_boosterSpeed
