@@ -18,5 +18,5 @@ func _on_host_pressed() -> void:
 
 func _on_join_pressed() -> void:
 	print("Join Pressed")
-	NetworkManager.join_game("127.0.0.1")
+	NetworkManager.join_game("192.168.1.141")
 	hide()
