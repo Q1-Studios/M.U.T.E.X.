@@ -7,14 +7,14 @@ signal max_Speed(speed)
 @export var ship_model:Node3D
 
 @export_group("Speed & Acceleration")
-@export var MAX_SPEED := 70.0       
+@export var MAX_SPEED := 90.0       
 @export var MIN_SPEED := -0.0      
 @export var acceleration := 25.0    
 @export var decceleration := -45.0
 
 @export_group("Boosting")
-@export var booooooooooost_acceleration := 100.0
-@export var max_speed_while_boosting := 120.0
+@export var booooooooooost_acceleration := 120.0
+@export var max_speed_while_boosting := 150.0
 @export var boost_duration = 5.0
 @export var boost_cooldown = 2.0
 var default_acceleration : float 
@@ -24,6 +24,7 @@ var default_acceleration : float
 @export var max_yaw_turn_multiplier := 4.0
 @export var pitch_speed := 70.0
 @export var max_pitch_turn_multiplier := 2.0
+@export var vertical_yaw_damper_activated := true
 
 # Visual
 @export_group("Visual Banking")
@@ -38,7 +39,7 @@ var default_acceleration : float
 @export var horizon_return_speed := 0.0 #2.0
 @export var camera_level_speed := 10.0 
 
-
+@onready var engine_sound: AudioStreamPlayer3D = $"../EngineSound"
 
 
 var current_speed := 0.0
@@ -75,8 +76,7 @@ func _physics_process(delta):
 		yaw_turn_multiplier = lerp(max_yaw_turn_multiplier, 1.0, speed_percent) 
 		pitch_turn_multiplier = lerp(max_pitch_turn_multiplier, 1.0, speed_percent) 
 		
-	var airflow_control = clamp(abs(current_speed) / 30.0, 0.3, 1.0)
-	airflow_control = clamp(abs(current_speed) / 15.0, 0.1, 1.0)
+	var airflow_control = clamp(abs(current_speed) / 20.0, 0.3, 1.0)
 	
 	yaw_turn_multiplier *= airflow_control
 	pitch_turn_multiplier *= airflow_control
@@ -87,7 +87,9 @@ func _physics_process(delta):
 	
 	# Restrict Turning when aggresively Pitching
 	var is_vertical = abs(player.transform.basis.z.y)
-	var vertical_yaw_damper = clamp(1.0 - is_vertical, 0.0, 1.0)
+	if not vertical_yaw_damper_activated:
+		is_vertical = 0.0
+	var vertical_yaw_damper = clamp(1.0 - is_vertical, 0.5, 1.0)
 	
 	# Rotate
 	player.rotate_object_local(Vector3.RIGHT, current_pitch_input * pitch_speed * pitch_turn_multiplier * delta)
@@ -113,6 +115,7 @@ func _physics_process(delta):
 
 	var apply_boost = is_boosting and remaining_boost_duration > 0
 	if apply_boost:
+			engine_sound.stream_paused = false
 			remaining_boost_duration -= delta
 			current_speed += booooooooooost_acceleration * delta
 			current_boost_cooldown += (boost_cooldown / boost_duration) * delta
@@ -126,10 +129,12 @@ func _physics_process(delta):
 	# Move
 	if acceleration_direction < 0:
 		current_speed += acceleration * delta
+		
 	elif acceleration_direction > 0:
 		current_speed += decceleration * delta
 	elif not apply_boost:
 		current_speed = move_toward(current_speed, 0.0, abs(default_acceleration) * delta)
+		engine_sound.stream_paused = true
 	   
 	if apply_boost:
 		current_speed = clamp(current_speed, MIN_SPEED, max_speed_while_boosting)
@@ -139,6 +144,10 @@ func _physics_process(delta):
 		
 	# Move relative to where we are facing (-Z is Forward)
 	player.velocity = -player.transform.basis.z * current_speed
+	
+	if (ScoreManager.game_over_signal_emmited):
+		player.velocity = Vector3.ZERO
+		is_shooting = false
 	
 	player.move_and_slide()
 	if is_shooting:

@@ -1,5 +1,5 @@
 extends Node
 
 
-var primary:Color
-var secondary:Color
+var timeTillNewEnemy = 3.0
+var enemyShootingCooldown = 1.5

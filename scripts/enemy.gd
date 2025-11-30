@@ -17,7 +17,7 @@ var health = 100
 @export var model_container: Node3D
 
 @export_group("Movement Settings")
-@export var MOVEMENT_SPEED = 60.0
+@export var MOVEMENT_SPEED = 85.0
 @export var ROTATION_SPEED = 1.5
 @export var WAYPOINT_REACH_DISTANCE = 20.0
 
@@ -362,7 +362,7 @@ func shoot_gun() -> void:
 		
 		if selected_gun.has_method("shoot_homing_missile"):
 			selected_gun.shoot_homing_missile(self)
-			gun_cooldown_timer.start()
+			gun_cooldown_timer.start(Global.enemyShootingCooldown)
 
 @rpc("any_peer", "call_local")
 func take_damage(damage_amount):

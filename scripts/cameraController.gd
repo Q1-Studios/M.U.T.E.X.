@@ -63,6 +63,11 @@ func _input(event):
 func _process(delta):
 	var joy_input = Input.get_vector("LookLeft", "LookRight", "LookUp", "LookDown")
 	var look_back = Input.is_action_pressed("LookBack")
+	
+	if (ScoreManager.game_over_signal_emmited):
+		joy_input = Vector2.ZERO
+		look_back = false
+		
 	var is_input_active = false
 	
 	if joy_input.length() > 0:

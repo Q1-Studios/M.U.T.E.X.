@@ -42,3 +42,4 @@ func die():
 func client_die_effect():
 	# Spawn particles, play sound, etc.
 	print("Player " + name + " exploded!")
+	$"../ExplosionSound".play()

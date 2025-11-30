@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkimdg4h1q5n2"]
+
+[ext_resource type="Script" uid="uid://du58e3gnk7gr5" path="res://scripts/button_sound_player.gd" id="1_yn4oo"]
+[ext_resource type="AudioStream" uid="uid://dv5uqqct5hpww" path="res://assets/sounds/ui/focus.wav" id="2_q4a6l"]
+[ext_resource type="AudioStream" uid="uid://d2bjsn72huq0b" path="res://assets/sounds/ui/click.wav" id="3_jcmb1"]
+
+[node name="ButtonSoundPlayer" type="Node"]
+script = ExtResource("1_yn4oo")
+
+[node name="FocusSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_q4a6l")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jcmb1")

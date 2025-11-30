@@ -12,4 +12,5 @@ func explode():
 	fire.emitting = true
 	smoke.emitting = true
 	explosion_sound.play()
-	await get_tree().create_timer(2.0).timeout
+	if get_tree() != null:
+		await get_tree().create_timer(2.0).timeout

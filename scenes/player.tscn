@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c111b6l8it2x6"]
+[gd_scene load_steps=31 format=3 uid="uid://c111b6l8it2x6"]
 
 [ext_resource type="Script" uid="uid://cc6g7dopbnu7h" path="res://scripts/Player.gd" id="1_qhqgy"]
 [ext_resource type="Script" uid="uid://b4rer4p7cpwlv" path="res://scripts/cameraController.gd" id="3_tuyoq"]
@@ -8,16 +8,18 @@
 [ext_resource type="Script" uid="uid://c5nc1c4n64d8p" path="res://scenes/Thurstes.gd" id="4_y4r1p"]
 [ext_resource type="PackedScene" uid="uid://d2snjgmsw07qr" path="res://scenes/gun.tscn" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://bdfw8wp21jlmh" path="res://scenes/thruster_exhaust.tscn" id="5_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://qymy4et4jfcg" path="res://assets/sprites/VerticleHUD.svg" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://b41grrrqbb785" path="res://assets/sprites/VerticalHUD.png" id="6_qfm1y"]
 [ext_resource type="Script" uid="uid://dwblcvei8080m" path="res://scenes/texture_rect.gd" id="8_smehm"]
 [ext_resource type="PackedScene" uid="uid://cduaufs6120d2" path="res://scenes/thruster_particles.tscn" id="11_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://dqwa42jtr1sqb" path="res://assets/models/thruster_exhaust/particle1.png" id="12_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://cfed5qf8seeex" path="res://assets/sprites/CircleHUD.png" id="14_a8ls1"]
 [ext_resource type="Script" path="res://scripts/circle_hud.gd" id="14_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://batglaeqbvbt" path="res://assets/sprites/SpeedBar.jpg" id="15_a8ls1"]
-[ext_resource type="Texture2D" uid="uid://ct3e64l3uj6mt" path="res://assets/MissileLOKC.png" id="15_fulsm"]
-[ext_resource type="Script" path="res://scripts/speed_bar.gd" id="16_qfm1y"]
-[ext_resource type="Script" path="res://scripts/point_display.gd" id="17_qfm1y"]
+[ext_resource type="Script" uid="uid://bw2j8cmn2acep" path="res://scripts/speed_bar.gd" id="16_qfm1y"]
+[ext_resource type="Script" uid="uid://d2a45bagp3nmb" path="res://scripts/point_display.gd" id="17_qfm1y"]
+[ext_resource type="PackedScene" uid="uid://cvwnv2lgiecdf" path="res://scenes/explosion.tscn" id="18_fulsm"]
+[ext_resource type="AudioStream" uid="uid://1gw744hujikf" path="res://assets/sounds/explosion.wav" id="19_4r5pv"]
+[ext_resource type="AudioStream" uid="uid://ckwcyngu2k4cl" path="res://assets/sounds/engine.wav" id="20_60mlk"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qhqgy"]
 properties/0/path = NodePath(".:position")
@@ -67,7 +69,7 @@ viewport_path = NodePath("PointDisplay/SubViewport")
 radius = 0.675
 height = 7.5
 
-[node name="CharacterBody3D2" type="CharacterBody3D" node_paths=PackedStringArray("movement_controller", "camera_controller", "camera", "point_display", "circle_hud", "pitch_hud", "speed_bar", "missileLock") groups=["Players"]]
+[node name="CharacterBody3D2" type="CharacterBody3D" node_paths=PackedStringArray("movement_controller", "camera_controller", "camera", "point_display", "circle_hud", "pitch_hud", "speed_bar") groups=["Players"]]
 collision_layer = 8
 collision_mask = 31
 motion_mode = 1
@@ -75,15 +77,10 @@ script = ExtResource("1_qhqgy")
 movement_controller = NodePath("movementController")
 camera_controller = NodePath("SpringArm3D")
 camera = NodePath("SpringArm3D/Camera3D")
-primary_color = Color(0.99572676, 0, 0.24413162, 1)
-secundary_color = Color(0.34117648, 1, 0.11764706, 1)
 point_display = NodePath("PointDisplay")
 circle_hud = NodePath("CircleHUD")
 pitch_hud = NodePath("ModelContainer/HUD")
 speed_bar = NodePath("SpeedBar")
-missileLock = NodePath("Missile Lock/Sprite3D")
-missileLockColor = Color(0.9297501, 0, 0.14976892, 1)
-noMissileLockColor = Color(0.34117648, 1, 0.11764706, 1)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qhqgy")
@@ -132,13 +129,13 @@ transparent_bg = true
 [node name="VerticleHUD" type="TextureRect" parent="ModelContainer/HUD/SubViewport" node_paths=PackedStringArray("player")]
 offset_right = 400.0
 offset_bottom = 2000.0
-texture = ExtResource("7_fjrip")
+texture = ExtResource("6_qfm1y")
 stretch_mode = 1
 script = ExtResource("8_smehm")
 player = NodePath("../../../..")
 
 [node name="Sprite3D" type="Sprite3D" parent="ModelContainer/HUD"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.664, 0, -11.829)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 2.1663532, 0, -11.829)
 texture = SubResource("ViewportTexture_smehm")
 
 [node name="ThrusterExhaust" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
@@ -230,13 +227,6 @@ player = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.56811, 5.41849)
 texture = SubResource("ViewportTexture_oprun")
 
-[node name="Missile Lock" type="Node3D" parent="."]
-
-[node name="Sprite3D" type="Sprite3D" parent="Missile Lock"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.799711, 0.70419574, -6.061)
-modulate = Color(0.27058825, 1, 0.101960786, 1)
-texture = ExtResource("15_fulsm")
-
 [node name="SpeedBar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83886, 0, -6.10254)
 
@@ -248,7 +238,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 min_value = 1.0
 max_value = 120.0
-value = 50.0
+value = 1.0
 texture_progress = ExtResource("15_a8ls1")
 script = ExtResource("16_qfm1y")
 player = NodePath("../../..")
@@ -277,6 +267,15 @@ texture = SubResource("ViewportTexture_qfm1y")
 [node name="ShipBodyCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.8503e-08, -0.615732)
 shape = SubResource("CapsuleShape3D_fulsm")
+
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("19_4r5pv")
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("20_60mlk")
+volume_db = 5.0
+autoplay = true
+[node name="Explosion" parent="." instance=ExtResource("18_fulsm")]
 
 [connection signal="newColor" from="." to="ModelContainer" method="_on_character_body_3d_2_new_color"]
 [connection signal="takeDamageSignal" from="." to="Area3D" method="_on_character_body_3d_2_take_damage_signal"]
