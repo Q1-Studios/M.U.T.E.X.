@@ -29,6 +29,7 @@ var health = 100
 @export_group("Combat Settings")
 @export var ATTACK_RANGE = 50.0
 @export var AVOID_RANGE = 20.0
+@export var PLAYER_DETECTION_DISTANCE: float = 80.0
 
 @export_group("Obstacle Avoidance")
 @export var OBSTACLE_DETECT_DISTANCE = 70.0
@@ -117,6 +118,9 @@ func _physics_process(delta: float) -> void:
 	# Only Server calculates movement
 	if not is_multiplayer_authority():
 		return
+		
+	if target_player_left():
+		return_to_patrol(target_player)
 	
 	match current_state:
 		PATROLLING:
@@ -125,6 +129,16 @@ func _physics_process(delta: float) -> void:
 			chase_player(delta)
 		ATTACKING:
 			attack_player(delta)
+
+func target_player_left() -> bool: 
+	if current_state == PATROLLING or not target_player or not is_instance_valid(target_player):
+		return false
+	
+	# Check if player is closer than the detection distance or in line of sight
+	var target_position = target_player.global_position
+	var distance = global_position.distance_to(target_position)
+	# print("Distance to target player: %s" % distance)
+	return distance > PLAYER_DETECTION_DISTANCE && not is_player_in_sight(target_player)
 
 func patrol(delta: float) -> void:
 	if patrol_points.is_empty():
@@ -171,6 +185,7 @@ func attack_player(delta: float) -> void:
 	if not target_player or not is_instance_valid(target_player):
 		current_state = PATROLLING
 		return
+		
 	var distance = global_position.distance_to(target_player.global_position)
 	var direction = (target_player.global_position - global_position).normalized()
 	
@@ -335,30 +350,47 @@ func rotate_towards(direction: Vector3, delta: float) -> void:
 	
 	basis = basis.slerp(target_basis, ROTATION_SPEED * delta).orthonormalized()
 	
-func is_player_in_sight() -> bool:
-
+func is_player_in_sight(target: Node3D = null) -> bool:
 	if not is_inside_tree() || not is_instance_valid(player_shape_cast):
 		return false
 	
 	player_shape_cast.force_shapecast_update()
-	return player_shape_cast.is_colliding()
+	
+	if not player_shape_cast.is_colliding():
+		return false;
+	
+	var collider = player_shape_cast.get_collider(0)
+	print("Colliding with %s" % collider)
+	if not collider:
+		return false
+	
+	if not target:
+		return collider.is_in_group(PLAYERS_GROUP_NAME)
+	
+	return target == collider	
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if current_state == PATROLLING and body.is_in_group(PLAYERS_GROUP_NAME):
+		print("Player detected! Switching to chase mode")
 		target_player = body
 		current_state = CHASING
-		body.MissileLock()
-		#print("Player detected! Switching to chase mode")
+		if body.has_method("missile_lock"):
+			body.missile_lock()
 
 func _on_detection_area_body_exited(body: Node3D) -> void:
-	if body == target_player and not is_player_in_sight():
-		target_player = null
-		current_state = PATROLLING
-		body.MissileUnlock()
-		#print("Player lost! Returning to patrol")
+	if body == target_player and not is_player_in_sight(target_player):
+		print("Player lost! Returning to patrol")
+		return_to_patrol(body)
+
+func return_to_patrol(body: Node3D) -> void:
+	print("Unlocking missile") 
+	target_player = null
+	current_state = PATROLLING
+	if body.has_method("missile_unlock"):
+		body.missile_unlock()
 
 func shoot_gun() -> void:
-	if has_node("Guns") and is_player_in_sight():
+	if has_node("Guns") and is_player_in_sight(target_player):
 		if not gun_cooldown_timer.is_stopped():
 			return
 		
@@ -379,16 +411,17 @@ func take_damage(damage_amount):
 	
 	if health <= 0:
 		ScoreManager.add_score(1)
-		print("Dead")
-		
-		guns.hide()
-		$Visuals.hide()
-		
-		await $Explosion.explode()
-		queue_free()
+		die()
 
+func die() -> void:
+	print("Enemy died")
+	guns.hide()
+	$Visuals.hide()
+	
+	await $Explosion.explode()
+	queue_free()
 
 func _on_collision_entered(body: Node3D) -> void:
 	print("Collided with obstacle %s" % body.name)
 	health = 0
-	queue_free()
+	die()
