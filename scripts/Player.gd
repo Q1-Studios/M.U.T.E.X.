@@ -14,7 +14,7 @@ signal newColor(primary:Color,secondary)
 @export var circle_hud: Node3D
 @export var pitch_hud: Node3D
 @export var speed_bar: Node3D
-@export var missileLock:Sprite3D
+@export var missileLock: Sprite3D
 @export var missileLockColor:Color
 @export var noMissileLockColor:Color
 @export var locked:bool =false
@@ -101,16 +101,18 @@ func receive_colors(primary: Color, secondary: Color):
 	primary_color = primary
 	secundary_color = secondary
 	emit_signal("newColor",primary,secondary)
-func MissileLock()->void: 
+	
+func missile_lock() -> void: 
 	locked=true
 	enemyCounter+=1
 	missileLock.modulate=missileLockColor
 	
 	
-func MissileUnlock()->void: 
-	locked=false
+func missile_unlock() -> void:
+	locked=false 
 	enemyCounter-=1
 	if(enemyCounter<=0):
 		missileLock.modulate=noMissileLockColor
+		
 func PlayAudio()->void:
 	audioMissileLock.play()
