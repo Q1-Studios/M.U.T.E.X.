@@ -79,7 +79,7 @@ func display_game_over_ui():
 
 @rpc("call_local", "reliable")
 func return_to_main_menu():
-	get_tree().change_scene_to_file("main_menu_scene")
-	multiplayer.multiplayer_peer.close()
+	get_tree().change_scene_to_packed(main_menu_scene)
+	NetworkManager.cleanup_network()
 	call_deferred("queue_free")
 	

@@ -1,7 +1,6 @@
 extends Node3D
 
 @onready var gun_ray = $RayCast3D
-@onready var cooldown_timer = $CooldownTimer
 
 var bulletScene = load("res://scenes/enemy_bullet.tscn")
 
