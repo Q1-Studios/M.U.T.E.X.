@@ -6,9 +6,6 @@ const DEFAULT_SERVER_IP = "192.168.1.141" # Localhost
 
 const LEVEL_SCENE_PATH = "res://scenes/LevelScene.tscn" 
 
-
-var peer = ENetMultiplayerPeer.new()
-
 # Signals to let the GUI know what's happening
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -23,6 +20,7 @@ func _ready():
 
 # --- HOSTING (The P2P "Server" Player) ---
 func host_game():
+	var peer = ENetMultiplayerPeer.new()
 	var error: Error = peer.create_server(PORT)
 	if error != OK:
 		print("cannot host: " + error_string(error))
@@ -39,7 +37,8 @@ func host_game():
 func join_game(address):
 	if address == "":
 		address = DEFAULT_SERVER_IP
-		
+	
+	var peer = ENetMultiplayerPeer.new()	
 	var error = peer.create_client(address, PORT)
 	if error != OK:
 		print("cannot join: " + error)
@@ -49,7 +48,13 @@ func join_game(address):
 	multiplayer.multiplayer_peer = peer
 	print("Joining...")
 
-
+func cleanup_network():
+	if multiplayer.multiplayer_peer != null:
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+	print("Network cleaned up")
+	ScoreManager.game_over_signal_emmited = false
+	
 # --- CALLBACKS ---
 func _on_player_connected(id):
 	print("Player connected: " + str(id))
