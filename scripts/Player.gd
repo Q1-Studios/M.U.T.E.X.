@@ -19,6 +19,7 @@ signal newColor(primary:Color,secondary)
 @export var noMissileLockColor:Color
 @export var locked:bool =false
 @export var audioMissileLock:AudioStreamPlayer3D
+@export var audioMissileLockAaaaaahh:AudioStreamPlayer3D
 
 var timer=1; 
 var maxTime=1;
@@ -32,7 +33,9 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 func _process(delta: float) -> void:
 	timer-=delta
-	if locked and timer<=0: 
+	if not audioMissileLockAaaaaahh.playing and locked:
+		audioMissileLockAaaaaahh.play()
+	if locked and timer<=0:
 		timer=maxTime
 		PlayAudio()
 func _ready():
