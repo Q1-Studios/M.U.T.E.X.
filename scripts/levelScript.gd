@@ -9,6 +9,8 @@ extends Node3D # Or Node2D
 @export var gameOverRect:TextureRect
 @export var FG : Sprite2D
 
+var player_visual_nodes: Array[String] = ["./CircleHUD", "./SpeedBar", "./PointDisplay", "./ModelContainer", "./MissieLock"]
+
 func _ready():
 	ScoreManager.game_over.connect(on_game_over)
 	# If this is the Host, spawn existing players (like yourself)
@@ -64,7 +66,7 @@ func spawn_enemy():
 	enemy_instance.name = "Enemy_%d%d" % [Time.get_ticks_usec(), randi()]
 	enemy_instance.set_multiplayer_authority(1)
 	
-	var enemy_type_id: int = (child_count % 2) + 1
+	var enemy_type_id: int = 2#(child_count % 2) + 1
 	enemy_instance.initialize(enemy_type_id, route_data["points"])
 	
 	$EnemySpawnTimer.start(Global.timeTillNewEnemy)
@@ -87,10 +89,19 @@ func on_game_over():
 
 @rpc("call_local", "reliable")
 func display_game_over_ui():
+	var child;
 	if ($Players.get_child_count() > 0):
-		$Players.get_child(0).get_child(-1).explode()
+		child = $Players.get_child(0);
 	if ($Players.get_child_count() > 1):
-		$Players.get_child(1).get_child(-1).explode()
+		child = $Players.get_child(1)
+		
+	if child != null:
+		# Hide all player visuals right before playing the explosion
+		for visual in player_visual_nodes:
+			if child.has_node(visual):
+				child.get_node(visual).hide()
+				
+		await child.get_node("./Explosion").explode()
 	print("GAME OVER")
 	gameOver.visible=true
 	FG.visible=true

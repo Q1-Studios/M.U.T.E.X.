@@ -11,15 +11,8 @@ var shooter: CharacterBody3D = null
 # We need to know who shot to determine what to chase
 
 func _ready():
-	# 1. Setup Initial Velocity (Flying straight forward)
-	
-	
-	# 2. Setup Cleanup
 	$LifeTimer.timeout.connect(queue_free)
-	
-	# 3. Setup Collision Signals
 	body_entered.connect(_on_impact)
-
 
 func setup_bullet(_shooter: CharacterBody3D):
 	velocity = -global_transform.basis.z * speed
