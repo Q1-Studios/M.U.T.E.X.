@@ -176,6 +176,13 @@ func _on_cancelhost_pressed() -> void:
 
 
 func _on_host_pressed() -> void:
+	# Find all potential IPs that identify the host's local network adapters
+	var ips: Array = []
+	for ip in IP.get_local_addresses():
+		if ip.begins_with(\"10.\") or ip.begins_with(\"172.16.\") or ip.begins_with(\"192.168.\"):
+			ips.append(ip)
+	$IPAddress.text = ips[0]
+	
 	show()
 	$CANCELHH.grab_focus()
 
@@ -1013,6 +1020,37 @@ theme_override_fonts/font = ExtResource("5_lt044")
 text = "#00ff55"
 placeholder_text = "<ENTER HEX CODE>"
 select_all_on_focus = true
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="HOSTINGASHOST"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 671.1849
+offset_top = 116.62433
+offset_right = 227.98291
+offset_bottom = 40.620605
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.751568, 0.751568)
+theme_override_font_sizes/normal_font_size = 70
+text = "Your IP-Address:"
+
+[node name="IPAddress" type="RichTextLabel" parent="HOSTINGASHOST"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 671.1849
+offset_top = 182.07678
+offset_right = 227.98291
+offset_bottom = 18.985352
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.751568, 0.751568)
+theme_override_colors/default_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
+theme_override_font_sizes/normal_font_size = 70
+text = "127.0.0.1"
 
 [connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Tutorial" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_options_btn_pressed"]
