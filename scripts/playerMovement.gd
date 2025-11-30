@@ -7,14 +7,14 @@ signal max_Speed(speed)
 @export var ship_model:Node3D
 
 @export_group("Speed & Acceleration")
-@export var MAX_SPEED := 70.0       
+@export var MAX_SPEED := 90.0       
 @export var MIN_SPEED := -0.0      
 @export var acceleration := 25.0    
 @export var decceleration := -45.0
 
 @export_group("Boosting")
-@export var booooooooooost_acceleration := 100.0
-@export var max_speed_while_boosting := 120.0
+@export var booooooooooost_acceleration := 120.0
+@export var max_speed_while_boosting := 150.0
 @export var boost_duration = 5.0
 @export var boost_cooldown = 2.0
 var default_acceleration : float 

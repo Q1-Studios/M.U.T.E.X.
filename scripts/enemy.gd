@@ -17,7 +17,7 @@ var health = 100
 @export var model_container: Node3D
 
 @export_group("Movement Settings")
-@export var MOVEMENT_SPEED = 60.0
+@export var MOVEMENT_SPEED = 85.0
 @export var ROTATION_SPEED = 1.5
 @export var WAYPOINT_REACH_DISTANCE = 20.0
 

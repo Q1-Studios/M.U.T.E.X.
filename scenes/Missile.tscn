@@ -21,6 +21,7 @@ stream_4/stream = ExtResource("7_5rgel")
 [sub_resource type="SphereShape3D" id="SphereShape3D_7880j"]
 
 [node name="Missile" type="Area3D"]
+transform = Transform3D(0.805, 0, 0, 0, 0.805, 0, 0, 0, 0.805, 0, 0, 0)
 script = ExtResource("1_ohnc3")
 
 [node name="Rocket" parent="." instance=ExtResource("2_1ifrg")]

@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var speed := 125.0
+@export var speed := 155.0
 @export var steer_force := 50.0 
 @export var damage := 100
 
