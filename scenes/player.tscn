@@ -67,7 +67,7 @@ height = 7.5
 radius = 1.0
 height = 7.0
 
-[node name="CharacterBody3D2" type="CharacterBody3D" node_paths=PackedStringArray("movement_controller", "camera_controller", "camera") groups=["Players"]]
+[node name="CharacterBody3D2" type="CharacterBody3D" node_paths=PackedStringArray("movement_controller", "camera_controller", "camera", "point_display", "circle_hud", "pitch_hud", "speed_bar") groups=["Players"]]
 collision_layer = 8
 collision_mask = 31
 motion_mode = 1
@@ -75,6 +75,10 @@ script = ExtResource("1_qhqgy")
 movement_controller = NodePath("movementController")
 camera_controller = NodePath("SpringArm3D")
 camera = NodePath("SpringArm3D/Camera3D")
+point_display = NodePath("PointDisplay")
+circle_hud = NodePath("CircleHUD")
+pitch_hud = NodePath("ModelContainer/HUD")
+speed_bar = NodePath("SpeedBar")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qhqgy")
