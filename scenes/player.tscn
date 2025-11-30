@@ -95,16 +95,12 @@ player = NodePath("..")
 model_container = NodePath("../ModelContainer")
 ship_model = NodePath("../ModelContainer/ShipModel/Spaceship_Player2")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("camera", "player", "point_display", "circle_hud", "pitch_hud", "speed_bar")]
+[node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("camera", "player")]
 transform = Transform3D(1, 0, 0, 0, 0.951267, 0.30837, 0, -0.30837, 0.951267, 0, 0, 0)
 spring_length = 14.0
 script = ExtResource("3_tuyoq")
 camera = NodePath("Camera3D")
 player = NodePath("..")
-point_display = NodePath("../PointDisplay")
-circle_hud = NodePath("../CircleHUD")
-pitch_hud = NodePath("../ModelContainer/HUD")
-speed_bar = NodePath("../SpeedBar")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 

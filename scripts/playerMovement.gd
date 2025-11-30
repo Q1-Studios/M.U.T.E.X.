@@ -63,6 +63,10 @@ func _ready():
 	max_Speed.emit(MAX_SPEED)
 
 func _physics_process(delta):
+	if (ScoreManager.game_over_signal_emmited):
+		player.velocity = Vector3.ZERO
+		return
+		
 	var raw_pitch = Input.get_axis("TiltDown", "TiltUp")
 	var raw_turn = Input.get_axis("RollRight", "RollLeft") 
 	var acceleration_direction = Input.get_axis("Accelerate", "Break")
@@ -144,10 +148,6 @@ func _physics_process(delta):
 		
 	# Move relative to where we are facing (-Z is Forward)
 	player.velocity = -player.transform.basis.z * current_speed
-	
-	if (ScoreManager.game_over_signal_emmited):
-		player.velocity = Vector3.ZERO
-		is_shooting = false
 	
 	player.move_and_slide()
 	if is_shooting:
