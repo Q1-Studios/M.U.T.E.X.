@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ds6mc0me8qppk"]
 
-[ext_resource type="Texture2D" uid="uid://cfed5qf8seeex" path="res://assets/sprites/svgviewer-png-output.png" id="1_w3y1y"]
+[ext_resource type="Texture2D" uid="uid://cfed5qf8seeex" path="res://assets/sprites/CircleHUD.png" id="1_w3y1y"]
 [ext_resource type="Script" path="res://scripts/CircleHUD.gd" id="2_2ktvv"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1uha1"]

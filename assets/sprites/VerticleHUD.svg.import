@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qymy4et4jfcg"
-path="res://.godot/imported/svgviewer-output.svg-b61aa681a0d5874ffb196980e7ef1bbb.ctex"
+path="res://.godot/imported/VerticleHUD.svg-1eae91f11f466e8a42af20dbaca3b497.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/svgviewer-output.svg"
-dest_files=["res://.godot/imported/svgviewer-output.svg-b61aa681a0d5874ffb196980e7ef1bbb.ctex"]
+source_file="res://assets/sprites/VerticleHUD.svg"
+dest_files=["res://.godot/imported/VerticleHUD.svg-1eae91f11f466e8a42af20dbaca3b497.ctex"]
 
 [params]
 
