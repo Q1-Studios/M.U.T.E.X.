@@ -1,5 +1,6 @@
 extends Node3D
 @export var visuals_node: Node3D
+@export var guns_node: Node3D
 
 func apply_visibility(type_id: int):
 	var is_host = multiplayer.is_server()
@@ -11,5 +12,7 @@ func apply_visibility(type_id: int):
 	print(str(type_id))
 	if type_id == 1:
 		visuals_node.visible = not is_host
+		guns_node.visible = not is_host
 	elif type_id == 2:
 		visuals_node.visible = is_host
+		guns_node.visible = is_host
