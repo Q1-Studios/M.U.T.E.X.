@@ -1,7 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8tq0bwaqknkx"]
+[gd_scene load_steps=11 format=3 uid="uid://b8tq0bwaqknkx"]
 
 [ext_resource type="Script" uid="uid://cqnjbk4y12ikk" path="res://scripts/bulletScript.gd" id="1_ohnc3"]
 [ext_resource type="PackedScene" uid="uid://cin7k7075t28o" path="res://scenes/rocket.tscn" id="2_1ifrg"]
+[ext_resource type="AudioStream" uid="uid://cypttp4kxcu1n" path="res://assets/sounds/laser/laser1.wav" id="3_1ifrg"]
+[ext_resource type="AudioStream" uid="uid://cxi5c030kt4j7" path="res://assets/sounds/laser/laser2.wav" id="4_fqlqp"]
+[ext_resource type="AudioStream" uid="uid://yig2deo3tiku" path="res://assets/sounds/laser/laser3.wav" id="5_krm66"]
+[ext_resource type="AudioStream" uid="uid://oa5kxsikto22" path="res://assets/sounds/laser/laser4.wav" id="6_ia2oj"]
+[ext_resource type="AudioStream" uid="uid://ppnsby5g1och" path="res://assets/sounds/laser/laser5.wav" id="7_5rgel"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iru0s"]
+streams_count = 5
+stream_0/stream = ExtResource("3_1ifrg")
+stream_1/stream = ExtResource("4_fqlqp")
+stream_2/stream = ExtResource("5_krm66")
+stream_3/stream = ExtResource("6_ia2oj")
+stream_4/stream = ExtResource("7_5rgel")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iru0s"]
 
@@ -11,6 +24,10 @@
 script = ExtResource("1_ohnc3")
 
 [node name="Rocket" parent="." instance=ExtResource("2_1ifrg")]
+
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_iru0s")
+volume_db = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.3136804, 0, 0, 0, 0.39280367, 0, 0, 0, 2.9471502, 0, 0, 0)

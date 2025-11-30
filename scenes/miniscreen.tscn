@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://tq2sekgu7c8"]
+[gd_scene load_steps=18 format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scenes/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://scenes/orangetheme.tres" id="1_j2igt"]
 [ext_resource type="Texture2D" uid="uid://bwqjr8hrqdd33" path="res://assets/sprites/opsec und so.png" id="3_l6gtq"]
 [ext_resource type="FontFile" uid="uid://d304xnpnbruf4" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.ttf" id="3_oua23"]
 [ext_resource type="Texture2D" uid="uid://ch76tb3w6jhpw" path="res://assets/sprites/opsec und so_gruber.png" id="4_j7o8s"]
+[ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/button_sound_player.tscn" id="4_qm21r"]
 [ext_resource type="FontFile" uid="uid://bbkwijog1qnxl" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.woff" id="5_lt044"]
 
 [sub_resource type="GDScript" id="GDScript_03b6j"]
@@ -402,11 +403,15 @@ focus_neighbor_top = NodePath("../QuitGameBTN")
 focus_neighbor_bottom = NodePath("../CreditsBTN")
 text = "LAUNCH"
 
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/HostGameBTN" instance=ExtResource("4_qm21r")]
+
 [node name="CreditsBTN" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../HostGameBTN")
 focus_neighbor_bottom = NodePath("../OptionsBTN")
 text = "INFO"
+
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/CreditsBTN" instance=ExtResource("4_qm21r")]
 
 [node name="OptionsBTN" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
@@ -414,12 +419,16 @@ focus_neighbor_top = NodePath("../CreditsBTN")
 focus_neighbor_bottom = NodePath("../QuitGameBTN")
 text = "CONFIG"
 
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/OptionsBTN" instance=ExtResource("4_qm21r")]
+
 [node name="QuitGameBTN" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../OptionsBTN")
 focus_neighbor_bottom = NodePath("../HostGameBTN")
 text = "[!] EJECT"
 script = SubResource("GDScript_vocgd")
+
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/QuitGameBTN" instance=ExtResource("4_qm21r")]
 
 [node name="Tutorial" type="Panel" parent="."]
 visible = false
@@ -500,6 +509,8 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
 theme_override_font_sizes/font_size = 75
 text = "   >>ACK<<   "
+
+[node name="ButtonSoundPlayer" parent="Tutorial/ACKTutorialBTN" instance=ExtResource("4_qm21r")]
 
 [node name="OpsecUndSo" type="Sprite2D" parent="Tutorial"]
 position = Vector2(588, 350)
@@ -608,6 +619,8 @@ focus_neighbor_bottom = NodePath(".")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 
+[node name="ButtonSoundPlayer" parent="Credits/RETURNFROMCREDITSBTN" instance=ExtResource("4_qm21r")]
+
 [node name="OpsecUndSo" type="Sprite2D" parent="Credits"]
 position = Vector2(1103.17, 2054.02)
 rotation = 1.5708
@@ -694,6 +707,8 @@ focus_neighbor_bottom = NodePath(".")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 
+[node name="ButtonSoundPlayer" parent="Options/RETURNFROMOPTIONS" instance=ExtResource("4_qm21r")]
+
 [node name="HOSTING" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -738,6 +753,8 @@ focus_neighbor_bottom = NodePath("../HOST")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 
+[node name="ButtonSoundPlayer" parent="HOSTING/CANCELHOST" instance=ExtResource("4_qm21r")]
+
 [node name="HOST" type="Button" parent="HOSTING"]
 layout_mode = 0
 offset_left = 134.475
@@ -751,6 +768,8 @@ focus_neighbor_bottom = NodePath("../CANCELHOST")
 theme_override_font_sizes/font_size = 75
 text = "HOST GAME"
 
+[node name="ButtonSoundPlayer" parent="HOSTING/HOST" instance=ExtResource("4_qm21r")]
+
 [node name="JOIN" type="Button" parent="HOSTING"]
 layout_mode = 0
 offset_left = 574.791
@@ -763,6 +782,8 @@ focus_neighbor_right = NodePath("../HOST")
 focus_neighbor_bottom = NodePath("../CANCELHOST")
 theme_override_font_sizes/font_size = 75
 text = "JOIN GAME"
+
+[node name="ButtonSoundPlayer" parent="HOSTING/JOIN" instance=ExtResource("4_qm21r")]
 
 [node name="HIGHSCORE" type="RichTextLabel" parent="HOSTING"]
 layout_mode = 1
@@ -841,6 +862,8 @@ focus_neighbor_bottom = NodePath("../LineEdit")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 
+[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/CANCELHH" instance=ExtResource("4_qm21r")]
+
 [node name="START" type="Button" parent="HOSTINGASHOST"]
 layout_mode = 0
 offset_left = 669.995
@@ -855,6 +878,8 @@ theme_override_font_sizes/font_size = 75
 disabled = true
 text = "START!"
 script = SubResource("GDScript_ib01u")
+
+[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/START" instance=ExtResource("4_qm21r")]
 
 [node name="LineEdit" type="LineEdit" parent="HOSTINGASHOST"]
 custom_minimum_size = Vector2(384.705, 79.67)

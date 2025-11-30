@@ -4,6 +4,8 @@ extends Area3D
 @export var steer_force := 50.0 
 @export var damage := 100
 
+@onready var shoot_sound: AudioStreamPlayer3D = $ShootSound
+
 var velocity := Vector3.ZERO
 var current_target: Node3D = null
 var shooter_is_host := false
@@ -13,6 +15,7 @@ func _ready():
 	if has_node("LifeTimer"):
 		$LifeTimer.timeout.connect(queue_free)
 	body_entered.connect(_on_impact)
+	shoot_sound.play()
 
 func setup_missile(pos: Vector3, basis_rot: Basis, is_host: bool):
 	global_position = pos

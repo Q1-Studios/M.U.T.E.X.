@@ -38,7 +38,7 @@ var default_acceleration : float
 @export var horizon_return_speed := 0.0 #2.0
 @export var camera_level_speed := 10.0 
 
-
+@onready var engine_sound: AudioStreamPlayer3D = $"../EngineSound"
 
 
 var current_speed := 0.0
@@ -112,6 +112,7 @@ func _physics_process(delta):
 
 	var apply_boost = is_boosting and remaining_boost_duration > 0
 	if apply_boost:
+			engine_sound.stream_paused = false
 			remaining_boost_duration -= delta
 			current_speed += booooooooooost_acceleration * delta
 			current_boost_cooldown += (boost_cooldown / boost_duration) * delta
@@ -125,10 +126,12 @@ func _physics_process(delta):
 	# Move
 	if acceleration_direction < 0:
 		current_speed += acceleration * delta
+		
 	elif acceleration_direction > 0:
 		current_speed += decceleration * delta
 	elif not apply_boost:
 		current_speed = move_toward(current_speed, 0.0, abs(default_acceleration) * delta)
+		engine_sound.stream_paused = true
 	   
 	if apply_boost:
 		current_speed = clamp(current_speed, MIN_SPEED, max_speed_while_boosting)
