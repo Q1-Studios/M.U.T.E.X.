@@ -154,7 +154,7 @@ func _on_control_zoomout() -> void:
 	
 func change_scene_usw():
 	if container.iJoinedNotHosted:
-		NetworkManager.join_game(\"192.168.1.141\")
+		NetworkManager.join_game(NetworkManager.DEFAULT_SERVER_IP)
 		return
 	
 	NetworkManager.host_game()
