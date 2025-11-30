@@ -268,7 +268,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-10.0]
+"values": [-5.0]
 }
 
 [sub_resource type="Animation" id="Animation_wu84c"]
@@ -439,7 +439,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(3, 5.733333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-10.0, -80.0]
+"values": [-5.0, -80.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ln24"]
@@ -555,7 +555,7 @@ texture = SubResource("GradientTexture2D_oa1go")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_tbmy8")
-volume_db = -10.0
+volume_db = -5.0
 autoplay = true
 parameters/looping = true
 
