@@ -67,6 +67,15 @@ func get_secondary()-> Color:
 	return secundary_color
 	
 func broadcast_colors():
+	# Wenn wir nicht der Server sind, abbrechen
+	if not multiplayer.is_server():
+		return
+		
+	# WICHTIG: Warte einen Moment, bis der Client den Spawn verarbeitet hat.
+	# "await get_tree().process_frame" wartet einen Frame.
+	await get_tree().process_frame 
+	await get_tree().process_frame # Zur Sicherheit lieber 2 Frames warten
+	
 	var color1 = NetworkManager.primary
 	var color2 = NetworkManager.secondary
 	rpc("receive_colors", color1, color2)
