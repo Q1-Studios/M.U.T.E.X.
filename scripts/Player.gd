@@ -39,7 +39,7 @@ func _ready():
 	collision_layer = 0
 	var my_peer_id = str(name).to_int()
 	
-	if my_peer_id == 1:
+	if my_peer_id == 1 && not Global.singlePlayer:
 		set_collision_layer_value(4, true)
 	else:
 		set_collision_layer_value(5, true)

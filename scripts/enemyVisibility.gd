@@ -2,6 +2,11 @@ extends Node3D
 @export var visuals_node: Node3D
 
 func apply_visibility(type_id: int):
+	
+	if Global.singlePlayer:
+		visuals_node.visible = true
+		return
+	
 	var is_host = multiplayer.is_server()
 
 	# Logic:

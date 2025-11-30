@@ -30,7 +30,7 @@ func setup_missile(pos: Vector3, basis_rot: Basis, is_host: bool):
 	$DetectionArea.collision_mask = 0
 	set_collision_mask_value(1, true) # Map
 	
-	if shooter_is_host:
+	if shooter_is_host or Global.singlePlayer:
 		# Host Fired -> Target Enemy 2 (3) + Client (5)
 		print("Host Fired")
 		set_collision_mask_value(3, true)
