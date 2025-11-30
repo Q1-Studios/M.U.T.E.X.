@@ -5,7 +5,9 @@ extends Node3D # Or Node2D
 @export var max_enemy_count: int = 70
 @export var main_menu_scene: PackedScene
 @onready var enemySpawner: MultiplayerSpawner = $EnemySpawner
-
+@export var gameOver:Node3D 
+@export var gameOverRect:TextureRect
+@export var FG : Sprite2D
 
 func _ready():
 	ScoreManager.game_over.connect(on_game_over)
@@ -90,6 +92,10 @@ func display_game_over_ui():
 	if ($Players.get_child_count() > 1):
 		$Players.get_child(1).get_child(-1).explode()
 	print("GAME OVER")
+	gameOver.visible=true
+	FG.visible=true
+	gameOverRect.visible=true
+	
 
 @rpc("call_local", "reliable")
 func return_to_main_menu():

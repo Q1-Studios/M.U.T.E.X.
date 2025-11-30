@@ -500,6 +500,15 @@ render_target_update_mode = 4
 
 [node name="Control" parent="FG/SubViewport" instance=ExtResource("4_8ln24")]
 
+[node name="LineEdit" parent="FG/SubViewport/Control/HOSTINGASHOST" index="3"]
+select_all_on_focus = false
+
+[node name="LineEdit2" parent="FG/SubViewport/Control/HOSTINGASHOST" index="5"]
+select_all_on_focus = false
+
+[node name="LineEdit3" parent="FG/SubViewport/Control/HOSTINGASHOST" index="8"]
+select_all_on_focus = false
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="Node2D" node_paths=PackedStringArray("container")]
