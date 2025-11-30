@@ -140,6 +140,7 @@ theme_override_font_sizes/normal_font_size = 30
 text = "- PRESS  START -"
 
 [node name="Panel3" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,6 +179,7 @@ offset_left = 866.0
 offset_top = 115.0
 offset_right = 909.0
 offset_bottom = 159.0
+focus_neighbor_top = NodePath("../QuitGameBTN")
 focus_neighbor_bottom = NodePath("../JoinGameBTN")
 text = "Host"
 
@@ -218,6 +220,7 @@ offset_top = 350.0
 offset_right = 935.0
 offset_bottom = 394.0
 focus_neighbor_top = NodePath("../OptionsBTN")
+focus_neighbor_bottom = NodePath("../HostGameBTN")
 text = "[!] EJECT"
 
 [node name="Panel2" type="Panel" parent="."]
