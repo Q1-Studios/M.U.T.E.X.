@@ -11,6 +11,11 @@ func _ready():
 	ScoreManager.game_over.connect(on_game_over)
 	# If this is the Host, spawn existing players (like yourself)
 	if multiplayer.is_server():
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
 		# 1 is always the ID of the server
 		add_player(1) 
 		
