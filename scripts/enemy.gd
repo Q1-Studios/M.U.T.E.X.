@@ -62,16 +62,17 @@ func _ready() -> void:
 		
 	if not is_multiplayer_authority():
 		return
+	
+	if not patrol_points.is_empty():
+		var random_index = randi() % patrol_points.size()
+		global_position = patrol_points[random_index]
+		current_patrol_index = random_index
 		
 	gun_cooldown_timer.start()
 
 # --- CHANGE 2: Simplified Initialize (Server Only) ---
 func initialize(enemy_type_id: int, path_points: Array[Vector3]) -> void:
 	patrol_points = path_points
-	if not patrol_points.is_empty():
-		var random_index = randi() % path_points.size()
-		global_position = patrol_points[random_index]
-	
 	# Setting this variable triggers the SETTER on the Server.
 	# The MultiplayerSynchronizer detects the change and updates the Client.
 	# The Client's SETTER runs, executing the logic.
@@ -335,6 +336,10 @@ func rotate_towards(direction: Vector3, delta: float) -> void:
 	basis = basis.slerp(target_basis, ROTATION_SPEED * delta).orthonormalized()
 	
 func is_player_in_sight() -> bool:
+
+	if not is_inside_tree() || not is_instance_valid(player_shape_cast):
+		return false
+	
 	player_shape_cast.force_shapecast_update()
 	return player_shape_cast.is_colliding()
 

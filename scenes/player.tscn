@@ -157,9 +157,11 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="LeftGun" parent="ModelContainer" instance=ExtResource("5_qlg0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47845, 0.426927, -0.531486)
+visible = false
 
 [node name="RightGun" parent="ModelContainer" instance=ExtResource("5_qlg0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.247, 0.363787, -0.562052)
+visible = false
 
 [node name="Area3D" type="Area3D" parent="ModelContainer"]
 
