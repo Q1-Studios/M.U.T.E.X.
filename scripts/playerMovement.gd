@@ -140,6 +140,10 @@ func _physics_process(delta):
 	# Move relative to where we are facing (-Z is Forward)
 	player.velocity = -player.transform.basis.z * current_speed
 	
+	if (ScoreManager.game_over_signal_emmited):
+		player.velocity = Vector3.ZERO
+		is_shooting = false
+	
 	player.move_and_slide()
 	if is_shooting:
 		ship_model.get_child(4).current_animation="Shooting"

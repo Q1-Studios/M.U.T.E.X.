@@ -9,7 +9,7 @@ func _process(_delta):
 	if not owner.is_multiplayer_authority():
 		return
 		
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") && not ScoreManager.game_over_signal_emmited:
 		request_fire()	
 	#if Input.is_action_just_pressed("shoot") && $Timer.is_stopped():
 		#$Timer.start()
