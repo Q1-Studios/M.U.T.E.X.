@@ -173,6 +173,18 @@ func _on_host_pressed() -> void:
 
 func _on_start_pressed() -> void:
 	hide()
+
+
+func _on_line_edit_focus_entered() -> void:
+	$LineEdit.edit()
+
+
+func _on_line_edit_2_focus_entered() -> void:
+	$LineEdit2.edit()
+
+
+func _on_line_edit_3_focus_entered() -> void:
+	$LineEdit3.edit()
 "
 
 [sub_resource type="GDScript" id="GDScript_ib01u"]
@@ -894,6 +906,7 @@ focus_neighbor_right = NodePath("../START")
 focus_neighbor_bottom = NodePath("../LineEdit2")
 theme_override_fonts/font = ExtResource("3_oua23")
 placeholder_text = "ENTER  NAME"
+select_all_on_focus = true
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
@@ -924,6 +937,7 @@ focus_neighbor_bottom = NodePath("../LineEdit3")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#0055ff"
 placeholder_text = "<ENTER HEX CODE>"
+select_all_on_focus = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
@@ -970,6 +984,7 @@ focus_neighbor_bottom = NodePath("../CANCELHH")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#00ff55"
 placeholder_text = "<ENTER HEX CODE>"
+select_all_on_focus = true
 
 [connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Tutorial" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_options_btn_pressed"]

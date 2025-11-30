@@ -520,6 +520,9 @@ scale = Vector2(157.661, 83.9539)
 texture = SubResource("GradientTexture2D_oa1go")
 
 [connection signal="zoomout" from="FG/SubViewport/Control" to="Node2D/Camera2D" method="_on_control_zoomout"]
+[connection signal="focus_entered" from="FG/SubViewport/Control/HOSTINGASHOST/LineEdit" to="FG/SubViewport/Control/HOSTINGASHOST" method="_on_line_edit_focus_entered"]
+[connection signal="focus_entered" from="FG/SubViewport/Control/HOSTINGASHOST/LineEdit2" to="FG/SubViewport/Control/HOSTINGASHOST" method="_on_line_edit_2_focus_entered"]
+[connection signal="focus_entered" from="FG/SubViewport/Control/HOSTINGASHOST/LineEdit3" to="FG/SubViewport/Control/HOSTINGASHOST" method="_on_line_edit_3_focus_entered"]
 [connection signal="zoom_in" from="Node2D/Camera2D" to="FG/SubViewport/Control" method="_on_zoomin"]
 
 [editable path="FG/SubViewport/Control"]
