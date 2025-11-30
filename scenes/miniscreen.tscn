@@ -140,7 +140,6 @@ theme_override_font_sizes/normal_font_size = 30
 text = "- PRESS  START -"
 
 [node name="Panel3" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,45 +172,53 @@ text = "[ OK ] TUNNEL MARGIN THRESHOLD ADJUSTED
 [ WARN ] JAM PROCESS TERMINATED WITH ERROR EXIT CODE 1; 'SUBMISSION STATUS: INCOMPLETE'
 [ ERR ] Stacktrace fetched to MFD "
 
-[node name="Button" type="Button" parent="Panel3"]
+[node name="HostGameBTN" type="Button" parent="Panel3"]
 layout_mode = 0
 offset_left = 866.0
 offset_top = 115.0
 offset_right = 909.0
 offset_bottom = 159.0
+focus_neighbor_bottom = NodePath("../JoinGameBTN")
 text = "Host"
 
-[node name="Button2" type="Button" parent="Panel3"]
+[node name="JoinGameBTN" type="Button" parent="Panel3"]
 layout_mode = 0
 offset_left = 876.0
 offset_top = 179.0
 offset_right = 919.0
 offset_bottom = 223.0
+focus_neighbor_top = NodePath("../HostGameBTN")
+focus_neighbor_bottom = NodePath("../CreditsBTN")
 text = "Join"
 
-[node name="Button3" type="Button" parent="Panel3"]
+[node name="CreditsBTN" type="Button" parent="Panel3"]
 layout_mode = 0
 offset_left = 867.0
 offset_top = 252.0
 offset_right = 936.0
 offset_bottom = 296.0
+focus_neighbor_top = NodePath("../JoinGameBTN")
+focus_neighbor_bottom = NodePath("../OptionsBTN")
 text = "INFO"
 
-[node name="Button4" type="Button" parent="Panel3"]
-layout_mode = 0
-offset_left = 848.0
-offset_top = 350.0
-offset_right = 917.0
-offset_bottom = 394.0
-text = "[!] EJECT"
-
-[node name="Button5" type="Button" parent="Panel3"]
+[node name="OptionsBTN" type="Button" parent="Panel3"]
 layout_mode = 0
 offset_left = 942.0
 offset_top = 294.0
 offset_right = 1011.0
 offset_bottom = 338.0
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath("../QuitGameBTN")
 text = "CONF"
+
+[node name="QuitGameBTN" type="Button" parent="Panel3"]
+layout_mode = 0
+offset_left = 848.0
+offset_top = 350.0
+offset_right = 935.0
+offset_bottom = 394.0
+focus_neighbor_top = NodePath("../OptionsBTN")
+text = "[!] EJECT"
 
 [node name="Panel2" type="Panel" parent="."]
 visible = false
@@ -260,7 +267,7 @@ text = "OPFOR SIGNAL SCRAMBLING DETECTED. SENSOR RENDERED INCOMPLETE  - COMPLEME
 >> CALLOUT INCOMING HOSTILES TO WINGMAN. THEY ARE IMMUNE TO YOU AND INVISIBLE TO HIM <<
 CODE: ARRANGE. COOrdinate.  NEUTRALIZE."
 
-[node name="Button" type="Button" parent="Panel2"]
+[node name="ACKTutorialBTN" type="Button" parent="Panel2"]
 layout_mode = 0
 offset_left = 934.18475
 offset_top = 669.9949
@@ -321,7 +328,7 @@ theme_override_font_sizes/normal_font_size = 25
 text = "NAME?
 COLOR?"
 
-[node name="Button" type="Button" parent="Panel4"]
+[node name="StartGameBTN" type="Button" parent="Panel4"]
 layout_mode = 0
 offset_left = 934.18475
 offset_top = 669.9949
@@ -335,5 +342,5 @@ position = Vector2(590.26196, 502.19867)
 scale = Vector2(1.6113886, 0.6932225)
 texture = ExtResource("2_e87qj")
 
-[connection signal="pressed" from="Panel2/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Panel4/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel2/ACKTutorialBTN" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel4/StartGameBTN" to="." method="_on_button_pressed"]

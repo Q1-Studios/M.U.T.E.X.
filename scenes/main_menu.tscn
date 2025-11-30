@@ -52,7 +52,7 @@ _data = {
 resource_name = "cameraparallax"
 script/source = "extends Camera2D
 class_name CameraController
-signal zoomin
+signal zoom_in
 
 @export var move_speed_factor: float = 1.2
 @export var zoom_speed_factor: float = 1
@@ -85,16 +85,18 @@ func _process(delta: float) -> void:
 			zoom = Vector2(1, 1)
 			time_until_snapback = 0
 	
-	if Input.is_action_pressed(\"Boost\") or Input.is_action_pressed(\"Accelerate\") or Input.is_action_pressed(\"TiltDown\") or Input.is_action_pressed(\"shoot\"):
+	if Input.is_anything_pressed():
 		$AnimationPlayer.play(\"zoom\")
 		zoomed = true
-		emit_signal(\"zoomin\")	
-			
+		
 
 
 func zoom_and_snap_back(duration: float) -> void:
 	target_zoom = Vector2(2, 2)
 	time_until_snapback = duration
+	
+func fettsack():
+	zoom_in.emit()
 "
 
 [sub_resource type="Animation" id="Animation_8ln24"]
@@ -131,10 +133,10 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:zoom")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.2666667),
+"times": PackedFloat32Array(0.13333334, 1.2666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(6.01, 6.01)]
@@ -146,10 +148,24 @@ tracks/1/path = NodePath(".:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.2666667),
+"times": PackedFloat32Array(0.19999999, 1.2666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-3748.405, 472.95)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fettsack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_tbmy8"]
@@ -241,9 +257,7 @@ autoplay = "jigglergb"
 size = Vector2i(1200, 1000)
 render_target_update_mode = 4
 
-[node name="Control" parent="FG/SubViewport" node_paths=PackedStringArray("zoomoutanim") instance=ExtResource("4_8ln24")]
-emitter_path = NodePath("../../../Node2D/Camera2D")
-zoomoutanim = NodePath("../../../Node2D/Camera2D/AnimationPlayer")
+[node name="Control" parent="FG/SubViewport" instance=ExtResource("4_8ln24")]
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -255,3 +269,5 @@ script = SubResource("GDScript_l6cm7")
 libraries = {
 &"": SubResource("AnimationLibrary_8ln24")
 }
+
+[connection signal="zoom_in" from="Node2D/Camera2D" to="FG/SubViewport/Control" method="_on_zoomin"]
