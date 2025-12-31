@@ -44,6 +44,7 @@ func sync_score(new_val):
 
 func reset_score():
 	current_score = 0
+	game_over_signal_emmited = false
 	score_updated.emit(0)
 	if multiplayer.is_server():
 		rpc("sync_score", 0)
