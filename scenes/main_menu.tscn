@@ -131,31 +131,37 @@ func _process(delta: float) -> void:
 		time_since_mouse += delta
 		if time_since_mouse >= mouse_hide_time:
 			mouse_icon.hide()
-
+	
 	if zoomed:
-		return
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var offset_vec: Vector2 = mouse_pos - position
-	var distance: float = offset_vec.length()
-	
-	var speed: float = distance * move_speed_factor
-	if speed < 10:
-		speed = 10
-	
-	position = position.move_toward(mouse_pos, delta * speed)
-	
-	if time_until_snapback > 0:
-		time_until_snapback -= delta
-		zoom = zoom.move_toward(target_zoom, delta * zoom_speed_factor)
-		if time_until_snapback <= 0:
-			zoom = Vector2(1, 1)
-			time_until_snapback = 0
-	
-	if Input.is_anything_pressed():
-		$AnimationPlayer.play(\"zoom\")
-		zoomed = true
+		var target_pos: Vector2 = Vector2(500, 250)
+		var offset_vec: Vector2 = target_pos - position
+		var distance: float = offset_vec.length()
+		var speed: float = distance * move_speed_factor
 		
-
+		position = position.move_toward(target_pos, delta * speed)
+	
+	else:
+		var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+		var offset_vec: Vector2 = mouse_pos - position
+		var distance: float = offset_vec.length()
+		
+		var speed: float = distance * move_speed_factor
+		if speed < 10:
+			speed = 10
+		
+		position = position.move_toward(mouse_pos, delta * speed)
+		
+		if time_until_snapback > 0:
+			time_until_snapback -= delta
+			zoom = zoom.move_toward(target_zoom, delta * zoom_speed_factor)
+			if time_until_snapback <= 0:
+				zoom = Vector2(1, 1)
+				time_until_snapback = 0
+		
+		if Input.is_anything_pressed():
+			$AnimationPlayer.play(\"zoom\")
+			zoomed = true
+			
 
 func zoom_and_snap_back(duration: float) -> void:
 	target_zoom = Vector2(2, 2)
@@ -163,7 +169,6 @@ func zoom_and_snap_back(duration: float) -> void:
 	
 func fettsack():
 	zoom_in.emit()
-	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
@@ -171,7 +176,6 @@ func _input(event: InputEvent) -> void:
 		time_since_mouse = 0
 	
 	$\"../../FG/SubViewport\".push_input(event,false)
-
 
 func _on_control_zoomout() -> void:
 	$AnimationPlayer.play(\"zoomback\")
