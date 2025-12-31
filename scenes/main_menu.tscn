@@ -119,9 +119,9 @@ func _ready() -> void:
 
 var zoomed = false
 func _process(delta: float) -> void:
+	# If the window was refocussed, hide mouse again
 	if get_window().has_focus() and not last_frame_window_focus:
-		# Forces an override if the engine has previously hidden the mouse
-		# But the OS made the mouse appear again (due to a window change)
+		# Force refresh of mouse mode (workaround on macOS)
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	

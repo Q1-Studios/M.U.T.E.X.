@@ -43,6 +43,8 @@ var _default_spring_length
 var shortened_spring_length = 8
 
 func _ready():
+	# Force refresh of mouse mode (workaround on macOS)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	add_excluded_object(get_parent().get_rid())
@@ -72,7 +74,7 @@ func _input(event):
 
 func _process(delta):
 	# Hide mouse automatically when it is idle for some time
-	if time_since_mouse < mouse_hide_time:
+	if time_since_mouse < mouse_hide_time and get_window().has_focus():
 		time_since_mouse += delta
 		if time_since_mouse >= mouse_hide_time:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
