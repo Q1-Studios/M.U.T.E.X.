@@ -10,6 +10,8 @@ const CLIENT_CONNECTION_TIMEOUT: float = 3.0
 var primary:Color 
 var secondary:Color
 
+var error_msg: String
+
 # Signals to let the GUI know what's happening
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -23,30 +25,33 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 # --- HOSTING (The P2P "Server" Player) ---
-func host_game():
+func host_game() -> bool:
 	var peer = ENetMultiplayerPeer.new()
 	var error: Error = peer.create_server(PORT)
 	if error != OK:
 		print("cannot host: " + error_string(error))
-		return
+		error_msg = "Cannot host: " + error_string(error)
+		return false
 	
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	print("Waiting for players...")
 	change_level.call_deferred(LEVEL_SCENE_PATH)
+	return true
 	# Optional: Setup UPnP to allow internet play without manual port forwarding
 	#_setup_upnp()
 
 # --- JOINING (The Client Player) ---
-func join_game(address):
+func join_game(address) -> bool:
 	if address == "":
 		address = DEFAULT_SERVER_IP
 	
 	var peer = ENetMultiplayerPeer.new()	
-	var error = peer.create_client(address, PORT)
+	var error: Error = peer.create_client(address, PORT)
 	if error != OK:
-		print("cannot join: " + error)
-		return
+		print("cannot join: " + error_string(error))
+		error_msg = "Cannot join: " + error_string(error)
+		return false
 		
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
@@ -56,11 +61,13 @@ func join_game(address):
 	var status: MultiplayerPeer.ConnectionStatus = peer.get_connection_status()
 	
 	if status != MultiplayerPeer.CONNECTION_CONNECTED:
-		print("No connection after %s seconds, start to host game..." % CLIENT_CONNECTION_TIMEOUT)
+		print("No connection after %s seconds" % CLIENT_CONNECTION_TIMEOUT)
 		multiplayer.multiplayer_peer.close()
 		multiplayer.multiplayer_peer = null
-		host_game()
+		error_msg = "Connecting to " + str(address) + " failed."
+		return false
 	
+	return true
 
 func cleanup_network():
 	if multiplayer.multiplayer_peer != null:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dp3rvhbvdll7k"]
+[gd_scene load_steps=20 format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scenes/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://scenes/orangetheme.tres" id="1_j2igt"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ch76tb3w6jhpw" path="res://assets/sprites/opsec und so_gruber.png" id="4_j7o8s"]
 [ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/button_sound_player.tscn" id="4_qm21r"]
 [ext_resource type="FontFile" uid="uid://bbkwijog1qnxl" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.woff" id="5_lt044"]
+[ext_resource type="Script" uid="uid://l4t0hvb6p5ct" path="res://scripts/network_error_label.gd" id="8_qm21r"]
 
 [sub_resource type="GDScript" id="GDScript_03b6j"]
 resource_name = "asdsadsadsadsadsads"
@@ -40,9 +41,11 @@ func _on_cancelhost_pressed() -> void:
 func _on_join_pressed() -> void:
 	hide()
 
-
 func _on_start_pressed() -> void:
 	hide()
+
+func _on_network_error() -> void:
+	show()
 "
 
 [sub_resource type="GDScript" id="GDScript_vocgd"]
@@ -140,6 +143,12 @@ func _on_host_pressed() -> void:
 
 func _on_line_edit_focus_entered() -> void:
 	$LineEdit.edit()
+
+
+func _on_network_error_exit_pressed() -> void:
+	show()
+	$HIGHSCORE._refresh()
+	$CANCELHOST.grab_focus()
 "
 
 [sub_resource type="GDScript" id="GDScript_ms7bd"]
@@ -250,6 +259,15 @@ func normalize_hex(input: String) -> String:
 		return michael  # valid hex code
 	else:
 		return \"\"  # or handle invalid input however you want
+"
+
+[sub_resource type="GDScript" id="GDScript_3k4et"]
+resource_name = "networkerror"
+script/source = "extends Panel
+
+
+func _on_exit_pressed() -> void:
+	hide()
 "
 
 [node name="Control" type="Control"]
@@ -1055,6 +1073,51 @@ theme_override_colors/default_color = Color(0.37254903, 0.23137255, 0.13333334, 
 theme_override_font_sizes/normal_font_size = 70
 text = "127.0.0.1"
 
+[node name="NETWORKERROR" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 106.0
+offset_top = 51.0
+offset_right = 106.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.840305, 0.840305)
+theme = ExtResource("1_j2igt")
+script = SubResource("GDScript_3k4et")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NETWORKERROR"]
+layout_mode = 0
+offset_left = -122.574554
+offset_top = 97.583626
+offset_right = 1297.4254
+offset_bottom = 710.45636
+
+[node name="ErrorMessage" type="Label" parent="NETWORKERROR/VBoxContainer"]
+custom_minimum_size = Vector2(1420, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Example network error"
+horizontal_alignment = 1
+script = ExtResource("8_qm21r")
+
+[node name="CenterContainer" type="CenterContainer" parent="NETWORKERROR/VBoxContainer"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="NETWORKERROR/VBoxContainer/CenterContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../LineEdit2")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../LineEdit")
+theme_override_font_sizes/font_size = 75
+text = "<< ACK >>"
+
+[node name="ButtonSoundPlayer" parent="NETWORKERROR/VBoxContainer/CenterContainer/Exit" instance=ExtResource("4_qm21r")]
+
 [connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Tutorial" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Options" method="_on_options_btn_pressed"]
@@ -1079,3 +1142,5 @@ text = "127.0.0.1"
 [connection signal="pressed" from="HOSTINGASHOST/START" to="PRESSTART" method="_on_start_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="Menu" method="_on_start_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="HOSTINGASHOST" method="_on_start_pressed"]
+[connection signal="pressed" from="NETWORKERROR/VBoxContainer/CenterContainer/Exit" to="HOSTING" method="_on_network_error_exit_pressed"]
+[connection signal="pressed" from="NETWORKERROR/VBoxContainer/CenterContainer/Exit" to="NETWORKERROR" method="_on_exit_pressed"]
