@@ -19,15 +19,19 @@ script/source = "extends Panel
 
 
 func _on_returnfromcreditsbtn_pressed() -> void:
-	$VBoxContainer/HostGameBTN.grab_focus()
-	$VBoxContainer/QuitGameBTN.resetbtn()
-func _on_returnfromoptions_pressed() -> void:
-	$VBoxContainer/HostGameBTN.grab_focus()
-	$VBoxContainer/QuitGameBTN.resetbtn()
-func _on_cancelhost_pressed() -> void:
+	show()
 	$VBoxContainer/HostGameBTN.grab_focus()
 	$VBoxContainer/QuitGameBTN.resetbtn()
 
+func _on_returnfromoptions_pressed() -> void:
+	show()
+	$VBoxContainer/HostGameBTN.grab_focus()
+	$VBoxContainer/QuitGameBTN.resetbtn()
+
+func _on_cancelhost_pressed() -> void:
+	show()
+	$VBoxContainer/HostGameBTN.grab_focus()
+	$VBoxContainer/QuitGameBTN.resetbtn()
 
 func _on_join_pressed() -> void:
 	hide()
@@ -35,8 +39,14 @@ func _on_join_pressed() -> void:
 func _on_start_pressed() -> void:
 	hide()
 
-func _on_network_error() -> void:
-	show()
+func _on_host_game_btn_pressed() -> void:
+	hide()
+
+func _on_credits_btn_pressed() -> void:
+	hide()
+
+func _on_options_btn_pressed() -> void:
+	hide()
 "
 
 [sub_resource type="GDScript" id="GDScript_vocgd"]
@@ -283,6 +293,16 @@ offset_bottom = 0.135925
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4qlu7")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_j2igt")
 
 [node name="Menu" type="Panel" parent="."]
 visible = false
@@ -891,7 +911,6 @@ offset_right = 539.411
 offset_bottom = 542.597
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../LineEdit")
-focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../LineEdit3")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#0055ff"
@@ -915,6 +934,12 @@ offset_left = 409.37503
 offset_top = -27.37085
 offset_right = 733.375
 offset_bottom = 276.62915
+focus_neighbor_left = NodePath("..")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../LineEdit3")
+focus_previous = NodePath("..")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
@@ -958,7 +983,6 @@ offset_right = 539.411
 offset_bottom = 693.733
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../LineEdit2")
-focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../CANCELHH")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#00ff55"
@@ -983,6 +1007,12 @@ offset_left = 409.37503
 offset_top = -178.50684
 offset_right = 733.375
 offset_bottom = 125.493164
+focus_neighbor_left = NodePath("..")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("..")
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
@@ -1193,8 +1223,11 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 30
 text = "- PRESS  START -"
 
+[connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Menu" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Tutorial" method="_on_host_game_btn_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Menu" method="_on_credits_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_options_btn_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Menu" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Options" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Tutorial/ACKTutorialBTN" to="Tutorial" method="_on_ack_tutorial_btn_pressed"]
 [connection signal="pressed" from="Tutorial/ACKTutorialBTN" to="HOSTING" method="_on_host_game_btn_pressed"]
@@ -1207,15 +1240,15 @@ text = "- PRESS  START -"
 [connection signal="pressed" from="HOSTING/HOST" to="HOSTING" method="_on_host_pressed"]
 [connection signal="pressed" from="HOSTING/HOST" to="HOSTINGASHOST" method="_on_host_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="." method="_zoomout"]
-[connection signal="pressed" from="HOSTING/JOIN" to="PRESSTART" method="_on_join_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="Menu" method="_on_join_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="HOSTING" method="_on_join_pressed"]
+[connection signal="pressed" from="HOSTING/JOIN" to="PRESSTART" method="_on_join_pressed"]
 [connection signal="focus_entered" from="HOSTING/LineEdit" to="HOSTING" method="_on_line_edit_focus_entered"]
 [connection signal="pressed" from="HOSTINGASHOST/CANCELHH" to="HOSTING" method="_on_cancelhh_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/CANCELHH" to="HOSTINGASHOST" method="_on_cancelhost_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="HOSTINGASHOST/START" to="PRESSTART" method="_on_start_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="Menu" method="_on_start_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="HOSTINGASHOST" method="_on_start_pressed"]
+[connection signal="pressed" from="HOSTINGASHOST/START" to="PRESSTART" method="_on_start_pressed"]
 [connection signal="pressed" from="NETWORKERROR/VBoxContainer/CenterContainer/Exit" to="HOSTING" method="_on_network_error_exit_pressed"]
 [connection signal="pressed" from="NETWORKERROR/VBoxContainer/CenterContainer/Exit" to="NETWORKERROR" method="_on_exit_pressed"]
