@@ -188,7 +188,7 @@ func change_scene_usw() -> void:
 		var success: bool = false
 		
 		if container.iJoinedNotHosted:
-			success = await NetworkManager.join_game(NetworkManager.DEFAULT_SERVER_IP)
+			success = await NetworkManager.join_game(NetworkManager.LAST_SERVER_IP)
 			if not success:
 				display_network_error()
 			return

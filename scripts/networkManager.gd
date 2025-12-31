@@ -2,7 +2,8 @@ extends Node
 
 # NetworkManager.gd
 const PORT = 8080
-var DEFAULT_SERVER_IP = "" # Leave blank initially, last entered IP will be remembered
+var LAST_SERVER_IP = "" # Leave blank initially, last entered IP will be remembered
+var DEFAULT_SERVER_IP = "127.0.0.1"
 
 const LEVEL_SCENE_PATH = "res://scenes/LevelScene.tscn" 
 const CLIENT_CONNECTION_TIMEOUT: float = 3.0

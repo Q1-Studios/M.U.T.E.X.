@@ -114,7 +114,7 @@ resource_name = "hosting"
 script/source = "extends Panel
 
 func _ready() -> void:
-	$LineEdit.text = NetworkManager.DEFAULT_SERVER_IP
+	$LineEdit.text = NetworkManager.LAST_SERVER_IP
 
 func _on_host_game_btn_pressed() -> void:
 	show()
@@ -122,12 +122,12 @@ func _on_host_game_btn_pressed() -> void:
 	$CANCELHOST.grab_focus()
 
 func _on_cancelhost_pressed() -> void:
-	NetworkManager.DEFAULT_SERVER_IP = $LineEdit.text
+	NetworkManager.LAST_SERVER_IP = $LineEdit.text
 	hide()
 
 
 func _on_join_pressed() -> void:
-	NetworkManager.DEFAULT_SERVER_IP = $LineEdit.text
+	NetworkManager.LAST_SERVER_IP = $LineEdit.text
 	hide()
 
 
@@ -138,7 +138,7 @@ func _on_cancelhh_pressed() -> void:
 
 
 func _on_host_pressed() -> void:
-	NetworkManager.DEFAULT_SERVER_IP = $LineEdit.text
+	NetworkManager.LAST_SERVER_IP = $LineEdit.text
 	hide()
 
 
