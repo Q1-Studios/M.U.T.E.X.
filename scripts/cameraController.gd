@@ -32,6 +32,10 @@ var _current_pitch := 0.0
 var _current_yaw := 0.0
 var _is_using_mouse := false
 
+# MOUSE DISAPPEARING VARIABLES
+const mouse_hide_time: float = 3.0
+var time_since_mouse: float = 0
+
 # THE DEFAULT ("HOME") POSITION
 var _default_pitch := 0.0
 var _default_yaw := 0.0
@@ -39,6 +43,8 @@ var _default_spring_length
 var shortened_spring_length = 8
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 	add_excluded_object(get_parent().get_rid())
 	_default_pitch = rotation_degrees.x
 	_default_yaw = rotation_degrees.y
@@ -49,6 +55,7 @@ func _ready():
 	
 
 func _input(event):
+	# Mouse is moved as part of game controls, hide it
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
@@ -56,11 +63,20 @@ func _input(event):
 			_is_using_mouse = true
 			_current_yaw -= event.relative.x * mouse_sensitivity
 			_current_pitch -= event.relative.y * mouse_sensitivity
-	else:
-		_is_using_mouse = false
+	
+	# If mouse has moved but not as part of the game controls, show it
+	elif event is InputEventMouseMotion:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		time_since_mouse = 0
+		_is_using_mouse = false
 
 func _process(delta):
+	# Hide mouse automatically when it is idle for some time
+	if time_since_mouse < mouse_hide_time:
+		time_since_mouse += delta
+		if time_since_mouse >= mouse_hide_time:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 	var joy_input = Input.get_vector("LookLeft", "LookRight", "LookUp", "LookDown")
 	var look_back = Input.is_action_pressed("LookBack")
 	
