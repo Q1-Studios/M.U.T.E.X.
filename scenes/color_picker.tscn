@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://crgueyuwsvter"]
+
+[node name="ColorPicker" type="ColorPicker"]
+offset_right = 300.00006
+offset_bottom = 291.0
+mouse_filter = 2
+edit_alpha = false
+can_add_swatches = false
+sampler_visible = false
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false

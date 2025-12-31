@@ -103,11 +103,13 @@ signal zoom_in
 @export var start:Button
 
 @export var mouse_hide_time: float = 3.0
+@export var mouse_icon: CanvasItem
 
 var target_zoom: Vector2 = Vector2(1, 1)
 var time_until_snapback: float = 0
 
 var time_since_mouse: float = 0
+var last_frame_window_focus: bool = false
 
 var allow_scene_change: bool = true
 
@@ -117,11 +119,19 @@ func _ready() -> void:
 
 var zoomed = false
 func _process(delta: float) -> void:
-	if get_window().has_focus() and time_since_mouse < mouse_hide_time:
+	if get_window().has_focus() and not last_frame_window_focus:
+		# Forces an override if the engine has previously hidden the mouse
+		# But the OS made the mouse appear again (due to a window change)
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	
+	last_frame_window_focus = get_window().has_focus()
+	
+	if time_since_mouse < mouse_hide_time:
 		time_since_mouse += delta
 		if time_since_mouse >= mouse_hide_time:
-			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	
+			mouse_icon.hide()
+
 	if zoomed:
 		return
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
@@ -157,7 +167,7 @@ func fettsack():
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		mouse_icon.show()
 		time_since_mouse = 0
 	
 	$\"../../FG/SubViewport\".push_input(event,false)
@@ -348,6 +358,73 @@ tracks/11/keys = {
 "values": [-5.0]
 }
 
+[sub_resource type="Animation" id="Animation_lgwnu"]
+resource_name = "network_error_menu_reset"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../FG/SubViewport/Control/PRESSTART:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../FG/SubViewport/Control/NETWORKERROR:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../FG/SubViewport/Control/NETWORKERROR/VBoxContainer/ErrorMessage")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../FG/SubViewport/Control/NETWORKERROR/VBoxContainer/CenterContainer/Exit")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"grab_focus"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../FG/SubViewport/Control/Menu:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_wu84c"]
 resource_name = "zoom"
 length = 1.387
@@ -534,73 +611,6 @@ tracks/10/keys = {
 "values": [-80.0, -80.0, -5.0, -80.0]
 }
 
-[sub_resource type="Animation" id="Animation_lgwnu"]
-resource_name = "network_error_menu_reset"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../FG/SubViewport/Control/PRESSTART:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../FG/SubViewport/Control/NETWORKERROR:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../FG/SubViewport/Control/NETWORKERROR/VBoxContainer/ErrorMessage")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"update"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../FG/SubViewport/Control/NETWORKERROR/VBoxContainer/CenterContainer/Exit")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"grab_focus"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../../FG/SubViewport/Control/Menu:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ln24"]
 _data = {
 &"RESET": SubResource("Animation_8ln24"),
@@ -696,10 +706,11 @@ select_all_on_focus = false
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="Node2D" node_paths=PackedStringArray("container")]
+[node name="Camera2D" type="Camera2D" parent="Node2D" node_paths=PackedStringArray("container", "mouse_icon")]
 position = Vector2(572, 465.665)
 script = SubResource("GDScript_l6cm7")
 container = NodePath("../../FG/SubViewport/Control/HOSTINGASHOST/START")
+mouse_icon = NodePath("../../FG/SubViewport/Control/MouseCursor")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Camera2D"]
 libraries = {
