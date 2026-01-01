@@ -113,8 +113,10 @@ func _on_options_btn_pressed() -> void:
 resource_name = "hosting"
 script/source = "extends Panel
 
+@export var ip_field: LineEdit
+
 func _ready() -> void:
-	$LineEdit.text = NetworkManager.LAST_SERVER_IP
+	ip_field.text = NetworkManager.LAST_SERVER_IP
 
 func _on_host_game_btn_pressed() -> void:
 	show()
@@ -122,12 +124,12 @@ func _on_host_game_btn_pressed() -> void:
 	$CANCELHOST.grab_focus()
 
 func _on_cancelhost_pressed() -> void:
-	NetworkManager.LAST_SERVER_IP = $LineEdit.text
+	NetworkManager.LAST_SERVER_IP = ip_field.text
 	hide()
 
 
 func _on_join_pressed() -> void:
-	NetworkManager.LAST_SERVER_IP = $LineEdit.text
+	NetworkManager.LAST_SERVER_IP = ip_field.text
 	hide()
 
 
@@ -138,12 +140,12 @@ func _on_cancelhh_pressed() -> void:
 
 
 func _on_host_pressed() -> void:
-	NetworkManager.LAST_SERVER_IP = $LineEdit.text
+	NetworkManager.LAST_SERVER_IP = ip_field.text
 	hide()
 
 
 func _on_line_edit_focus_entered() -> void:
-	$LineEdit.edit()
+	ip_field.edit()
 
 
 func _on_network_error_exit_pressed() -> void:
@@ -221,25 +223,30 @@ resource_name = "stoart"
 script/source = "extends Button
 
 var teamname = \"IJoined\"
-@export var hexkot = \"#123123\"
-@export var hexkot_secondary = \"#123123\"
+@export var hexcode_primary = \"#123123\"
+@export var hexcode_secondary = \"#123123\"
+
+@export var teamname_field: LineEdit
+@export var primary_col_field: LineEdit
+@export var secondary_col_field: LineEdit
+
 var iJoinedNotHosted = true
 
 func _process(_delta: float) -> void:
-	if($\"../LineEdit\".text != \"\") and regexvalid():
-		teamname = $\"../LineEdit\".text
-		hexkot = normalize_hex($\"../LineEdit2\".text)
-		hexkot_secondary = normalize_hex($\"../LineEdit3\".text)
-		NetworkManager.primary=hexkot
-		NetworkManager.secondary=hexkot_secondary
+	if(teamname_field.text != \"\") and regexvalid():
+		teamname = teamname_field.text
+		hexcode_primary = normalize_hex(primary_col_field.text)
+		hexcode_secondary = normalize_hex(secondary_col_field.text)
+		NetworkManager.primary = hexcode_primary
+		NetworkManager.secondary = hexcode_secondary
 		iJoinedNotHosted = false
 		disabled = false
 	else:
 		disabled = true
 		iJoinedNotHosted = true
 func regexvalid() -> bool:
-	var norm = normalize_hex($\"../LineEdit2\".text)
-	var norm2 = normalize_hex($\"../LineEdit3\".text)
+	var norm = normalize_hex(primary_col_field.text)
+	var norm2 = normalize_hex(secondary_col_field.text)
 	if norm!=\"\" and norm2!=\"\":
 		return true
 	return false
@@ -675,7 +682,7 @@ text = "<< return >>"
 
 [node name="ButtonSoundPlayer" parent="Options/RETURNFROMOPTIONS" instance=ExtResource("4_qm21r")]
 
-[node name="HOSTING" type="Panel" parent="."]
+[node name="HOSTING" type="Panel" parent="." node_paths=PackedStringArray("ip_field")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -691,6 +698,7 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_bi3l1")
+ip_field = NodePath("IpField")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="HOSTING"]
 layout_mode = 1
@@ -716,7 +724,7 @@ offset_right = 387.475
 offset_bottom = 188.724
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../HOST")
-focus_neighbor_right = NodePath("../LineEdit")
+focus_neighbor_right = NodePath("../IpField")
 focus_neighbor_bottom = NodePath("../HOST")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
@@ -745,7 +753,7 @@ offset_top = 264.19
 offset_right = 1003.0
 offset_bottom = 348.19
 focus_neighbor_left = NodePath("../HOST")
-focus_neighbor_top = NodePath("../LineEdit")
+focus_neighbor_top = NodePath("../IpField")
 focus_neighbor_right = NodePath("../HOST")
 focus_neighbor_bottom = NodePath("../CANCELHOST")
 theme_override_font_sizes/font_size = 75
@@ -788,7 +796,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 90
 text = "HIGH  SCORES"
 
-[node name="LineEdit" type="LineEdit" parent="HOSTING"]
+[node name="IpField" type="LineEdit" parent="HOSTING"]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 750.0
@@ -846,32 +854,35 @@ offset_top = 104.724
 offset_right = 387.475
 offset_bottom = 188.724
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../LineEdit2")
+focus_neighbor_top = NodePath("../PrimaryColorField")
 focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../LineEdit")
+focus_neighbor_bottom = NodePath("../TeamnameField")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 
 [node name="ButtonSoundPlayer" parent="HOSTINGASHOST/CANCELHH" instance=ExtResource("4_qm21r")]
 
-[node name="START" type="Button" parent="HOSTINGASHOST"]
+[node name="START" type="Button" parent="HOSTINGASHOST" node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field")]
 layout_mode = 0
 offset_left = 669.995
 offset_top = 312.982
 offset_right = 922.995
 offset_bottom = 396.982
-focus_neighbor_left = NodePath("../LineEdit")
+focus_neighbor_left = NodePath("../TeamnameField")
 focus_neighbor_top = NodePath("../CANCELHH")
-focus_neighbor_right = NodePath("../LineEdit")
+focus_neighbor_right = NodePath("../TeamnameField")
 focus_neighbor_bottom = NodePath("../CANCELHH")
 theme_override_font_sizes/font_size = 75
 disabled = true
 text = "START!"
 script = SubResource("GDScript_ib01u")
+teamname_field = NodePath("../TeamnameField")
+primary_col_field = NodePath("../PrimaryColorField")
+secondary_col_field = NodePath("../SecondaryColorField")
 
 [node name="ButtonSoundPlayer" parent="HOSTINGASHOST/START" instance=ExtResource("4_qm21r")]
 
-[node name="LineEdit" type="LineEdit" parent="HOSTINGASHOST"]
+[node name="TeamnameField" type="LineEdit" parent="HOSTINGASHOST"]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -881,7 +892,7 @@ offset_bottom = 392.652
 focus_neighbor_left = NodePath("../START")
 focus_neighbor_top = NodePath("../CANCELHH")
 focus_neighbor_right = NodePath("../START")
-focus_neighbor_bottom = NodePath("../LineEdit2")
+focus_neighbor_bottom = NodePath("../PrimaryColorField")
 theme_override_fonts/font = ExtResource("3_oua23")
 placeholder_text = "ENTER  NAME"
 select_all_on_focus = true
@@ -902,7 +913,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM COLOR PRIMARY:"
 
-[node name="LineEdit2" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview")]
+[node name="PrimaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -910,8 +921,8 @@ offset_top = 462.927
 offset_right = 539.411
 offset_bottom = 542.597
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../LineEdit")
-focus_neighbor_bottom = NodePath("../LineEdit3")
+focus_neighbor_top = NodePath("../TeamnameField")
+focus_neighbor_bottom = NodePath("../SecondaryColorField")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#0055ff"
 placeholder_text = "<ENTER HEX CODE>"
@@ -920,7 +931,7 @@ script = ExtResource("9_bi3l1")
 color_picker = NodePath("PrimaryColorPicker")
 preview = NodePath("ColorRect")
 
-[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/LineEdit2"]
+[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/PrimaryColorField"]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 10.0
@@ -928,7 +939,7 @@ offset_right = 375.0
 offset_bottom = 70.0
 mouse_filter = 2
 
-[node name="PrimaryColorPicker" parent="HOSTINGASHOST/LineEdit2" instance=ExtResource("7_vocgd")]
+[node name="PrimaryColorPicker" parent="HOSTINGASHOST/PrimaryColorField" instance=ExtResource("7_vocgd")]
 layout_mode = 1
 offset_left = 409.37503
 offset_top = -27.37085
@@ -938,7 +949,7 @@ focus_neighbor_left = NodePath("..")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../../LineEdit3")
+focus_next = NodePath("../../SecondaryColorField")
 focus_previous = NodePath("..")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HOSTINGASHOST"]
@@ -974,7 +985,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM COLOR SECONDARY:"
 
-[node name="LineEdit3" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview")]
+[node name="SecondaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -982,7 +993,7 @@ offset_top = 614.063
 offset_right = 539.411
 offset_bottom = 693.733
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../LineEdit2")
+focus_neighbor_top = NodePath("../PrimaryColorField")
 focus_neighbor_bottom = NodePath("../CANCELHH")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#00ff55"
@@ -992,7 +1003,7 @@ script = ExtResource("9_bi3l1")
 color_picker = NodePath("SecondaryColorPicker")
 preview = NodePath("ColorRect")
 
-[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/LineEdit3"]
+[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/SecondaryColorField"]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 10.0
@@ -1000,7 +1011,7 @@ offset_right = 375.0
 offset_bottom = 70.0
 mouse_filter = 2
 
-[node name="SecondaryColorPicker" parent="HOSTINGASHOST/LineEdit3" instance=ExtResource("7_vocgd")]
+[node name="SecondaryColorPicker" parent="HOSTINGASHOST/SecondaryColorField" instance=ExtResource("7_vocgd")]
 visible = false
 layout_mode = 1
 offset_left = 409.37503
@@ -1243,7 +1254,7 @@ text = "- PRESS  START -"
 [connection signal="pressed" from="HOSTING/JOIN" to="Menu" method="_on_join_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="HOSTING" method="_on_join_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="PRESSTART" method="_on_join_pressed"]
-[connection signal="focus_entered" from="HOSTING/LineEdit" to="HOSTING" method="_on_line_edit_focus_entered"]
+[connection signal="focus_entered" from="HOSTING/IpField" to="HOSTING" method="_on_line_edit_focus_entered"]
 [connection signal="pressed" from="HOSTINGASHOST/CANCELHH" to="HOSTING" method="_on_cancelhh_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/CANCELHH" to="HOSTINGASHOST" method="_on_cancelhost_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="." method="_on_start_pressed"]
