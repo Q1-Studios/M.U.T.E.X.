@@ -24,6 +24,7 @@ func _on_gui_focus_changed(control: Control) -> void:
 
 func _on_focus_entered() -> void:
 	edit()
+	caret_column = text.length()
 
 func _on_text_changed(new_text: String) -> void:
 	var new_color: Color = Color(new_text)

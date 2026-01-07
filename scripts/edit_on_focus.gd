@@ -5,3 +5,4 @@ func _ready() -> void:
 
 func _on_focus_entered() -> void:
 	edit()
+	caret_column = text.length()

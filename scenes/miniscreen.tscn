@@ -128,26 +128,18 @@ func _on_cancelhost_pressed() -> void:
 	NetworkManager.LAST_SERVER_IP = ip_field.text
 	hide()
 
-
 func _on_join_pressed() -> void:
 	NetworkManager.LAST_SERVER_IP = ip_field.text
 	hide()
-
 
 func _on_cancelhh_pressed() -> void:
 	show()
 	$HIGHSCORE._refresh()
 	$CANCELHOST.grab_focus()
 
-
 func _on_host_pressed() -> void:
 	NetworkManager.LAST_SERVER_IP = ip_field.text
 	hide()
-
-
-func _on_line_edit_focus_entered() -> void:
-	ip_field.edit()
-
 
 func _on_network_error_exit_pressed() -> void:
 	show()
@@ -802,6 +794,7 @@ focus_previous = NodePath("../CANCELHOST")
 theme_override_fonts/font = ExtResource("3_oua23")
 placeholder_text = "ENTER IP"
 select_all_on_focus = true
+script = ExtResource("7_hofui")
 
 [node name="HOSTINGASHOST" type="Panel" parent="."]
 visible = false
