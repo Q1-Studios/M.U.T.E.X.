@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dp3rvhbvdll7k"]
+[gd_scene load_steps=26 format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scenes/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://scenes/orangetheme.tres" id="1_j2igt"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/button_sound_player.tscn" id="4_qm21r"]
 [ext_resource type="FontFile" uid="uid://bbkwijog1qnxl" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.woff" id="5_lt044"]
 [ext_resource type="Script" uid="uid://bp7fv1w2aua3c" path="res://scripts/edit_on_focus.gd" id="7_hofui"]
+[ext_resource type="Script" uid="uid://b3e3vm0gjjh4n" path="res://scripts/join_btn.gd" id="7_ms7bd"]
 [ext_resource type="PackedScene" uid="uid://crgueyuwsvter" path="res://scenes/color_picker.tscn" id="7_vocgd"]
 [ext_resource type="Script" uid="uid://l4t0hvb6p5ct" path="res://scripts/network_error_label.gd" id="8_qm21r"]
 [ext_resource type="Script" uid="uid://dklx4pm5boqr6" path="res://scripts/color_picker_line_edit.gd" id="9_bi3l1"]
@@ -225,6 +226,7 @@ func _process(_delta: float) -> void:
 	else:
 		disabled = true
 		iJoinedNotHosted = true
+
 func regexvalid() -> bool:
 	var norm = normalize_hex(primary_col_field.text)
 	var norm2 = normalize_hex(secondary_col_field.text)
@@ -727,7 +729,7 @@ text = "HOST GAME"
 
 [node name="ButtonSoundPlayer" parent="HOSTING/HOST" instance=ExtResource("4_qm21r")]
 
-[node name="JOIN" type="Button" parent="HOSTING"]
+[node name="JOIN" type="Button" parent="HOSTING" node_paths=PackedStringArray("ip_field")]
 layout_mode = 0
 offset_left = 750.0
 offset_top = 264.19
@@ -739,6 +741,8 @@ focus_neighbor_right = NodePath("../HOST")
 focus_neighbor_bottom = NodePath("../CANCELHOST")
 theme_override_font_sizes/font_size = 75
 text = "JOIN GAME"
+script = ExtResource("7_ms7bd")
+ip_field = NodePath("../IpField")
 
 [node name="ButtonSoundPlayer" parent="HOSTING/JOIN" instance=ExtResource("4_qm21r")]
 
