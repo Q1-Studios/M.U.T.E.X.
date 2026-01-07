@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/button_sound_player.tscn" id="4_qm21r"]
 [ext_resource type="FontFile" uid="uid://bbkwijog1qnxl" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.woff" id="5_lt044"]
 [ext_resource type="Script" uid="uid://bp7fv1w2aua3c" path="res://scripts/edit_on_focus.gd" id="7_hofui"]
-[ext_resource type="Script" uid="uid://b3e3vm0gjjh4n" path="res://scripts/join_btn.gd" id="7_ms7bd"]
 [ext_resource type="PackedScene" uid="uid://crgueyuwsvter" path="res://scenes/color_picker.tscn" id="7_vocgd"]
+[ext_resource type="Script" uid="uid://s1c47d08pcj8" path="res://scripts/ip_addr_line_edit.gd" id="8_ib01u"]
 [ext_resource type="Script" uid="uid://l4t0hvb6p5ct" path="res://scripts/network_error_label.gd" id="8_qm21r"]
 [ext_resource type="Script" uid="uid://dklx4pm5boqr6" path="res://scripts/color_picker_line_edit.gd" id="9_bi3l1"]
 [ext_resource type="Texture2D" uid="uid://ce5ivqphk25pc" path="res://assets/sprites/cursor.svg" id="11_t6nao"]
@@ -729,7 +729,7 @@ text = "HOST GAME"
 
 [node name="ButtonSoundPlayer" parent="HOSTING/HOST" instance=ExtResource("4_qm21r")]
 
-[node name="JOIN" type="Button" parent="HOSTING" node_paths=PackedStringArray("ip_field")]
+[node name="JOIN" type="Button" parent="HOSTING"]
 layout_mode = 0
 offset_left = 750.0
 offset_top = 264.19
@@ -741,8 +741,6 @@ focus_neighbor_right = NodePath("../HOST")
 focus_neighbor_bottom = NodePath("../CANCELHOST")
 theme_override_font_sizes/font_size = 75
 text = "JOIN GAME"
-script = ExtResource("7_ms7bd")
-ip_field = NodePath("../IpField")
 
 [node name="ButtonSoundPlayer" parent="HOSTING/JOIN" instance=ExtResource("4_qm21r")]
 
@@ -781,7 +779,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 90
 text = "HIGH  SCORES"
 
-[node name="IpField" type="LineEdit" parent="HOSTING"]
+[node name="IpField" type="LineEdit" parent="HOSTING" node_paths=PackedStringArray("dependant_btn", "error_label")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 750.0
@@ -798,7 +796,19 @@ focus_previous = NodePath("../CANCELHOST")
 theme_override_fonts/font = ExtResource("3_oua23")
 placeholder_text = "ENTER IP"
 select_all_on_focus = true
-script = ExtResource("7_hofui")
+script = ExtResource("8_ib01u")
+dependant_btn = NodePath("../JOIN")
+error_label = NodePath("ErrorMsg")
+
+[node name="ErrorMsg" type="Label" parent="HOSTING/IpField"]
+visible = false
+layout_mode = 0
+offset_top = 85.68326
+offset_right = 383.3114
+offset_bottom = 127.33481
+theme_override_colors/font_color = Color(0.627451, 0.16862746, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Enter a valid IP address to join!"
 
 [node name="HOSTINGASHOST" type="Panel" parent="."]
 visible = false
