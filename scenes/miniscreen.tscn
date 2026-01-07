@@ -20,21 +20,25 @@
 resource_name = "gurber"
 script/source = "extends Panel
 
+@export var host_game_btn: Button
+@export var credits_btn: Button
+@export var options_btn: Button
+@export var quit_game_btn: Button
 
 func _on_returnfromcreditsbtn_pressed() -> void:
 	show()
-	$VBoxContainer/HostGameBTN.grab_focus()
-	$VBoxContainer/QuitGameBTN.resetbtn()
+	credits_btn.grab_focus()
+	quit_game_btn.resetbtn()
 
 func _on_returnfromoptions_pressed() -> void:
 	show()
-	$VBoxContainer/HostGameBTN.grab_focus()
-	$VBoxContainer/QuitGameBTN.resetbtn()
+	options_btn.grab_focus()
+	quit_game_btn.resetbtn()
 
 func _on_cancelhost_pressed() -> void:
 	show()
-	$VBoxContainer/HostGameBTN.grab_focus()
-	$VBoxContainer/QuitGameBTN.resetbtn()
+	host_game_btn.grab_focus()
+	quit_game_btn.resetbtn()
 
 func _on_join_pressed() -> void:
 	hide()
@@ -303,7 +307,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 
-[node name="Menu" type="Panel" parent="."]
+[node name="Menu" type="Panel" parent="." node_paths=PackedStringArray("host_game_btn", "credits_btn", "options_btn", "quit_game_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -314,6 +318,10 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_j7o8s")
+host_game_btn = NodePath("VBoxContainer/HostGameBTN")
+credits_btn = NodePath("VBoxContainer/CreditsBTN")
+options_btn = NodePath("VBoxContainer/OptionsBTN")
+quit_game_btn = NodePath("VBoxContainer/QuitGameBTN")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Menu"]
 layout_mode = 1
