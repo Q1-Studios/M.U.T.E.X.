@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dp3rvhbvdll7k"]
+[gd_scene load_steps=25 format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scenes/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://scenes/orangetheme.tres" id="1_j2igt"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ch76tb3w6jhpw" path="res://assets/sprites/opsec und so_gruber.png" id="4_j7o8s"]
 [ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/button_sound_player.tscn" id="4_qm21r"]
 [ext_resource type="FontFile" uid="uid://bbkwijog1qnxl" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.woff" id="5_lt044"]
+[ext_resource type="Script" uid="uid://bp7fv1w2aua3c" path="res://scripts/edit_on_focus.gd" id="7_hofui"]
 [ext_resource type="PackedScene" uid="uid://crgueyuwsvter" path="res://scenes/color_picker.tscn" id="7_vocgd"]
 [ext_resource type="Script" uid="uid://l4t0hvb6p5ct" path="res://scripts/network_error_label.gd" id="8_qm21r"]
 [ext_resource type="Script" uid="uid://dklx4pm5boqr6" path="res://scripts/color_picker_line_edit.gd" id="9_bi3l1"]
@@ -204,18 +205,6 @@ func _on_host_pressed() -> void:
 
 func _on_start_pressed() -> void:
 	hide()
-
-
-func _on_line_edit_focus_entered() -> void:
-	$LineEdit.edit()
-
-
-func _on_line_edit_2_focus_entered() -> void:
-	$LineEdit2.edit()
-
-
-func _on_line_edit_3_focus_entered() -> void:
-	$LineEdit3.edit()
 "
 
 [sub_resource type="GDScript" id="GDScript_ib01u"]
@@ -896,6 +885,7 @@ focus_neighbor_bottom = NodePath("../PrimaryColorField")
 theme_override_fonts/font = ExtResource("3_oua23")
 placeholder_text = "ENTER  NAME"
 select_all_on_focus = true
+script = ExtResource("7_hofui")
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1

@@ -675,13 +675,13 @@ render_target_update_mode = 4
 
 [node name="Control" parent="FG/SubViewport" instance=ExtResource("4_8ln24")]
 
-[node name="LineEdit" parent="FG/SubViewport/Control/HOSTINGASHOST" index="3"]
+[node name="TeamnameField" parent="FG/SubViewport/Control/HOSTINGASHOST" index="3"]
 select_all_on_focus = false
 
-[node name="LineEdit2" parent="FG/SubViewport/Control/HOSTINGASHOST" index="5"]
+[node name="PrimaryColorField" parent="FG/SubViewport/Control/HOSTINGASHOST" index="5"]
 select_all_on_focus = false
 
-[node name="LineEdit3" parent="FG/SubViewport/Control/HOSTINGASHOST" index="8"]
+[node name="SecondaryColorField" parent="FG/SubViewport/Control/HOSTINGASHOST" index="8"]
 select_all_on_focus = false
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -714,9 +714,6 @@ bus = &"Music"
 parameters/looping = true
 
 [connection signal="zoomout" from="FG/SubViewport/Control" to="Node2D/Camera2D" method="_on_control_zoomout"]
-[connection signal="focus_entered" from="FG/SubViewport/Control/HOSTINGASHOST/LineEdit" to="FG/SubViewport/Control/HOSTINGASHOST" method="_on_line_edit_focus_entered"]
-[connection signal="focus_entered" from="FG/SubViewport/Control/HOSTINGASHOST/LineEdit2" to="FG/SubViewport/Control/HOSTINGASHOST" method="_on_line_edit_2_focus_entered"]
-[connection signal="focus_entered" from="FG/SubViewport/Control/HOSTINGASHOST/LineEdit3" to="FG/SubViewport/Control/HOSTINGASHOST" method="_on_line_edit_3_focus_entered"]
 [connection signal="zoom_in" from="Node2D/Camera2D" to="FG/SubViewport/Control" method="_on_zoomin"]
 
 [editable path="FG/SubViewport/Control"]
