@@ -211,11 +211,19 @@ var teamname = \"IJoined\"
 @export var teamname_field: LineEdit
 @export var primary_col_field: LineEdit
 @export var secondary_col_field: LineEdit
+@export var team_error_label: Label
+@export var color_error_label: Label
 
 var iJoinedNotHosted = true
 
 func _process(_delta: float) -> void:
-	if(teamname_field.text != \"\") and regexvalid():
+	var teamname_ok: bool = not teamname_field.text.is_empty()
+	var color_codes_ok: bool = regexvalid()
+	
+	team_error_label.visible = not teamname_ok
+	color_error_label.visible = not color_codes_ok
+	
+	if teamname_ok and color_codes_ok:
 		teamname = teamname_field.text
 		hexcode_primary = normalize_hex(primary_col_field.text)
 		hexcode_secondary = normalize_hex(secondary_col_field.text)
@@ -806,7 +814,7 @@ layout_mode = 0
 offset_top = 85.68326
 offset_right = 383.3114
 offset_bottom = 127.33481
-theme_override_colors/font_color = Color(0.627451, 0.16862746, 0, 1)
+theme_override_colors/font_color = Color(0.5882353, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Enter a valid IP address to join!"
 
@@ -858,7 +866,7 @@ text = "<< return >>"
 
 [node name="ButtonSoundPlayer" parent="HOSTINGASHOST/CANCELHH" instance=ExtResource("4_qm21r")]
 
-[node name="START" type="Button" parent="HOSTINGASHOST" node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field")]
+[node name="START" type="Button" parent="HOSTINGASHOST" node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field", "team_error_label", "color_error_label")]
 layout_mode = 0
 offset_left = 669.995
 offset_top = 312.982
@@ -875,6 +883,25 @@ script = SubResource("GDScript_ib01u")
 teamname_field = NodePath("../TeamnameField")
 primary_col_field = NodePath("../PrimaryColorField")
 secondary_col_field = NodePath("../SecondaryColorField")
+team_error_label = NodePath("VBoxContainer/TeamNameError")
+color_error_label = NodePath("VBoxContainer/ColorError")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HOSTINGASHOST/START"]
+layout_mode = 0
+offset_left = 277.2801
+offset_right = 559.3206
+offset_bottom = 82.11267
+alignment = 1
+
+[node name="TeamNameError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5891461, 1.8410012e-06, 5.2943824e-07, 1)
+text = "Enter valid team name!"
+
+[node name="ColorError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5891461, 1.8410012e-06, 5.2943824e-07, 1)
+text = "Enter valid color code!"
 
 [node name="ButtonSoundPlayer" parent="HOSTINGASHOST/START" instance=ExtResource("4_qm21r")]
 
@@ -922,7 +949,7 @@ focus_neighbor_top = NodePath("../TeamnameField")
 focus_neighbor_bottom = NodePath("../SecondaryColorField")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#0055ff"
-placeholder_text = "<ENTER HEX CODE>"
+placeholder_text = "ENTER HEX CODE"
 select_all_on_focus = true
 script = ExtResource("9_bi3l1")
 color_picker = NodePath("PrimaryColorPicker")
@@ -994,7 +1021,7 @@ focus_neighbor_top = NodePath("../PrimaryColorField")
 focus_neighbor_bottom = NodePath("../CANCELHH")
 theme_override_fonts/font = ExtResource("5_lt044")
 text = "#00ff55"
-placeholder_text = "<ENTER HEX CODE>"
+placeholder_text = "ENTER HEX CODE"
 select_all_on_focus = true
 script = ExtResource("9_bi3l1")
 color_picker = NodePath("SecondaryColorPicker")
