@@ -127,10 +127,16 @@ func _process(delta: float) -> void:
 	
 	last_frame_window_focus = get_window().has_focus()
 	
-	if time_since_mouse < mouse_hide_time:
+	if not get_window().has_focus():
+		mouse_icon.hide()
+	
+	# Hide mouse when it is idle
+	if time_since_mouse < mouse_hide_time and get_window().has_focus():
 		time_since_mouse += delta
 		if time_since_mouse >= mouse_hide_time:
 			mouse_icon.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	
 	if zoomed:
 		var target_pos: Vector2 = Vector2(500, 250)
