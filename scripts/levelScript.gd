@@ -3,7 +3,6 @@ extends Node3D # Or Node2D
 @export var player_scene: PackedScene
 @export var enemy_scene: PackedScene 
 @export var max_enemy_count: int = 60
-@export var main_menu_scene: PackedScene
 @onready var enemySpawner: MultiplayerSpawner = $EnemySpawner
 @export var gameOver:Node3D 
 @export var gameOverRect:TextureRect
@@ -106,7 +105,7 @@ func display_game_over_ui():
 
 @rpc("call_local", "reliable")
 func return_to_main_menu():
-	get_tree().change_scene_to_packed(main_menu_scene)
+	get_tree().change_scene_to_packed(SceneManager.menu_scene)
 	NetworkManager.cleanup_network()
 	call_deferred("queue_free")
 	

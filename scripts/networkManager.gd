@@ -5,7 +5,6 @@ const PORT = 8080
 var LAST_SERVER_IP = "" # Leave blank initially, last entered IP will be remembered
 var DEFAULT_SERVER_IP = "127.0.0.1"
 
-const LEVEL_SCENE_PATH = "res://scenes/LevelScene.tscn" 
 const CLIENT_CONNECTION_TIMEOUT: float = 3.0
 
 var primary:Color 
@@ -37,7 +36,7 @@ func host_game() -> bool:
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	print("Waiting for players...")
-	change_level.call_deferred(LEVEL_SCENE_PATH)
+	change_level.call_deferred(SceneManager.level_scene)
 	return true
 	# Optional: Setup UPnP to allow internet play without manual port forwarding
 	#_setup_upnp()
@@ -88,7 +87,7 @@ func _on_player_disconnected(id):
 
 func _on_connected_ok():
 	print("Connected to server!")
-	change_level.call_deferred(LEVEL_SCENE_PATH)
+	change_level.call_deferred(SceneManager.level_scene)
 
 func _on_connected_fail():
 	print("Connection failed!")
@@ -120,5 +119,5 @@ func _setup_upnp():
 	else:
 		print("UPnP Success! Join Address: %s" % upnp.query_external_address())
 
-func change_level(scene_path):
-	get_tree().change_scene_to_file(scene_path)
+func change_level(scene: PackedScene):
+	get_tree().change_scene_to_packed(scene)

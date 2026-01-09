@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dls7354f4iw2m"]
+[gd_scene load_steps=4 format=3 uid="uid://dls7354f4iw2m"]
 
 [ext_resource type="Script" uid="uid://6iksotqxv0pt" path="res://scripts/enemy_gun.gd" id="1_7w47d"]
+[ext_resource type="PackedScene" uid="uid://cpwlcv55dkw2" path="res://scenes/enemy_bullet.tscn" id="2_5o30m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_og67c"]
 
 [node name="EnemyGun" type="Node3D"]
 script = ExtResource("1_7w47d")
+bulletScene = ExtResource("2_5o30m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.5, 0, 0, 0)

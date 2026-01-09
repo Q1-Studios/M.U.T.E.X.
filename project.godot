@@ -27,6 +27,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 NetworkManager="*res://scripts/networkManager.gd"
 ScoreManager="*res://scripts/scoreManager.gd"
 Global="*res://scripts/Global.gd"
+SceneManager="*res://scenes/scene_manager.tscn"
 
 [display]
 

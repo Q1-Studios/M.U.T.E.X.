@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var gun_ray = $RayCast3D
 # Ensure this points to the new PHYSICS-ONLY missile (no sync node)
-var missile_scene = load("res://scenes/Missile.tscn")
+@export var missile_scene: PackedScene
 
 func _process(_delta):
 	# Input Guard

@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var gun_ray = $RayCast3D
 
-var bulletScene = load("res://scenes/enemy_bullet.tscn")
+@export var bulletScene: PackedScene
 
 func _ready() -> void:
 	pass
