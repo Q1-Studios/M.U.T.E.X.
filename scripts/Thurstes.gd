@@ -13,8 +13,27 @@ var maxSpeed:float = 100
 @export var max_boosterSpeed:float=0.7
 @export var smooth_factor: float = 10.0 # Wie weich die Änderung passiert (höher = schneller)
 
+@export var primary_color:Color
+@export var secondary_color:Color
+var Ship_primary:StandardMaterial3D
+var Ship_secondary:StandardMaterial3D
+@export var Ship:MeshInstance3D
+@export var Ship_Node:Node3D
+@export var particle:Node3D
 
-
+func _ready() -> void:
+	primary_color=NetworkManager.primary
+	secondary_color=NetworkManager.secondary
+	recolor()
+	pass
+func recolor()-> void: 
+	Ship = Ship_Node.get_child(0)
+	Ship_primary=Ship.mesh.surface_get_material(1)
+	Ship_secondary=Ship.mesh.surface_get_material(2)
+	Ship_primary.albedo_color=primary_color
+	Ship_secondary.albedo_color=secondary_color
+	particle.get_child(0).mesh.material.emission=secondary_color
+	thrusterMain.get_child(0).get_child(0).material_override.emission=secondary_color
 func _physics_process(delta: float) -> void:
 	if not player or not thrusterMain:
 		return
@@ -26,13 +45,24 @@ func _physics_process(delta: float) -> void:
 	else:
 		max_scale_z=max_normalSpeed
 	var target_z = remap(velocity, 0.0, maxSpeed,min_scale_z,max_scale_z)
+	var lifetime = remap(velocity, 0.0, maxSpeed,0.02,0.11)
 	
+	lifetime = clamp(lifetime, 0.02,0.11)
 	target_z = clamp(target_z, min_scale_z, max_scale_z)
 	
 	thrusterMain.scale.y = lerp(thrusterMain.scale.y, target_z, smooth_factor * delta)
 	thrusterLeft.scale.y = lerp(thrusterLeft.scale.y, target_z, smooth_factor * delta)
 	thrusterRight.scale.y = lerp(thrusterRight.scale.y, target_z, smooth_factor * delta)
+	
+	particle.get_children()[0].lifetime=lerp(particle.get_child(0).lifetime,lifetime,smooth_factor*delta)
 
 
 func _on_movement_controller_max_speed(speed: Variant) -> void:
 	maxSpeed=speed
+
+
+func _on_character_body_3d_2_new_color(primary: Color, secondary: Variant) -> void:
+	primary_color=primary
+	secondary_color=secondary
+	recolor()
+	pass # Replace with function body.

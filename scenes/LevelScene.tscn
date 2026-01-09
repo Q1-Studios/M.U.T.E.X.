@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://v77ciykwt5p2" path="res://scripts/stream_play_on_finished.gd" id="11_v0yqo"]
 [ext_resource type="Texture2D" uid="uid://cayw6362tw6y1" path="res://assets/skybox/cockpit.png" id="12_5ok7o"]
 [ext_resource type="Material" uid="uid://dg1x6fpusyufh" path="res://assets/shaders/scanline.tres" id="12_xy8s2"]
-[ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://scenes/orangetheme.tres" id="13_5ok7o"]
+[ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://resources/orangetheme.tres" id="13_5ok7o"]
 [ext_resource type="FontFile" uid="uid://d304xnpnbruf4" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.ttf" id="14_ofep6"]
 [ext_resource type="PackedScene" uid="uid://ci3pwfoj5jp0s" path="res://scenes/shipStardestroyer.tscn" id="16_ofep6"]
 

@@ -18,6 +18,10 @@ boot_splash/image="uid://xupiwbanh4s"
 config/icon="uid://dglg4lxaouuf7"
 boot_splash/minimum_display_time=2500
 
+[audio]
+
+buses/default_bus_layout="res://resources/default_bus_layout.tres"
+
 [autoload]
 
 NetworkManager="*res://scripts/networkManager.gd"

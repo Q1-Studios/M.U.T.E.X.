@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://dp3rvhbvdll7k"]
 
-[ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scenes/miniscreen_controller.gd" id="1_4qlu7"]
-[ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://scenes/orangetheme.tres" id="1_j2igt"]
+[ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scripts/miniscreen_controller.gd" id="1_4qlu7"]
+[ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://resources/orangetheme.tres" id="1_j2igt"]
 [ext_resource type="Texture2D" uid="uid://bwqjr8hrqdd33" path="res://assets/sprites/opsec und so.png" id="3_l6gtq"]
 [ext_resource type="FontFile" uid="uid://d304xnpnbruf4" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.ttf" id="3_oua23"]
 [ext_resource type="Texture2D" uid="uid://ch76tb3w6jhpw" path="res://assets/sprites/opsec und so_gruber.png" id="4_j7o8s"]

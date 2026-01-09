@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcsrny6wuflty"
-path.s3tc="res://.godot/imported/Chroshair.svg-644d1bce20f74171e75e2ce9d9a0a9e7.s3tc.ctex"
-path.etc2="res://.godot/imported/Chroshair.svg-644d1bce20f74171e75e2ce9d9a0a9e7.etc2.ctex"
+uid="uid://ct3e64l3uj6mt"
+path.s3tc="res://.godot/imported/MissileLOKC.png-220c27f926b09bb74370e283d094a193.s3tc.ctex"
+path.etc2="res://.godot/imported/MissileLOKC.png-220c27f926b09bb74370e283d094a193.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/Chroshair.svg"
-dest_files=["res://.godot/imported/Chroshair.svg-644d1bce20f74171e75e2ce9d9a0a9e7.s3tc.ctex", "res://.godot/imported/Chroshair.svg-644d1bce20f74171e75e2ce9d9a0a9e7.etc2.ctex"]
+source_file="res://assets/sprites/MissileLOKC.png"
+dest_files=["res://.godot/imported/MissileLOKC.png-220c27f926b09bb74370e283d094a193.s3tc.ctex", "res://.godot/imported/MissileLOKC.png-220c27f926b09bb74370e283d094a193.etc2.ctex"]
 
 [params]
 
@@ -40,6 +40,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

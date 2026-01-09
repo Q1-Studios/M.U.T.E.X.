@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://fabgyipwskbh"]
 
-[ext_resource type="Texture2D" uid="uid://ct3e64l3uj6mt" path="res://assets/MissileLOKC.png" id="1_ckhyd"]
+[ext_resource type="Texture2D" uid="uid://ct3e64l3uj6mt" path="res://assets/sprites/MissileLOKC.png" id="1_ckhyd"]
 
 [node name="Missile Lock" type="Node3D"]
 
