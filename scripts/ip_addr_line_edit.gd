@@ -22,7 +22,7 @@ func _on_text_changed(new_text: String) -> void:
 
 func is_ip(string: String) -> bool:
 	var ip_regex := RegEx.new()
-	ip_regex.compile("^[0-9.]+$")
+	ip_regex.compile("^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|([1-9])?[0-9])(\\.(?!$)|$)){4}$")
 	
 	if ip_regex.search(string):
 		return true
