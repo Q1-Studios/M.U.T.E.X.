@@ -4,6 +4,8 @@ extends LineEdit
 @export var error_label: Label
 
 func _ready() -> void:
+	text = NetworkManager.LAST_SERVER_IP
+	
 	focus_entered.connect(_on_focus_entered)
 	text_changed.connect(_on_text_changed)
 	_on_text_changed(text)

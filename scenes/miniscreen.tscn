@@ -122,9 +122,6 @@ script/source = "extends Panel
 
 @export var ip_field: LineEdit
 
-func _ready() -> void:
-	ip_field.text = NetworkManager.LAST_SERVER_IP
-
 func _on_host_game_btn_pressed() -> void:
 	show()
 	$HIGHSCORE._refresh()
