@@ -40,6 +40,11 @@ func _on_cancelhost_pressed() -> void:
 	host_game_btn.grab_focus()
 	quit_game_btn.resetbtn()
 
+func _on_return_from_tutorial_btn_pressed() -> void:
+	show()
+	host_game_btn.grab_focus()
+	quit_game_btn.resetbtn()
+
 func _on_join_pressed() -> void:
 	hide()
 
@@ -83,8 +88,10 @@ func _on_host_game_btn_pressed() -> void:
 	show()
 	$ACKTutorialBTN.grab_focus()
 
-
 func _on_ack_tutorial_btn_pressed() -> void:
+	hide()
+
+func _on_return_from_tutorial_btn_pressed() -> void:
 	hide()
 "
 
@@ -402,6 +409,19 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_t6nao")
+
+[node name="ReturnFromTutorialBtn" type="Button" parent="Tutorial"]
+visible = false
+layout_mode = 0
+offset_left = 134.47496
+offset_top = 8.330309
+offset_right = 386.7644
+offset_bottom = 92.33031
+theme_override_font_sizes/font_size = 75
+text = "<< Return"
+script = ExtResource("5_ib01u")
+
+[node name="ButtonSoundPlayer" parent="Tutorial/ReturnFromTutorialBtn" instance=ExtResource("4_qm21r")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Tutorial"]
 layout_mode = 1
@@ -1274,6 +1294,8 @@ text = "- PRESS  START -"
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Menu" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Options" method="_on_options_btn_pressed"]
+[connection signal="pressed" from="Tutorial/ReturnFromTutorialBtn" to="Menu" method="_on_return_from_tutorial_btn_pressed"]
+[connection signal="pressed" from="Tutorial/ReturnFromTutorialBtn" to="Tutorial" method="_on_return_from_tutorial_btn_pressed"]
 [connection signal="pressed" from="Tutorial/ACKTutorialBTN" to="Tutorial" method="_on_ack_tutorial_btn_pressed"]
 [connection signal="pressed" from="Tutorial/ACKTutorialBTN" to="HOSTING" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Credits/RETURNFROMCREDITSBTN" to="Menu" method="_on_returnfromcreditsbtn_pressed"]
