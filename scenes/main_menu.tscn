@@ -121,9 +121,7 @@ var zoomed = false
 func _process(delta: float) -> void:
 	# If the window was refocussed, hide mouse again
 	if get_window().has_focus() and not last_frame_window_focus:
-		# Force refresh of mouse mode (workaround on macOS)
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		hide_mouse()
 	
 	last_frame_window_focus = get_window().has_focus()
 	
@@ -135,8 +133,7 @@ func _process(delta: float) -> void:
 		time_since_mouse += delta
 		if time_since_mouse >= mouse_hide_time:
 			mouse_icon.hide()
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			hide_mouse()
 	
 	if zoomed:
 		var target_pos: Vector2 = Vector2(500, 250)
@@ -167,12 +164,16 @@ func _process(delta: float) -> void:
 		if Input.is_anything_pressed():
 			$AnimationPlayer.play(\"zoom\")
 			zoomed = true
-			
 
 func zoom_and_snap_back(duration: float) -> void:
 	target_zoom = Vector2(2, 2)
 	time_until_snapback = duration
-	
+
+func hide_mouse() -> void:
+	# Force refresh of mouse mode (workaround on macOS)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
 func fettsack():
 	zoom_in.emit()
 
@@ -180,6 +181,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		mouse_icon.show()
 		time_since_mouse = 0
+	
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion or event is InputEventKey:
+		mouse_icon.hide()
+		hide_mouse()
 	
 	$\"../../FG/SubViewport\".push_input(event,false)
 

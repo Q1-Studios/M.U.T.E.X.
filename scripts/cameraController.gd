@@ -66,6 +66,11 @@ func _input(event):
 			_current_yaw -= event.relative.x * mouse_sensitivity
 			_current_pitch -= event.relative.y * mouse_sensitivity
 	
+	# If a controller is used, instantly hide mouse
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		_is_using_mouse = false
+	
 	# If mouse has moved but not as part of the game controls, show it
 	elif event is InputEventMouseMotion:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
