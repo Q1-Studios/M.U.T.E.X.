@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bwqjr8hrqdd33" path="res://assets/sprites/opsec und so.png" id="3_l6gtq"]
 [ext_resource type="FontFile" uid="uid://d304xnpnbruf4" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.ttf" id="3_oua23"]
 [ext_resource type="Texture2D" uid="uid://ch76tb3w6jhpw" path="res://assets/sprites/opsec und so_gruber.png" id="4_j7o8s"]
-[ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/button_sound_player.tscn" id="4_qm21r"]
+[ext_resource type="PackedScene" uid="uid://dkimdg4h1q5n2" path="res://scenes/gui_sound_player.tscn" id="4_qm21r"]
 [ext_resource type="Script" uid="uid://xjlbk1bjuiry" path="res://scripts/action_triggered_button.gd" id="5_ib01u"]
 [ext_resource type="FontFile" uid="uid://bbkwijog1qnxl" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.woff" id="5_lt044"]
 [ext_resource type="Script" uid="uid://bp7fv1w2aua3c" path="res://scripts/edit_on_focus.gd" id="7_hofui"]
@@ -847,6 +847,8 @@ theme_override_colors/font_color = Color(0.5882353, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Enter a valid IP address to join!"
 
+[node name="GUISoundPlayer" parent="HOSTING/IpField" instance=ExtResource("4_qm21r")]
+
 [node name="HOSTINGASHOST" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -951,6 +953,8 @@ placeholder_text = "ENTER  NAME"
 select_all_on_focus = true
 script = ExtResource("7_hofui")
 
+[node name="GUISoundPlayer" parent="HOSTINGASHOST/TeamnameField" instance=ExtResource("4_qm21r")]
+
 [node name="RichTextLabel3" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
 anchors_preset = 15
@@ -1005,6 +1009,8 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../../SecondaryColorField")
 focus_previous = NodePath("..")
+
+[node name="GUISoundPlayer" parent="HOSTINGASHOST/PrimaryColorField" instance=ExtResource("4_qm21r")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
@@ -1078,6 +1084,8 @@ focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath("..")
+
+[node name="GUISoundPlayer" parent="HOSTINGASHOST/SecondaryColorField" instance=ExtResource("4_qm21r")]
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1

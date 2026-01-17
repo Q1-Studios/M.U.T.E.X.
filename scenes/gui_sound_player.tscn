@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dv5uqqct5hpww" path="res://assets/sounds/ui/focus.wav" id="2_q4a6l"]
 [ext_resource type="AudioStream" uid="uid://d2bjsn72huq0b" path="res://assets/sounds/ui/click.wav" id="3_jcmb1"]
 
-[node name="ButtonSoundPlayer" type="Node"]
+[node name="GUISoundPlayer" type="Node"]
 script = ExtResource("1_yn4oo")
 
 [node name="FocusSound" type="AudioStreamPlayer" parent="."]
