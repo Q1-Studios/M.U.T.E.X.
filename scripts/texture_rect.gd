@@ -16,8 +16,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pan_camera(delta)
 
-func pan_camera(delta):
-	var is_input_active = false
+func pan_camera(_delta: float) -> void:
+	#var is_input_active = false
 	var playerrot=player.rotation_degrees
 	var rot = remap(playerrot.x,-60,60,min_panning,max_panning)
 	position.y = clamp(rot, min_panning, max_panning)
