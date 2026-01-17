@@ -2,11 +2,13 @@ extends EditOnFocusLineEdit
 
 @export var color_picker: ColorPicker
 @export var preview: ColorRect
+@export var invalid_symbol: CanvasItem
 
 func _ready() -> void:
 	super._ready()
 	
 	color_picker.hide()
+	invalid_symbol.hide()
 	color_picker.color = Color(text)
 	preview.color = Color(text)
 	
@@ -24,13 +26,18 @@ func _on_gui_focus_changed(control: Control) -> void:
 		color_picker.hide()
 
 func _on_text_changed(new_text: String) -> void:
-	var new_color: Color = Color(new_text)
-	color_picker.color = new_color
-	preview.color = new_color
+	if Color.html_is_valid(new_text):
+		var new_color: Color = Color(new_text)
+		color_picker.color = new_color
+		preview.color = new_color
+		invalid_symbol.hide()
+	else:
+		invalid_symbol.show()
 
 func _on_color_picker_changed(color: Color) -> void:
 	text = "#" + color.to_html(false)
 	preview.color = color
+	invalid_symbol.hide()
 
 func get_children_recursive(node: Node = self) -> Array[Node]:
 	var result: Array[Node] = []

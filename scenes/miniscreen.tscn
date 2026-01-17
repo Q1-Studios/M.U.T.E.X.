@@ -227,7 +227,7 @@ var iJoinedNotHosted = true
 
 func _process(_delta: float) -> void:
 	var teamname_ok: bool = not teamname_field.text.is_empty()
-	var color_codes_ok: bool = regexvalid()
+	var color_codes_ok: bool = are_colors_valid()
 	
 	team_error_label.visible = not teamname_ok
 	color_error_label.visible = not color_codes_ok
@@ -244,29 +244,19 @@ func _process(_delta: float) -> void:
 		disabled = true
 		iJoinedNotHosted = true
 
-func regexvalid() -> bool:
+func are_colors_valid() -> bool:
 	var norm = normalize_hex(primary_col_field.text)
 	var norm2 = normalize_hex(secondary_col_field.text)
-	if norm!=\"\" and norm2!=\"\":
+	if norm != \"\" and norm2 != \"\":
 		return true
 	return false
-		
-	
+
 func normalize_hex(input: String) -> String:
-	var michael := input.strip_edges()
-
-	# Prepend \"#\" if missing
-	if not michael.begins_with(\"#\"):
-		michael = \"#\" + michael
-
-	# Check if it matches a valid hex color pattern (#RGB, #RRGGBB, #RRGGBBAA)
-	var hex_regex := RegEx.new()
-	hex_regex.compile(\"^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$\")
-
-	if hex_regex.search(michael):
-		return michael  # valid hex code
-	else:
-		return \"\"  # or handle invalid input however you want
+	var clean_input: String = input.strip_edges()
+	
+	if Color.html_is_valid(clean_input):
+		return clean_input
+	return \"\"
 "
 
 [sub_resource type="GDScript" id="GDScript_3k4et"]
@@ -971,7 +961,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM COLOR PRIMARY:"
 
-[node name="PrimaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview")]
+[node name="PrimaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview", "invalid_symbol")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -988,6 +978,7 @@ select_all_on_focus = true
 script = ExtResource("9_bi3l1")
 color_picker = NodePath("PrimaryColorPicker")
 preview = NodePath("ColorRect")
+invalid_symbol = NodePath("ColorRect/InvalidLabel")
 
 [node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/PrimaryColorField"]
 layout_mode = 0
@@ -996,6 +987,18 @@ offset_top = 10.0
 offset_right = 375.0
 offset_bottom = 70.0
 mouse_filter = 2
+
+[node name="InvalidLabel" type="Label" parent="HOSTINGASHOST/PrimaryColorField/ColorRect"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 50
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PrimaryColorPicker" parent="HOSTINGASHOST/PrimaryColorField" instance=ExtResource("7_vocgd")]
 layout_mode = 1
@@ -1045,7 +1048,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM COLOR SECONDARY:"
 
-[node name="SecondaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview")]
+[node name="SecondaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview", "invalid_symbol")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -1062,6 +1065,7 @@ select_all_on_focus = true
 script = ExtResource("9_bi3l1")
 color_picker = NodePath("SecondaryColorPicker")
 preview = NodePath("ColorRect")
+invalid_symbol = NodePath("ColorRect/InvalidLabel")
 
 [node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/SecondaryColorField"]
 layout_mode = 0
@@ -1070,6 +1074,18 @@ offset_top = 10.0
 offset_right = 375.0
 offset_bottom = 70.0
 mouse_filter = 2
+
+[node name="InvalidLabel" type="Label" parent="HOSTINGASHOST/SecondaryColorField/ColorRect"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 50
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SecondaryColorPicker" parent="HOSTINGASHOST/SecondaryColorField" instance=ExtResource("7_vocgd")]
 visible = false
