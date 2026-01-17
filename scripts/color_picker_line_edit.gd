@@ -1,14 +1,15 @@
-extends LineEdit
+extends EditOnFocusLineEdit
 
 @export var color_picker: ColorPicker
 @export var preview: ColorRect
 
 func _ready() -> void:
+	super._ready()
+	
 	color_picker.hide()
 	color_picker.color = Color(text)
 	preview.color = Color(text)
 	
-	focus_entered.connect(_on_focus_entered)
 	text_changed.connect(_on_text_changed)
 	color_picker.color_changed.connect(_on_color_picker_changed)
 	get_viewport().gui_focus_changed.connect(_on_gui_focus_changed)
@@ -21,10 +22,6 @@ func _on_gui_focus_changed(control: Control) -> void:
 		color_picker.show()
 	else:
 		color_picker.hide()
-
-func _on_focus_entered() -> void:
-	edit()
-	caret_column = text.length()
 
 func _on_text_changed(new_text: String) -> void:
 	var new_color: Color = Color(new_text)
