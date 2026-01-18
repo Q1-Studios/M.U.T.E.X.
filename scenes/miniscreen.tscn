@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dp3rvhbvdll7k"]
+[gd_scene load_steps=28 format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scripts/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://resources/orangetheme.tres" id="1_j2igt"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dklx4pm5boqr6" path="res://scripts/color_picker_line_edit.gd" id="9_bi3l1"]
 [ext_resource type="Texture2D" uid="uid://ce5ivqphk25pc" path="res://assets/sprites/cursor.svg" id="11_t6nao"]
 [ext_resource type="Script" uid="uid://dm14dk4gbd8d6" path="res://scripts/mouse_cursor.gd" id="12_hofui"]
+[ext_resource type="Script" uid="uid://b1aoym76f4n18" path="res://scripts/copy_text_on_click.gd" id="13_3k4et"]
 
 [sub_resource type="GDScript" id="GDScript_j7o8s"]
 resource_name = "gurber"
@@ -1141,7 +1142,7 @@ anchor_bottom = 1.0
 offset_left = 671.1849
 offset_top = 116.62433
 offset_right = 227.98291
-offset_bottom = 40.620605
+offset_bottom = -797.8712
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.751568, 0.751568)
@@ -1149,22 +1150,28 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "Your IP-Address:"
 
-[node name="IPAddress" type="RichTextLabel" parent="HOSTINGASHOST"]
+[node name="IPAddress" type="Label" parent="HOSTINGASHOST" node_paths=PackedStringArray("copied_notification")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 671.1849
-offset_top = 182.07678
-offset_right = 227.98291
-offset_bottom = 18.985352
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 670.0
+offset_top = 180.0
+offset_right = 830.0
+offset_bottom = 251.0
 scale = Vector2(0.751568, 0.751568)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
-theme_override_font_sizes/normal_font_size = 70
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
+theme_override_font_sizes/font_size = 70
 text = "127.0.0.1"
+script = ExtResource("13_3k4et")
+copied_notification = NodePath("../CopiedLabel")
+
+[node name="CopiedLabel" type="Label" parent="HOSTINGASHOST"]
+layout_mode = 0
+offset_left = 675.94507
+offset_top = 234.43866
+offset_right = 736.94507
+offset_bottom = 270.43866
+theme_override_colors/font_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
+text = "Copied!"
 
 [node name="NETWORKERROR" type="Panel" parent="."]
 visible = false
