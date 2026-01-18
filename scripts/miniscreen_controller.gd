@@ -1,9 +1,13 @@
 extends Control
 
+@export var start_overlay: Panel
+@export var main_menu_layer: Panel
+@export var init_focus_btn: Button
+
 func _on_zoomin():
-	$Menu.show()
-	$PRESSTART.hide()
-	$Menu/VBoxContainer/HostGameBTN.grab_focus()
+	main_menu_layer.show()
+	start_overlay.hide()
+	init_focus_btn.grab_focus()
 
 signal zoomout
 

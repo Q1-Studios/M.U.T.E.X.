@@ -1,18 +1,13 @@
 extends Label
+class_name CopyOnClickLabel
 
 @export var copied_notification: CanvasItem
 
 var mouse_inside: bool = false
 
 func _ready() -> void:
-	copied_notification.modulate.a = 0
-	
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-
-func _process(delta: float) -> void:
-	if copied_notification.modulate.a > 0:
-		copied_notification.modulate.a -= delta
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():

@@ -96,11 +96,11 @@ class_name CameraController
 signal zoom_in
 
 @export var container: Node = null
+@export var animation_player: AnimationPlayer
+@export var subviewport: SubViewport
 @export var move_speed_factor: float = 1.2
 @export var zoom_speed_factor: float = 1
 @onready var screen_center: Vector2 = get_viewport().get_visible_rect().size / 2
-
-@export var start:Button
 
 @export var mouse_hide_time: float = 3.0
 @export var mouse_icon: CanvasItem
@@ -162,7 +162,7 @@ func _process(delta: float) -> void:
 				time_until_snapback = 0
 		
 		if Input.is_anything_pressed():
-			$AnimationPlayer.play(\"zoom\")
+			animation_player.play(\"zoom\")
 			zoomed = true
 
 func zoom_and_snap_back(duration: float) -> void:
@@ -186,10 +186,10 @@ func _input(event: InputEvent) -> void:
 		mouse_icon.hide()
 		hide_mouse()
 	
-	$\"../../FG/SubViewport\".push_input(event,false)
+	subviewport.push_input(event,false)
 
 func _on_control_zoomout() -> void:
-	$AnimationPlayer.play(\"zoomback\")
+	animation_player.play(\"zoomback\")
 
 func set_allow_scene_change() -> void:
 	# Must be called before changing scene
@@ -222,8 +222,8 @@ func change_scene_usw() -> void:
 		#	ScoreManager.save_current_run()
 
 func display_network_error() -> void:
-	$AnimationPlayer.play_backwards(\"zoomback\")
-	$AnimationPlayer.queue(\"network_error_menu_reset\")
+	animation_player.play_backwards(\"zoomback\")
+	animation_player.queue(\"network_error_menu_reset\")
 "
 
 [sub_resource type="Animation" id="Animation_8ln24"]
@@ -697,10 +697,12 @@ select_all_on_focus = false
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="Node2D" node_paths=PackedStringArray("container", "mouse_icon")]
+[node name="Camera2D" type="Camera2D" parent="Node2D" node_paths=PackedStringArray("container", "animation_player", "subviewport", "mouse_icon")]
 position = Vector2(572, 465.665)
 script = SubResource("GDScript_l6cm7")
 container = NodePath("../../FG/SubViewport/Control/HOSTINGASHOST/START")
+animation_player = NodePath("AnimationPlayer")
+subviewport = NodePath("../../FG/SubViewport")
 mouse_icon = NodePath("../../FG/SubViewport/Control/MouseCursor")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Camera2D"]

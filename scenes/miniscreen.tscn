@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dp3rvhbvdll7k"]
+[gd_scene load_steps=29 format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scripts/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://resources/orangetheme.tres" id="1_j2igt"]
@@ -11,11 +11,13 @@
 [ext_resource type="Script" uid="uid://bp7fv1w2aua3c" path="res://scripts/edit_on_focus.gd" id="7_hofui"]
 [ext_resource type="PackedScene" uid="uid://crgueyuwsvter" path="res://scenes/color_picker.tscn" id="7_vocgd"]
 [ext_resource type="Script" uid="uid://s1c47d08pcj8" path="res://scripts/ip_addr_line_edit.gd" id="8_ib01u"]
+[ext_resource type="Script" uid="uid://bvh0yqqj2r1ue" path="res://scripts/highscore_label.gd" id="8_irrrk"]
 [ext_resource type="Script" uid="uid://l4t0hvb6p5ct" path="res://scripts/network_error_label.gd" id="8_qm21r"]
 [ext_resource type="Script" uid="uid://dklx4pm5boqr6" path="res://scripts/color_picker_line_edit.gd" id="9_bi3l1"]
 [ext_resource type="Texture2D" uid="uid://ce5ivqphk25pc" path="res://assets/sprites/cursor.svg" id="11_t6nao"]
 [ext_resource type="Script" uid="uid://dm14dk4gbd8d6" path="res://scripts/mouse_cursor.gd" id="12_hofui"]
-[ext_resource type="Script" uid="uid://b1aoym76f4n18" path="res://scripts/copy_text_on_click.gd" id="13_3k4et"]
+[ext_resource type="Script" uid="uid://bh2top0jlnc6f" path="res://scripts/ip_address_label.gd" id="13_0fhfr"]
+[ext_resource type="Script" uid="uid://b54548liy8821" path="res://scripts/auto_fadeout.gd" id="14_0fhfr"]
 
 [sub_resource type="GDScript" id="GDScript_j7o8s"]
 resource_name = "gurber"
@@ -84,10 +86,11 @@ func _init() -> void:
 resource_name = "tut"
 script/source = "extends Panel
 
+@export var init_focus_btn: Button
 
 func _on_host_game_btn_pressed() -> void:
 	show()
-	$ACKTutorialBTN.grab_focus()
+	init_focus_btn.grab_focus()
 
 func _on_ack_tutorial_btn_pressed() -> void:
 	hide()
@@ -100,11 +103,11 @@ func _on_return_from_tutorial_btn_pressed() -> void:
 resource_name = "makevis"
 script/source = "extends Panel
 
+@export var init_focus_btn: Button
 
-func _on_options_btn_pressed() -> void:
+func _on_credits_btn_pressed() -> void:
 	show()
-	$RETURNFROMCREDITSBTN.grab_focus()
-
+	init_focus_btn.grab_focus()
 
 func _on_returnfromcreditsbtn_pressed() -> void:
 	hide()
@@ -114,6 +117,7 @@ func _on_returnfromcreditsbtn_pressed() -> void:
 resource_name = "garuber"
 script/source = "extends Panel
 
+@export var init_focus_btn: Button
 
 func _on_returnfromoptions_pressed() -> void:
 	hide()
@@ -121,19 +125,21 @@ func _on_returnfromoptions_pressed() -> void:
 
 func _on_options_btn_pressed() -> void:
 	show()
-	$RETURNFROMOPTIONS.grab_focus()
+	init_focus_btn.grab_focus()
 "
 
 [sub_resource type="GDScript" id="GDScript_bi3l1"]
 resource_name = "hosting"
 script/source = "extends Panel
 
+@export var init_focus_btn: Button
+@export var highscore_label: HighscoreLabel
 @export var ip_field: LineEdit
 
 func _on_host_game_btn_pressed() -> void:
 	show()
-	$HIGHSCORE._refresh()
-	$CANCELHOST.grab_focus()
+	highscore_label._refresh()
+	init_focus_btn.grab_focus()
 
 func _on_cancelhost_pressed() -> void:
 	NetworkManager.LAST_SERVER_IP = ip_field.text
@@ -145,8 +151,8 @@ func _on_join_pressed() -> void:
 
 func _on_cancelhh_pressed() -> void:
 	show()
-	$HIGHSCORE._refresh()
-	$CANCELHOST.grab_focus()
+	highscore_label._refresh()
+	init_focus_btn.grab_focus()
 
 func _on_host_pressed() -> void:
 	NetworkManager.LAST_SERVER_IP = ip_field.text
@@ -154,57 +160,24 @@ func _on_host_pressed() -> void:
 
 func _on_network_error_exit_pressed() -> void:
 	show()
-	$HIGHSCORE._refresh()
-	$CANCELHOST.grab_focus()
-"
-
-[sub_resource type="GDScript" id="GDScript_ms7bd"]
-resource_name = "fetchhighscore"
-script/source = "extends RichTextLabel
-func _init() -> void:
-	_refresh()
-func _refresh():
-	var highscores = ScoreManager.load_highscores()
-	
-	# Check if empty
-	if highscores.is_empty():
-		text = \":(\"
-		return
-	
-	# Build the list
-	var display_text = \"TOP HIGHSCORES\\n\\n\"
-	var count = min(highscores.size(), 5)  # Max 5 entries
-	
-	for i in range(count):
-		var entry = highscores[i]
-		display_text += \"%d. %s - %d\\n\" % [i + 1, entry.TeamName, int(entry.score)]
-	
-	text = display_text
+	highscore_label._refresh()
+	init_focus_btn.grab_focus()
 "
 
 [sub_resource type="GDScript" id="GDScript_hofui"]
 resource_name = "hhost"
 script/source = "extends Panel
 
+@export var ip_addr_label: IPAddressLabel
+@export var init_focus: Button
 
 func _on_cancelhost_pressed() -> void:
 	hide()
 
-
 func _on_host_pressed() -> void:
-	# Find all potential IPs that identify the host's local network adapters
-	var ips: Array = []
-	for ip in IP.get_local_addresses():
-		if ip.begins_with(\"10.\") or ip.begins_with(\"172.16.\") or ip.begins_with(\"192.168.\"):
-			ips.append(ip)
-	if ips.size() > 0:
-		$IPAddress.text = ips[0]
-	else:
-		$IPAddress.text = \"Couldn't find your IP :(\"
-	
+	ip_addr_label.refresh_ip()
 	show()
-	$CANCELHH.grab_focus()
-
+	init_focus.grab_focus()
 
 func _on_start_pressed() -> void:
 	hide()
@@ -282,7 +255,7 @@ func _on_start_pressed() -> void:
 	show()
 "
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("start_overlay", "main_menu_layer", "init_focus_btn")]
 layout_mode = 3
 anchor_right = 1.042
 anchor_bottom = 1.543
@@ -291,6 +264,9 @@ offset_bottom = 0.135925
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4qlu7")
+start_overlay = NodePath("PRESSTART")
+main_menu_layer = NodePath("Menu")
+init_focus_btn = NodePath("Menu/VBoxContainer/HostGameBTN")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -392,7 +368,7 @@ script = SubResource("GDScript_vocgd")
 
 [node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/QuitGameBTN" instance=ExtResource("4_qm21r")]
 
-[node name="Tutorial" type="Panel" parent="."]
+[node name="Tutorial" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -408,6 +384,7 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_t6nao")
+init_focus_btn = NodePath("ACKTutorialBTN")
 
 [node name="ReturnFromTutorialBtn" type="Button" parent="Tutorial"]
 visible = false
@@ -499,7 +476,7 @@ position = Vector2(588, 350)
 scale = Vector2(0.456107, 0.456107)
 texture = ExtResource("4_j7o8s")
 
-[node name="Credits" type="Panel" parent="."]
+[node name="Credits" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -515,6 +492,7 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_lt044")
+init_focus_btn = NodePath("RETURNFROMCREDITSBTN")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Credits"]
 layout_mode = 1
@@ -651,7 +629,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 90
 text = "CREDITS"
 
-[node name="Options" type="Panel" parent="."]
+[node name="Options" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -667,6 +645,7 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_qm21r")
+init_focus_btn = NodePath("RETURNFROMOPTIONS")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Options"]
 layout_mode = 1
@@ -706,7 +685,7 @@ script = ExtResource("5_ib01u")
 
 [node name="ButtonSoundPlayer" parent="Options/RETURNFROMOPTIONS" instance=ExtResource("4_qm21r")]
 
-[node name="HOSTING" type="Panel" parent="." node_paths=PackedStringArray("ip_field")]
+[node name="HOSTING" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn", "highscore_label", "ip_field")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -722,6 +701,8 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_bi3l1")
+init_focus_btn = NodePath("CANCELHOST")
+highscore_label = NodePath("HIGHSCORE")
 ip_field = NodePath("IpField")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="HOSTING"]
@@ -807,7 +788,7 @@ scale = Vector2(0.751568, 0.751568)
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = ":("
-script = SubResource("GDScript_ms7bd")
+script = ExtResource("8_irrrk")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HOSTING"]
 layout_mode = 1
@@ -860,7 +841,7 @@ text = "Enter a valid IP address to join!"
 
 [node name="GUISoundPlayer" parent="HOSTING/IpField" instance=ExtResource("4_qm21r")]
 
-[node name="HOSTINGASHOST" type="Panel" parent="."]
+[node name="HOSTINGASHOST" type="Panel" parent="." node_paths=PackedStringArray("ip_addr_label", "init_focus")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -876,6 +857,8 @@ scale = Vector2(0.840305, 0.840305)
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_hofui")
+ip_addr_label = NodePath("IPAddress")
+init_focus = NodePath("CANCELHH")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="HOSTINGASHOST"]
 layout_mode = 1
@@ -1161,7 +1144,7 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
 theme_override_font_sizes/font_size = 70
 text = "127.0.0.1"
-script = ExtResource("13_3k4et")
+script = ExtResource("13_0fhfr")
 copied_notification = NodePath("../CopiedLabel")
 
 [node name="CopiedLabel" type="Label" parent="HOSTINGASHOST"]
@@ -1172,6 +1155,7 @@ offset_right = 736.94507
 offset_bottom = 270.43866
 theme_override_colors/font_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
 text = "Copied!"
+script = ExtResource("14_0fhfr")
 
 [node name="NETWORKERROR" type="Panel" parent="."]
 visible = false
@@ -1352,7 +1336,7 @@ text = "- PRESS  START -"
 [connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Menu" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HostGameBTN" to="Tutorial" method="_on_host_game_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Menu" method="_on_credits_btn_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_options_btn_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/CreditsBTN" to="Credits" method="_on_credits_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Menu" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsBTN" to="Options" method="_on_options_btn_pressed"]
 [connection signal="pressed" from="Tutorial/ReturnFromTutorialBtn" to="Menu" method="_on_return_from_tutorial_btn_pressed"]
@@ -1371,7 +1355,6 @@ text = "- PRESS  START -"
 [connection signal="pressed" from="HOSTING/JOIN" to="Menu" method="_on_join_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="HOSTING" method="_on_join_pressed"]
 [connection signal="pressed" from="HOSTING/JOIN" to="PRESSTART" method="_on_join_pressed"]
-[connection signal="focus_entered" from="HOSTING/IpField" to="HOSTING" method="_on_line_edit_focus_entered"]
 [connection signal="pressed" from="HOSTINGASHOST/CANCELHH" to="HOSTING" method="_on_cancelhh_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/CANCELHH" to="HOSTINGASHOST" method="_on_cancelhost_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="." method="_on_start_pressed"]
