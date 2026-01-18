@@ -1,7 +1,17 @@
 # M.U.T.E.X.
 This is our game jam submission for [Klagenfurt Game Jam, 2nd Tech Edition](https://itch.io/jam/klagenfurt-game-jam-2nd-tech-edition)!
 
-> Stranded in outer space, you and your friend have been drifting for months at hyper speed. You have now reached the event horizon and you two are seeing things nobody has seen before. A black hole consuming a star drawing you in, extraterrestrial lifeforms attacking you, and a shattered planet that has turned into an asteroid belt. Due to your extended voyage, components of your ship have broken down and you are only able to identify some ships with your radar. Can you and your friend work together to make it out alive? Or will the lack of communication be your downfall?! Communicate with your friend to identify the hidden aliens! Blast the enemies with your rockets, weave around the asteroids to make the enemies crash into them and escape together!
+> **WARP TUNNEL COMPROMISED. SIGNAL SCRAMBLING DETECTED.**
+>
+> You and your wingman have been drifting through the depths of the cosmos for months, evading the enemy fleet successfully but you both knew it was only a matter of time before they would eventually have you cornered. It seems the time to face them head-on has finally come.
+>
+> This is no fair playing field though. Advanced signal scrambling and cloaking technology render these relentless attackers invisible across half of the electromagnetic spectrum. If you want to stand even the slimmest chance of survival, you and your wingman will have to adapt quickly.
+>
+> **BAND SWEEP M.U.T.E.X. ACTIVE. SENSORS RECALIBRATED. COMBAT SYSTEMS ENGAGED.**
+>
+> With your sensors calibrated to detect what the other can't, but each on its own incomplete, you'll have to work together and watch each other's back. Blast your way through an unrelenting stream of enemies. Work together with your teammate to neutralize every threat before it neutralizes you. Unify your signals to beat the odds and stay alive.
+> 
+> Good luck, pilot.
 
 All assets (including art, sounds, music and code), except for those explicitly mentioned [below](#used-third-party-assets) are made by our team.
 
