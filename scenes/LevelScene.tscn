@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b0g8rxgtpwr8c" path="res://scripts/levelScript.gd" id="1_in5yg"]
 [ext_resource type="PackedScene" uid="uid://c111b6l8it2x6" path="res://scenes/player.tscn" id="2_dfg5a"]
 [ext_resource type="PackedScene" uid="uid://cuyyf2weq0thj" path="res://scenes/enemy.tscn" id="3_y8gwd"]
-[ext_resource type="PackedScene" uid="uid://cypwqksg1qrc5" path="res://scenes/main_menu.tscn" id="4_1sa1m"]
 [ext_resource type="PackedScene" uid="uid://bcglhcauxwnwl" path="res://scenes/patrol_route_manager.tscn" id="4_lpkg1"]
 [ext_resource type="Texture2D" uid="uid://d151yfr6rb33i" path="res://assets/skybox/skybox.jpg" id="5_n4611"]
 [ext_resource type="ArrayMesh" uid="uid://7x3x5kvhgdei" path="res://assets/models/map/asteroid belt8.obj" id="6_vle45"]
@@ -15,6 +14,7 @@
 [ext_resource type="Material" uid="uid://dg1x6fpusyufh" path="res://assets/shaders/scanline.tres" id="12_xy8s2"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://resources/orangetheme.tres" id="13_5ok7o"]
 [ext_resource type="FontFile" uid="uid://d304xnpnbruf4" path="res://assets/font/DSEG14-Classic/DSEG14Classic-Regular.ttf" id="14_ofep6"]
+[ext_resource type="Script" uid="uid://bfndwlxixa0pq" path="res://scripts/fps_indicator.gd" id="16_1her1"]
 [ext_resource type="PackedScene" uid="uid://ci3pwfoj5jp0s" path="res://scenes/shipStardestroyer.tscn" id="16_ofep6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vle45"]
@@ -140,7 +140,6 @@ _data = {
 script = ExtResource("1_in5yg")
 player_scene = ExtResource("2_dfg5a")
 enemy_scene = ExtResource("3_y8gwd")
-main_menu_scene = ExtResource("4_1sa1m")
 gameOver = NodePath("Node3D")
 gameOverRect = NodePath("Node3D/TextureRect")
 FG = NodePath("Node3D/FG")
@@ -383,6 +382,14 @@ transform = Transform3D(2.8623834, 0, -2.49473, 0, 3.7969613, 0, 2.49473, 0, 2.8
 
 [node name="Ship" parent="." instance=ExtResource("16_ofep6")]
 transform = Transform3D(-1.9954565, 0, -2.2401235, 0, 3, 0, 2.2401235, 0, -1.9954565, -2644.6104, 676.8045, 3174.083)
+
+[node name="FpsIndicator" type="Label" parent="."]
+offset_left = 10.0
+offset_right = 91.0
+offset_bottom = 35.0
+text = "60 fps"
+vertical_alignment = 1
+script = ExtResource("16_1her1")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="finished" from="IntroMusic" to="MainMusic" method="_on_finished"]
