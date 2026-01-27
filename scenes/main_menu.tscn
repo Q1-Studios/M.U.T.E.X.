@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cypwqksg1qrc5"]
+[gd_scene format=3 uid="uid://cypwqksg1qrc5"]
 
 [ext_resource type="Texture2D" uid="uid://b156cmxm1wmhe" path="res://assets/skybox/bg.png" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://qymy4et4jfcg" path="res://assets/sprites/VerticleHUD.svg" id="2_8ln24"]
@@ -617,7 +617,7 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_oa1go"]
 gradient = SubResource("Gradient_rtw2f")
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1939009066]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -625,45 +625,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG" type="Parallax2D" parent="."]
+[node name="BG" type="Parallax2D" parent="." unique_id=65985576]
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="BG" type="Sprite2D" parent="BG"]
+[node name="BG" type="Sprite2D" parent="BG" unique_id=936318021]
 position = Vector2(596, 266)
 scale = Vector2(0.666751, 0.666751)
 texture = ExtResource("1_l6cm7")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BG/BG"]
-libraries = {
-&"": SubResource("AnimationLibrary_lgwnu")
-}
-autoplay = "woosh"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BG/BG" unique_id=1323985275]
+libraries/ = SubResource("AnimationLibrary_lgwnu")
+autoplay = &"woosh"
 
-[node name="BGAfter" type="Sprite2D" parent="BG"]
+[node name="BGAfter" type="Sprite2D" parent="BG" unique_id=476018366]
 visible = false
 position = Vector2(593, 214)
 scale = Vector2(0.803769, 0.803769)
 texture = ExtResource("2_rtw2f")
 
-[node name="cockpithud" type="Parallax2D" parent="."]
+[node name="cockpithud" type="Parallax2D" parent="." unique_id=1336510893]
 scroll_scale = Vector2(0.07, 0.07)
 
-[node name="SvgviewerOutput" type="Sprite2D" parent="cockpithud"]
+[node name="SvgviewerOutput" type="Sprite2D" parent="cockpithud" unique_id=1559216799]
 position = Vector2(593, 241)
 scale = Vector2(0.14078, 0.14078)
 texture = ExtResource("2_8ln24")
 region_enabled = true
 region_rect = Rect2(0, 705.483, 400, 852.151)
 
-[node name="FG" type="Parallax2D" parent="."]
+[node name="FG" type="Parallax2D" parent="." unique_id=2059084308]
 scroll_scale = Vector2(0.05, 0.05)
 
-[node name="FG" type="Sprite2D" parent="FG"]
+[node name="FG" type="Sprite2D" parent="FG" unique_id=1483264591]
 position = Vector2(587, 323)
 scale = Vector2(0.931855, 0.931855)
 texture = ExtResource("2_wu84c")
 
-[node name="TextureRect" type="TextureRect" parent="FG"]
+[node name="TextureRect" type="TextureRect" parent="FG" unique_id=2091855391]
 material = ExtResource("3_wu84c")
 offset_left = 257.0
 offset_top = 321.0
@@ -673,18 +671,16 @@ rotation = -0.017827
 scale = Vector2(0.157008, 0.153548)
 texture = SubResource("ViewportTexture_wu84c")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="FG/TextureRect"]
-libraries = {
-&"": SubResource("AnimationLibrary_tbmy8")
-}
-autoplay = "jigglergb"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FG/TextureRect" unique_id=106786484]
+libraries/ = SubResource("AnimationLibrary_tbmy8")
+autoplay = &"jigglergb"
 speed_scale = 0.75
 
-[node name="SubViewport" type="SubViewport" parent="FG"]
+[node name="SubViewport" type="SubViewport" parent="FG" unique_id=1207278902]
 size = Vector2i(1200, 1000)
 render_target_update_mode = 4
 
-[node name="Control" parent="FG/SubViewport" instance=ExtResource("4_8ln24")]
+[node name="Control" parent="FG/SubViewport" unique_id=22910524 instance=ExtResource("4_8ln24")]
 
 [node name="TeamnameField" parent="FG/SubViewport/Control/HOSTINGASHOST" index="3"]
 select_all_on_focus = false
@@ -695,9 +691,9 @@ select_all_on_focus = false
 [node name="SecondaryColorField" parent="FG/SubViewport/Control/HOSTINGASHOST" index="8"]
 select_all_on_focus = false
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1098508321]
 
-[node name="Camera2D" type="Camera2D" parent="Node2D" node_paths=PackedStringArray("container", "animation_player", "subviewport", "mouse_icon")]
+[node name="Camera2D" type="Camera2D" parent="Node2D" unique_id=1302962212 node_paths=PackedStringArray("container", "animation_player", "subviewport", "mouse_icon")]
 position = Vector2(572, 465.665)
 script = SubResource("GDScript_l6cm7")
 container = NodePath("../../FG/SubViewport/Control/HOSTINGASHOST/START")
@@ -705,21 +701,19 @@ animation_player = NodePath("AnimationPlayer")
 subviewport = NodePath("../../FG/SubViewport")
 mouse_icon = NodePath("../../FG/SubViewport/Control/MouseCursor")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Camera2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_8ln24")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Camera2D" unique_id=1348390270]
+libraries/ = SubResource("AnimationLibrary_8ln24")
 
-[node name="WarpSound" type="AudioStreamPlayer" parent="Node2D/Camera2D"]
+[node name="WarpSound" type="AudioStreamPlayer" parent="Node2D/Camera2D" unique_id=1785546955]
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="FADETOWHITE" type="Sprite2D" parent="."]
+[node name="FADETOWHITE" type="Sprite2D" parent="." unique_id=1594088050]
 visible = false
 scale = Vector2(157.661, 83.9539)
 texture = SubResource("GradientTexture2D_oa1go")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1231433262]
 stream = ExtResource("8_tbmy8")
 volume_db = -5.0
 autoplay = true

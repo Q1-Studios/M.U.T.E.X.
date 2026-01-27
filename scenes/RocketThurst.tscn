@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpe8pqldegflt"]
+[gd_scene format=3 uid="uid://bpe8pqldegflt"]
 
 [ext_resource type="PackedScene" uid="uid://d03en4a46ugui" path="res://assets/models/thruster_exhaust/thruster_exhaust.glb" id="1_h7ay5"]
 [ext_resource type="Material" uid="uid://do6gmpgv16hde" path="res://assets/models/thruster_exhaust/thruster_exhaust.tres" id="2_4mpp8"]
 
-[node name="thruster_exhaust" instance=ExtResource("1_h7ay5")]
+[node name="thruster_exhaust" unique_id=1291996638 instance=ExtResource("1_h7ay5")]
 
 [node name="SIDE" parent="." index="0"]
 material_override = ExtResource("2_4mpp8")

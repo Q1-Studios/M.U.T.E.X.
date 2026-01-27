@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dls7354f4iw2m"]
+[gd_scene format=3 uid="uid://dls7354f4iw2m"]
 
 [ext_resource type="Script" uid="uid://6iksotqxv0pt" path="res://scripts/enemy_gun.gd" id="1_7w47d"]
 [ext_resource type="PackedScene" uid="uid://cpwlcv55dkw2" path="res://scenes/enemy_bullet.tscn" id="2_5o30m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_og67c"]
 
-[node name="EnemyGun" type="Node3D"]
+[node name="EnemyGun" type="Node3D" unique_id=596413210]
 script = ExtResource("1_7w47d")
 bulletScene = ExtResource("2_5o30m")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1307034045]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("BoxMesh_og67c")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=481398743]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29293367)
 target_position = Vector3(0, 0, -1)
 hit_from_inside = true

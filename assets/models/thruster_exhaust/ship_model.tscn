@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://84qcf0s50w45"]
+[gd_scene format=3 uid="uid://84qcf0s50w45"]
 
 [ext_resource type="PackedScene" uid="uid://d1bt2wphhu40a" path="res://scenes/spaceship_player.tscn" id="2_3g7j7"]
 
-[node name="ShipModel" type="Node3D"]
+[node name="ShipModel" type="Node3D" unique_id=104071534]
 
-[node name="Spaceship_Player2" parent="." instance=ExtResource("2_3g7j7")]
+[node name="Spaceship_Player2" parent="." unique_id=1648967844 instance=ExtResource("2_3g7j7")]
 transform = Transform3D(-0.707107, -0.707107, -8.74228e-08, -0.707107, 0.707107, 0, 6.18172e-08, 6.18172e-08, -1, 0, 0, 0)

@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bm06tepcpvlcd"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bm06tepcpvlcd"]
 
 [ext_resource type="Material" uid="uid://bcskukux6fk2m" path="res://assets/models/thruster_exhaust/xray_pass1.tres" id="1_eekwp"]
 [ext_resource type="Shader" uid="uid://d4f0hcyxxtohf" path="res://assets/models/thruster_exhaust/outline_shader.gdshader" id="1_p7kl6"]

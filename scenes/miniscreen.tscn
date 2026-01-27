@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dp3rvhbvdll7k"]
+[gd_scene format=3 uid="uid://dp3rvhbvdll7k"]
 
 [ext_resource type="Script" uid="uid://ojikmh0bkwii" path="res://scripts/miniscreen_controller.gd" id="1_4qlu7"]
 [ext_resource type="Theme" uid="uid://540k58tsq54u" path="res://resources/orangetheme.tres" id="1_j2igt"]
@@ -255,7 +255,7 @@ func _on_start_pressed() -> void:
 	show()
 "
 
-[node name="Control" type="Control" node_paths=PackedStringArray("start_overlay", "main_menu_layer", "init_focus_btn")]
+[node name="Control" type="Control" unique_id=1966018312 node_paths=PackedStringArray("start_overlay", "main_menu_layer", "init_focus_btn")]
 layout_mode = 3
 anchor_right = 1.042
 anchor_bottom = 1.543
@@ -268,7 +268,7 @@ start_overlay = NodePath("PRESSTART")
 main_menu_layer = NodePath("Menu")
 init_focus_btn = NodePath("Menu/VBoxContainer/HostGameBTN")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="." unique_id=485882885]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,7 +278,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_j2igt")
 
-[node name="Menu" type="Panel" parent="." node_paths=PackedStringArray("host_game_btn", "credits_btn", "options_btn", "quit_game_btn")]
+[node name="Menu" type="Panel" parent="." unique_id=493469674 node_paths=PackedStringArray("host_game_btn", "credits_btn", "options_btn", "quit_game_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -294,7 +294,7 @@ credits_btn = NodePath("VBoxContainer/CreditsBTN")
 options_btn = NodePath("VBoxContainer/OptionsBTN")
 quit_game_btn = NodePath("VBoxContainer/QuitGameBTN")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Menu"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu" unique_id=2073155463]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -319,7 +319,7 @@ text = "[ OK ] TUNNEL MARGIN THRESHOLD ADJUSTED
 [ WARN ] JAM PROCESS TERMINATED WITH ERROR EXIT CODE 1; 'SUBMISSION STATUS: INCOMPLETE'
 [ ERR ] Stacktrace fetched to MFD "
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1988771582]
 layout_mode = 0
 offset_left = 821.0
 offset_top = 165.0
@@ -327,7 +327,7 @@ offset_right = 908.0
 offset_bottom = 353.0
 scale = Vector2(1.56789, 1.56789)
 
-[node name="HostGameBTN" type="Button" parent="Menu/VBoxContainer"]
+[node name="HostGameBTN" type="Button" parent="Menu/VBoxContainer" unique_id=1467537986]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitGameBTN")
 focus_neighbor_bottom = NodePath("../CreditsBTN")
@@ -335,9 +335,9 @@ focus_next = NodePath("../CreditsBTN")
 focus_previous = NodePath("../QuitGameBTN")
 text = "LAUNCH"
 
-[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/HostGameBTN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/HostGameBTN" unique_id=336115099 instance=ExtResource("4_qm21r")]
 
-[node name="CreditsBTN" type="Button" parent="Menu/VBoxContainer"]
+[node name="CreditsBTN" type="Button" parent="Menu/VBoxContainer" unique_id=1191595566]
 layout_mode = 2
 focus_neighbor_top = NodePath("../HostGameBTN")
 focus_neighbor_bottom = NodePath("../OptionsBTN")
@@ -345,9 +345,9 @@ focus_next = NodePath("../OptionsBTN")
 focus_previous = NodePath("../HostGameBTN")
 text = "INFO"
 
-[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/CreditsBTN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/CreditsBTN" unique_id=588407915 instance=ExtResource("4_qm21r")]
 
-[node name="OptionsBTN" type="Button" parent="Menu/VBoxContainer"]
+[node name="OptionsBTN" type="Button" parent="Menu/VBoxContainer" unique_id=72926998]
 layout_mode = 2
 focus_neighbor_top = NodePath("../CreditsBTN")
 focus_neighbor_bottom = NodePath("../QuitGameBTN")
@@ -355,9 +355,9 @@ focus_next = NodePath("../QuitGameBTN")
 focus_previous = NodePath("../CreditsBTN")
 text = "CONFIG"
 
-[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/OptionsBTN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/OptionsBTN" unique_id=519050217 instance=ExtResource("4_qm21r")]
 
-[node name="QuitGameBTN" type="Button" parent="Menu/VBoxContainer"]
+[node name="QuitGameBTN" type="Button" parent="Menu/VBoxContainer" unique_id=496529443]
 layout_mode = 2
 focus_neighbor_top = NodePath("../OptionsBTN")
 focus_neighbor_bottom = NodePath("../HostGameBTN")
@@ -366,9 +366,9 @@ focus_previous = NodePath("../OptionsBTN")
 text = "[!] EJECT"
 script = SubResource("GDScript_vocgd")
 
-[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/QuitGameBTN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Menu/VBoxContainer/QuitGameBTN" unique_id=144289114 instance=ExtResource("4_qm21r")]
 
-[node name="Tutorial" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn")]
+[node name="Tutorial" type="Panel" parent="." unique_id=251795719 node_paths=PackedStringArray("init_focus_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -386,7 +386,7 @@ theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_t6nao")
 init_focus_btn = NodePath("ACKTutorialBTN")
 
-[node name="ReturnFromTutorialBtn" type="Button" parent="Tutorial"]
+[node name="ReturnFromTutorialBtn" type="Button" parent="Tutorial" unique_id=887929312]
 visible = false
 layout_mode = 0
 offset_left = 134.47496
@@ -397,9 +397,9 @@ theme_override_font_sizes/font_size = 75
 text = "<< Return"
 script = ExtResource("5_ib01u")
 
-[node name="ButtonSoundPlayer" parent="Tutorial/ReturnFromTutorialBtn" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Tutorial/ReturnFromTutorialBtn" unique_id=438932174 instance=ExtResource("4_qm21r")]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial" unique_id=51021586]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -416,7 +416,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 30
 text = "MISSION  OBJECTIVE  UPDATED"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Tutorial"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Tutorial" unique_id=755959102]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -435,7 +435,7 @@ COMPLEMENTARY BAND SWEEP MUTEX RECOMMENDED.
 SOME HOSTILES ARE INVISIBLE TO YOU.
 UNIFY VISCON FOR COMPLETE PICTURE <<"
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Tutorial"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Tutorial" unique_id=1158007326]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -454,7 +454,7 @@ COOrdinate.
 
 NEUTRALIZE."
 
-[node name="ACKTutorialBTN" type="Button" parent="Tutorial"]
+[node name="ACKTutorialBTN" type="Button" parent="Tutorial" unique_id=1686440395]
 layout_mode = 0
 offset_left = 134.475
 offset_top = 104.724
@@ -469,14 +469,14 @@ focus_previous = NodePath(".")
 theme_override_font_sizes/font_size = 75
 text = "   >>ACK<<   "
 
-[node name="ButtonSoundPlayer" parent="Tutorial/ACKTutorialBTN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Tutorial/ACKTutorialBTN" unique_id=1628760010 instance=ExtResource("4_qm21r")]
 
-[node name="OpsecUndSo" type="Sprite2D" parent="Tutorial"]
+[node name="OpsecUndSo" type="Sprite2D" parent="Tutorial" unique_id=324202829]
 position = Vector2(588, 350)
 scale = Vector2(0.456107, 0.456107)
 texture = ExtResource("4_j7o8s")
 
-[node name="Credits" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn")]
+[node name="Credits" type="Panel" parent="." unique_id=1543305123 node_paths=PackedStringArray("init_focus_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -494,7 +494,7 @@ theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_lt044")
 init_focus_btn = NodePath("RETURNFROMCREDITSBTN")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Credits"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Credits" unique_id=1765624883]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -514,7 +514,7 @@ W0Lphi
 Tobishreds
 "
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="Credits"]
+[node name="RichTextLabel4" type="RichTextLabel" parent="Credits" unique_id=180203980]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -534,7 +534,7 @@ PORTAR
 Seal
 "
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Credits"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Credits" unique_id=1871525571]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -554,7 +554,7 @@ CUCU
 -- Additional Help --
 Xtoph"
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="Credits"]
+[node name="RichTextLabel5" type="RichTextLabel" parent="Credits" unique_id=1284055104]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -571,7 +571,7 @@ theme_override_font_sizes/normal_font_size = 70
 text = "Q1 Studios - KLUJAM Tech edition  NOV 2025
 Made with Love, Godot and Caffeine"
 
-[node name="RETURNFROMCREDITSBTN" type="Button" parent="Credits"]
+[node name="RETURNFROMCREDITSBTN" type="Button" parent="Credits" unique_id=278024435]
 layout_mode = 0
 offset_left = 134.475
 offset_top = 104.724
@@ -587,15 +587,15 @@ theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 script = ExtResource("5_ib01u")
 
-[node name="ButtonSoundPlayer" parent="Credits/RETURNFROMCREDITSBTN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Credits/RETURNFROMCREDITSBTN" unique_id=1147792152 instance=ExtResource("4_qm21r")]
 
-[node name="OpsecUndSo" type="Sprite2D" parent="Credits"]
+[node name="OpsecUndSo" type="Sprite2D" parent="Credits" unique_id=81194542]
 position = Vector2(1103.17, 2054.02)
 rotation = 1.5708
 scale = Vector2(2.24459, 2.24459)
 texture = ExtResource("3_l6gtq")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits" unique_id=408321205]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -612,7 +612,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 90
 text = "CREDITS"
 
-[node name="RichTextLabel6" type="RichTextLabel" parent="Credits"]
+[node name="RichTextLabel6" type="RichTextLabel" parent="Credits" unique_id=1857845798]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -629,7 +629,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 90
 text = "CREDITS"
 
-[node name="Options" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn")]
+[node name="Options" type="Panel" parent="." unique_id=2060806164 node_paths=PackedStringArray("init_focus_btn")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -647,7 +647,7 @@ theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_qm21r")
 init_focus_btn = NodePath("RETURNFROMOPTIONS")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Options"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Options" unique_id=1286824564]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -667,7 +667,7 @@ text = "<Option Menu incomplete>
 please ascribe additional points to submission for adhering to theme
 "
 
-[node name="RETURNFROMOPTIONS" type="Button" parent="Options"]
+[node name="RETURNFROMOPTIONS" type="Button" parent="Options" unique_id=564803591]
 layout_mode = 0
 offset_left = 134.475
 offset_top = 104.724
@@ -683,9 +683,9 @@ theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 script = ExtResource("5_ib01u")
 
-[node name="ButtonSoundPlayer" parent="Options/RETURNFROMOPTIONS" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="Options/RETURNFROMOPTIONS" unique_id=1711917152 instance=ExtResource("4_qm21r")]
 
-[node name="HOSTING" type="Panel" parent="." node_paths=PackedStringArray("init_focus_btn", "highscore_label", "ip_field")]
+[node name="HOSTING" type="Panel" parent="." unique_id=1936516148 node_paths=PackedStringArray("init_focus_btn", "highscore_label", "ip_field")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -705,7 +705,7 @@ init_focus_btn = NodePath("CANCELHOST")
 highscore_label = NodePath("HIGHSCORE")
 ip_field = NodePath("IpField")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="HOSTING"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="HOSTING" unique_id=1189755163]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -721,7 +721,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "<Host Will Decide COLOR AND TEAM NAME>"
 
-[node name="CANCELHOST" type="Button" parent="HOSTING"]
+[node name="CANCELHOST" type="Button" parent="HOSTING" unique_id=474435186]
 layout_mode = 0
 offset_left = 134.475
 offset_top = 104.724
@@ -737,9 +737,9 @@ theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 script = ExtResource("5_ib01u")
 
-[node name="ButtonSoundPlayer" parent="HOSTING/CANCELHOST" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="HOSTING/CANCELHOST" unique_id=1903435109 instance=ExtResource("4_qm21r")]
 
-[node name="HOST" type="Button" parent="HOSTING"]
+[node name="HOST" type="Button" parent="HOSTING" unique_id=1452971777]
 layout_mode = 0
 offset_left = 134.475
 offset_top = 264.19
@@ -754,9 +754,9 @@ focus_previous = NodePath("../IpField")
 theme_override_font_sizes/font_size = 75
 text = "HOST GAME"
 
-[node name="ButtonSoundPlayer" parent="HOSTING/HOST" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="HOSTING/HOST" unique_id=1555810260 instance=ExtResource("4_qm21r")]
 
-[node name="JOIN" type="Button" parent="HOSTING"]
+[node name="JOIN" type="Button" parent="HOSTING" unique_id=1886542607]
 layout_mode = 0
 offset_left = 750.0
 offset_top = 264.19
@@ -771,9 +771,9 @@ focus_previous = NodePath("../HOST")
 theme_override_font_sizes/font_size = 75
 text = "JOIN GAME"
 
-[node name="ButtonSoundPlayer" parent="HOSTING/JOIN" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="HOSTING/JOIN" unique_id=365105477 instance=ExtResource("4_qm21r")]
 
-[node name="HIGHSCORE" type="RichTextLabel" parent="HOSTING"]
+[node name="HIGHSCORE" type="RichTextLabel" parent="HOSTING" unique_id=166258608]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -790,7 +790,7 @@ theme_override_font_sizes/normal_font_size = 70
 text = ":("
 script = ExtResource("8_irrrk")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HOSTING"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HOSTING" unique_id=1045129327]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -808,7 +808,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 90
 text = "HIGH  SCORES"
 
-[node name="IpField" type="LineEdit" parent="HOSTING" node_paths=PackedStringArray("dependant_btn", "error_label")]
+[node name="IpField" type="LineEdit" parent="HOSTING" unique_id=304003098 node_paths=PackedStringArray("dependant_btn", "error_label")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 750.0
@@ -829,7 +829,7 @@ script = ExtResource("8_ib01u")
 dependant_btn = NodePath("../JOIN")
 error_label = NodePath("ErrorMsg")
 
-[node name="ErrorMsg" type="Label" parent="HOSTING/IpField"]
+[node name="ErrorMsg" type="Label" parent="HOSTING/IpField" unique_id=1924556738]
 visible = false
 layout_mode = 0
 offset_top = 85.68326
@@ -839,9 +839,9 @@ theme_override_colors/font_color = Color(0.5882353, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Enter a valid IP address to join!"
 
-[node name="GUISoundPlayer" parent="HOSTING/IpField" instance=ExtResource("4_qm21r")]
+[node name="GUISoundPlayer" parent="HOSTING/IpField" unique_id=1817612351 instance=ExtResource("4_qm21r")]
 
-[node name="HOSTINGASHOST" type="Panel" parent="." node_paths=PackedStringArray("ip_addr_label", "init_focus")]
+[node name="HOSTINGASHOST" type="Panel" parent="." unique_id=175377983 node_paths=PackedStringArray("ip_addr_label", "init_focus")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -860,7 +860,7 @@ script = SubResource("GDScript_hofui")
 ip_addr_label = NodePath("IPAddress")
 init_focus = NodePath("CANCELHH")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="HOSTINGASHOST"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="HOSTINGASHOST" unique_id=158576473]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -876,7 +876,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM NAME:"
 
-[node name="CANCELHH" type="Button" parent="HOSTINGASHOST"]
+[node name="CANCELHH" type="Button" parent="HOSTINGASHOST" unique_id=529427525]
 layout_mode = 0
 offset_left = 134.475
 offset_top = 104.724
@@ -892,9 +892,9 @@ theme_override_font_sizes/font_size = 75
 text = "<< return >>"
 script = ExtResource("5_ib01u")
 
-[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/CANCELHH" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/CANCELHH" unique_id=858485202 instance=ExtResource("4_qm21r")]
 
-[node name="START" type="Button" parent="HOSTINGASHOST" node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field", "team_error_label", "color_error_label")]
+[node name="START" type="Button" parent="HOSTINGASHOST" unique_id=1932400121 node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field", "team_error_label", "color_error_label")]
 layout_mode = 0
 offset_left = 669.995
 offset_top = 312.982
@@ -916,26 +916,26 @@ secondary_col_field = NodePath("../SecondaryColorField")
 team_error_label = NodePath("VBoxContainer/TeamNameError")
 color_error_label = NodePath("VBoxContainer/ColorError")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HOSTINGASHOST/START"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HOSTINGASHOST/START" unique_id=218101971]
 layout_mode = 0
 offset_left = 277.2801
 offset_right = 559.3206
 offset_bottom = 82.11267
 alignment = 1
 
-[node name="TeamNameError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer"]
+[node name="TeamNameError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer" unique_id=1195163327]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5891461, 1.8410012e-06, 5.2943824e-07, 1)
 text = "Enter valid team name!"
 
-[node name="ColorError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer"]
+[node name="ColorError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer" unique_id=830420253]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5891461, 1.8410012e-06, 5.2943824e-07, 1)
 text = "Enter valid color code!"
 
-[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/START" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/START" unique_id=476738893 instance=ExtResource("4_qm21r")]
 
-[node name="TeamnameField" type="LineEdit" parent="HOSTINGASHOST"]
+[node name="TeamnameField" type="LineEdit" parent="HOSTINGASHOST" unique_id=567275056]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -953,9 +953,9 @@ placeholder_text = "ENTER  NAME"
 select_all_on_focus = true
 script = ExtResource("7_hofui")
 
-[node name="GUISoundPlayer" parent="HOSTINGASHOST/TeamnameField" instance=ExtResource("4_qm21r")]
+[node name="GUISoundPlayer" parent="HOSTINGASHOST/TeamnameField" unique_id=2040077410 instance=ExtResource("4_qm21r")]
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="HOSTINGASHOST"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="HOSTINGASHOST" unique_id=1551222400]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -971,7 +971,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM COLOR PRIMARY:"
 
-[node name="PrimaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview", "invalid_symbol")]
+[node name="PrimaryColorField" type="LineEdit" parent="HOSTINGASHOST" unique_id=260669334 node_paths=PackedStringArray("color_picker", "preview", "invalid_symbol")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -992,7 +992,7 @@ color_picker = NodePath("PrimaryColorPicker")
 preview = NodePath("ColorRect")
 invalid_symbol = NodePath("ColorRect/InvalidLabel")
 
-[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/PrimaryColorField"]
+[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/PrimaryColorField" unique_id=401243331]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 10.0
@@ -1000,7 +1000,7 @@ offset_right = 375.0
 offset_bottom = 70.0
 mouse_filter = 2
 
-[node name="InvalidLabel" type="Label" parent="HOSTINGASHOST/PrimaryColorField/ColorRect"]
+[node name="InvalidLabel" type="Label" parent="HOSTINGASHOST/PrimaryColorField/ColorRect" unique_id=1542804124]
 layout_mode = 0
 offset_right = 60.0
 offset_bottom = 60.0
@@ -1012,7 +1012,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PrimaryColorPicker" parent="HOSTINGASHOST/PrimaryColorField" instance=ExtResource("7_vocgd")]
+[node name="PrimaryColorPicker" parent="HOSTINGASHOST/PrimaryColorField" unique_id=1291444695 instance=ExtResource("7_vocgd")]
 layout_mode = 1
 offset_left = 409.37503
 offset_top = -27.37085
@@ -1025,9 +1025,9 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../../SecondaryColorField")
 focus_previous = NodePath("..")
 
-[node name="GUISoundPlayer" parent="HOSTINGASHOST/PrimaryColorField" instance=ExtResource("4_qm21r")]
+[node name="GUISoundPlayer" parent="HOSTINGASHOST/PrimaryColorField" unique_id=1661485653 instance=ExtResource("4_qm21r")]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HOSTINGASHOST"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HOSTINGASHOST" unique_id=1127330738]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1044,7 +1044,7 @@ theme_override_fonts/normal_font = ExtResource("3_oua23")
 theme_override_font_sizes/normal_font_size = 30
 text = "PILOT  PREFERENCES"
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="HOSTINGASHOST"]
+[node name="RichTextLabel4" type="RichTextLabel" parent="HOSTINGASHOST" unique_id=1968122506]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1060,7 +1060,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "TEAM COLOR SECONDARY:"
 
-[node name="SecondaryColorField" type="LineEdit" parent="HOSTINGASHOST" node_paths=PackedStringArray("color_picker", "preview", "invalid_symbol")]
+[node name="SecondaryColorField" type="LineEdit" parent="HOSTINGASHOST" unique_id=449784676 node_paths=PackedStringArray("color_picker", "preview", "invalid_symbol")]
 custom_minimum_size = Vector2(384.705, 79.67)
 layout_mode = 0
 offset_left = 154.706
@@ -1081,7 +1081,7 @@ color_picker = NodePath("SecondaryColorPicker")
 preview = NodePath("ColorRect")
 invalid_symbol = NodePath("ColorRect/InvalidLabel")
 
-[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/SecondaryColorField"]
+[node name="ColorRect" type="ColorRect" parent="HOSTINGASHOST/SecondaryColorField" unique_id=1528146]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 10.0
@@ -1089,7 +1089,7 @@ offset_right = 375.0
 offset_bottom = 70.0
 mouse_filter = 2
 
-[node name="InvalidLabel" type="Label" parent="HOSTINGASHOST/SecondaryColorField/ColorRect"]
+[node name="InvalidLabel" type="Label" parent="HOSTINGASHOST/SecondaryColorField/ColorRect" unique_id=1519594861]
 layout_mode = 0
 offset_right = 60.0
 offset_bottom = 60.0
@@ -1101,7 +1101,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SecondaryColorPicker" parent="HOSTINGASHOST/SecondaryColorField" instance=ExtResource("7_vocgd")]
+[node name="SecondaryColorPicker" parent="HOSTINGASHOST/SecondaryColorField" unique_id=1340105296 instance=ExtResource("7_vocgd")]
 visible = false
 layout_mode = 1
 offset_left = 409.37503
@@ -1115,9 +1115,9 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath("..")
 
-[node name="GUISoundPlayer" parent="HOSTINGASHOST/SecondaryColorField" instance=ExtResource("4_qm21r")]
+[node name="GUISoundPlayer" parent="HOSTINGASHOST/SecondaryColorField" unique_id=120783486 instance=ExtResource("4_qm21r")]
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="HOSTINGASHOST"]
+[node name="RichTextLabel5" type="RichTextLabel" parent="HOSTINGASHOST" unique_id=896342395]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1133,7 +1133,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "Your IP-Address:"
 
-[node name="IPAddress" type="Label" parent="HOSTINGASHOST" node_paths=PackedStringArray("copied_notification")]
+[node name="IPAddress" type="Label" parent="HOSTINGASHOST" unique_id=1664664294 node_paths=PackedStringArray("copied_notification")]
 layout_mode = 1
 offset_left = 670.0
 offset_top = 180.0
@@ -1147,7 +1147,7 @@ text = "127.0.0.1"
 script = ExtResource("13_0fhfr")
 copied_notification = NodePath("../CopiedLabel")
 
-[node name="CopiedLabel" type="Label" parent="HOSTINGASHOST"]
+[node name="CopiedLabel" type="Label" parent="HOSTINGASHOST" unique_id=2010171371]
 layout_mode = 0
 offset_left = 675.94507
 offset_top = 234.43866
@@ -1157,7 +1157,7 @@ theme_override_colors/font_color = Color(0.37254903, 0.23137255, 0.13333334, 1)
 text = "Copied!"
 script = ExtResource("14_0fhfr")
 
-[node name="NETWORKERROR" type="Panel" parent="."]
+[node name="NETWORKERROR" type="Panel" parent="." unique_id=1323156595]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1174,14 +1174,14 @@ mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_3k4et")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NETWORKERROR"]
+[node name="VBoxContainer" type="VBoxContainer" parent="NETWORKERROR" unique_id=2040885603]
 layout_mode = 0
 offset_left = -122.574554
 offset_top = 97.583626
 offset_right = 1297.4254
 offset_bottom = 710.45636
 
-[node name="ErrorMessage" type="Label" parent="NETWORKERROR/VBoxContainer"]
+[node name="ErrorMessage" type="Label" parent="NETWORKERROR/VBoxContainer" unique_id=337718207]
 custom_minimum_size = Vector2(1420, 300)
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
@@ -1189,24 +1189,24 @@ text = "Example network error"
 horizontal_alignment = 1
 script = ExtResource("8_qm21r")
 
-[node name="CenterContainer" type="CenterContainer" parent="NETWORKERROR/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="NETWORKERROR/VBoxContainer" unique_id=771147112]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="NETWORKERROR/VBoxContainer/CenterContainer"]
+[node name="Exit" type="Button" parent="NETWORKERROR/VBoxContainer/CenterContainer" unique_id=1297549968]
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "<< ACK >>"
 
-[node name="ButtonSoundPlayer" parent="NETWORKERROR/VBoxContainer/CenterContainer/Exit" instance=ExtResource("4_qm21r")]
+[node name="ButtonSoundPlayer" parent="NETWORKERROR/VBoxContainer/CenterContainer/Exit" unique_id=1991472747 instance=ExtResource("4_qm21r")]
 
-[node name="MouseCursor" type="Sprite2D" parent="."]
+[node name="MouseCursor" type="Sprite2D" parent="." unique_id=173032957]
 position = Vector2(-10, -10)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("11_t6nao")
 offset = Vector2(50, 50)
 script = ExtResource("12_hofui")
 
-[node name="PRESSTART" type="Panel" parent="."]
+[node name="PRESSTART" type="Panel" parent="." unique_id=2128598929]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1217,7 +1217,7 @@ mouse_filter = 1
 theme = ExtResource("1_j2igt")
 script = SubResource("GDScript_03b6j")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PRESSTART"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PRESSTART" unique_id=114410774]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1267,7 +1267,7 @@ text = "
                                                                                                                            
                                                                                                                            "
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="PRESSTART"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="PRESSTART" unique_id=716398736]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1316,7 +1316,7 @@ text = "
                                                                                                                            
                                                                                                                            "
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="PRESSTART"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="PRESSTART" unique_id=1416623597]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

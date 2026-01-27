@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c111b6l8it2x6"]
+[gd_scene format=3 uid="uid://c111b6l8it2x6"]
 
 [ext_resource type="Script" uid="uid://cc6g7dopbnu7h" path="res://scripts/Player.gd" id="1_qhqgy"]
 [ext_resource type="Script" uid="uid://b4rer4p7cpwlv" path="res://scripts/cameraController.gd" id="3_tuyoq"]
@@ -73,7 +73,7 @@ viewport_path = NodePath("PointDisplay/SubViewport")
 radius = 0.675
 height = 7.5
 
-[node name="CharacterBody3D2" type="CharacterBody3D" node_paths=PackedStringArray("movement_controller", "camera_controller", "camera", "point_display", "circle_hud", "pitch_hud", "speed_bar", "missileLock", "audioMissileLock", "audioMissileLockAaaaaahh") groups=["Players"]]
+[node name="CharacterBody3D2" type="CharacterBody3D" unique_id=1785032897 node_paths=PackedStringArray("movement_controller", "camera_controller", "camera", "point_display", "circle_hud", "pitch_hud", "speed_bar", "missileLock", "audioMissileLock", "audioMissileLockAaaaaahh") groups=["Players"]]
 collision_layer = 8
 collision_mask = 31
 motion_mode = 1
@@ -91,32 +91,32 @@ noMissileLockColor = Color(0.07450981, 0.99215686, 0.08235294, 1)
 audioMissileLock = NodePath("MissieLock/MissileLock")
 audioMissileLockAaaaaahh = NodePath("MissieLock/MissileLock2")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=227741004]
 replication_config = SubResource("SceneReplicationConfig_qhqgy")
 
-[node name="movementController" type="Node3D" parent="." node_paths=PackedStringArray("player", "model_container", "ship_model")]
+[node name="movementController" type="Node3D" parent="." unique_id=511644922 node_paths=PackedStringArray("player", "model_container", "ship_model")]
 script = ExtResource("4_dqkch")
 player = NodePath("..")
 model_container = NodePath("../ModelContainer")
 ship_model = NodePath("../ModelContainer/ShipModel/Spaceship_Player2")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("camera", "player")]
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=621151834 node_paths=PackedStringArray("camera", "player")]
 transform = Transform3D(1, 0, 0, 0, 0.951267, 0.30837, 0, -0.30837, 0.951267, 0, 0, 0)
 spring_length = 14.0
 script = ExtResource("3_tuyoq")
 camera = NodePath("Camera3D")
 player = NodePath("..")
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=583294644]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1620909788]
 script = ExtResource("4_jej6c")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" groups=["Players"]]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" unique_id=140907181 groups=["Players"]]
 transform = Transform3D(3.08671e-07, 0, 0.89754, 0, 0.528894, 0, 7.06156, 0, -3.92327e-08, 0, 0.038, -0.914)
 shape = SubResource("CapsuleShape3D_tuyoq")
 
-[node name="ModelContainer" type="Node3D" parent="." node_paths=PackedStringArray("player", "thrusterMain", "thrusterLeft", "thrusterRight", "movement", "Ship_Node", "particle")]
+[node name="ModelContainer" type="Node3D" parent="." unique_id=1209626417 node_paths=PackedStringArray("player", "thrusterMain", "thrusterLeft", "thrusterRight", "movement", "Ship_Node", "particle")]
 script = ExtResource("4_y4r1p")
 player = NodePath("..")
 thrusterMain = NodePath("ThrusterExhaust")
@@ -126,12 +126,12 @@ movement = NodePath("../movementController")
 Ship_Node = NodePath("ShipModel/Spaceship_Player2")
 particle = NodePath("ThrusterExhaust/particles")
 
-[node name="HUD" type="Node3D" parent="ModelContainer"]
+[node name="HUD" type="Node3D" parent="ModelContainer" unique_id=64016472]
 
-[node name="SubViewport" type="SubViewport" parent="ModelContainer/HUD"]
+[node name="SubViewport" type="SubViewport" parent="ModelContainer/HUD" unique_id=1722570008]
 transparent_bg = true
 
-[node name="VerticleHUD" type="TextureRect" parent="ModelContainer/HUD/SubViewport" node_paths=PackedStringArray("player")]
+[node name="VerticleHUD" type="TextureRect" parent="ModelContainer/HUD/SubViewport" unique_id=1977117138 node_paths=PackedStringArray("player")]
 offset_right = 400.0
 offset_bottom = 2000.0
 texture = ExtResource("6_qfm1y")
@@ -139,75 +139,75 @@ stretch_mode = 1
 script = ExtResource("8_smehm")
 player = NodePath("../../../..")
 
-[node name="Sprite3D" type="Sprite3D" parent="ModelContainer/HUD"]
+[node name="Sprite3D" type="Sprite3D" parent="ModelContainer/HUD" unique_id=721920367]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.5, 0, -11.829)
 texture = SubResource("ViewportTexture_smehm")
 
-[node name="ThrusterExhaust" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
+[node name="ThrusterExhaust" parent="ModelContainer" unique_id=1001548391 instance=ExtResource("5_tuyoq")]
 transform = Transform3D(0.445, 0, 0, 0, 0.0102358, 0.212942, 0, -0.439881, 0.00495504, -0.130108, 0.251334, 2.23022)
 
-[node name="particles" parent="ModelContainer/ThrusterExhaust" instance=ExtResource("11_d2wvv")]
+[node name="particles" parent="ModelContainer/ThrusterExhaust" unique_id=1608988739 instance=ExtResource("11_d2wvv")]
 transform = Transform3D(2.24719, 0, 0, 0, 0.0528708, -2.27211, 0, 4.69357, 0.109217, 0, 0, 0)
 
-[node name="ThrusterExhaust2" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
+[node name="ThrusterExhaust2" parent="ModelContainer" unique_id=1647952457 instance=ExtResource("5_tuyoq")]
 transform = Transform3D(0.431913, 0.105895, -0.00119282, 0, 0.0102355, 0.212942, 0.107128, -0.426944, 0.00480917, 1.11393, 0.132954, 1.87072)
 
-[node name="ThrusterExhaust3" parent="ModelContainer" instance=ExtResource("5_tuyoq")]
+[node name="ThrusterExhaust3" parent="ModelContainer" unique_id=1838993450 instance=ExtResource("5_tuyoq")]
 transform = Transform3D(0.429815, -0.113931, 0.00128334, 0, 0.0102355, 0.212942, -0.115257, -0.424871, 0.00478581, -1.4094, 0.14741, 1.84686)
 
-[node name="ShipModel" parent="ModelContainer" instance=ExtResource("4_qlg0r")]
+[node name="ShipModel" parent="ModelContainer" unique_id=152457821 instance=ExtResource("4_qlg0r")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
-[node name="LeftGun" parent="ModelContainer" instance=ExtResource("5_qlg0r")]
+[node name="LeftGun" parent="ModelContainer" unique_id=276904113 instance=ExtResource("5_qlg0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47845, 0.426927, -0.531486)
 visible = false
 
-[node name="RightGun" parent="ModelContainer" instance=ExtResource("5_qlg0r")]
+[node name="RightGun" parent="ModelContainer" unique_id=8720925 instance=ExtResource("5_qlg0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.247, 0.363787, -0.562052)
 visible = false
 
-[node name="Area3D" type="Area3D" parent="ModelContainer"]
+[node name="Area3D" type="Area3D" parent="ModelContainer" unique_id=653104247]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ModelContainer/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ModelContainer/Area3D" unique_id=116424427]
 transform = Transform3D(2.70113e-07, 0, 0.89754, 0, 0.528894, 0, 6.17946, 0, -3.92327e-08, 0, 0.038, -0.914)
 shape = SubResource("CapsuleShape3D_tuyoq")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="ModelContainer/Area3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ModelContainer/Area3D" unique_id=267029433]
 transform = Transform3D(5.95371, 0, 5.05552e-08, 0, 0.279729, 0, 1.53151e-06, 0, 1.3531, -0.07686, 0.058098, 1.39981)
 shape = SubResource("CapsuleShape3D_tuyoq")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="ModelContainer/Area3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ModelContainer/Area3D" unique_id=173355921]
 transform = Transform3D(2.70113e-07, 0, 0.89754, 0, 0.528894, 0, 6.17946, 0, -3.92327e-08, 0, 0.038, -0.914)
 shape = SubResource("CapsuleShape3D_tuyoq")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="ModelContainer/Area3D"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ModelContainer/Area3D" unique_id=677023470]
 transform = Transform3D(5.95371, 0, 5.05552e-08, 0, 0.279729, 0, 1.53151e-06, 0, 1.3531, -0.07686, 0.058098, 1.39981)
 shape = SubResource("CapsuleShape3D_tuyoq")
 
-[node name="ShipWingsCollisionShape" type="CollisionShape3D" parent="ModelContainer/Area3D"]
+[node name="ShipWingsCollisionShape" type="CollisionShape3D" parent="ModelContainer/Area3D" unique_id=1652920249]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.194874, 2.08403)
 shape = SubResource("CapsuleShape3D_4r5pv")
 
-[node name="MissieLock" type="Node3D" parent="."]
+[node name="MissieLock" type="Node3D" parent="." unique_id=1527948484]
 transform = Transform3D(1, 0, 0, 0, 0.99999946, 0, 0, 0, 0.99999946, -8.74988, 0.7703991, -6.357684)
 
-[node name="Sprite3D" type="Sprite3D" parent="MissieLock"]
+[node name="Sprite3D" type="Sprite3D" parent="MissieLock" unique_id=36739287]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 modulate = Color(0.27058825, 1, 0.101960786, 1)
 texture = ExtResource("15_fulsm")
 
-[node name="MissileLock2" type="AudioStreamPlayer3D" parent="MissieLock"]
+[node name="MissileLock2" type="AudioStreamPlayer3D" parent="MissieLock" unique_id=907600445]
 transform = Transform3D(1, 0, 0, 0, 1.0000005, 0, 0, 0, 1.0000005, 0, 0, 0)
 stream = ExtResource("13_4ni07")
 volume_db = 8.474
 bus = &"SFX"
 
-[node name="MissileLock" type="AudioStreamPlayer3D" parent="MissieLock"]
+[node name="MissileLock" type="AudioStreamPlayer3D" parent="MissieLock" unique_id=1626478457]
 stream = ExtResource("13_a38lo")
 volume_db = -1.23
 bus = &"SFX"
 
-[node name="shield_scannerparticle_try" type="CPUParticles3D" parent="."]
+[node name="shield_scannerparticle_try" type="CPUParticles3D" parent="." unique_id=773409817]
 transform = Transform3D(1, 0, 0, 0, -0.953664, 0.300872, 0, -0.300872, -0.953664, -0.0405608, -0.55562, 1.41512)
 visible = false
 amount = 762
@@ -233,14 +233,14 @@ angle_max = 25.0
 scale_amount_min = 9.58
 scale_amount_max = 9.58
 
-[node name="CircleHUD" type="Node3D" parent="."]
+[node name="CircleHUD" type="Node3D" parent="." unique_id=1752575651]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 20, -28)
 
-[node name="SubViewport" type="SubViewport" parent="CircleHUD"]
+[node name="SubViewport" type="SubViewport" parent="CircleHUD" unique_id=1010522723]
 transparent_bg = true
 size = Vector2i(250, 200)
 
-[node name="CircleHUD" type="TextureRect" parent="CircleHUD/SubViewport" node_paths=PackedStringArray("player")]
+[node name="CircleHUD" type="TextureRect" parent="CircleHUD/SubViewport" unique_id=1368806659 node_paths=PackedStringArray("player")]
 offset_left = -175.0
 offset_right = 425.0
 offset_bottom = 600.0
@@ -249,17 +249,17 @@ texture = ExtResource("14_a8ls1")
 script = ExtResource("14_f1ej7")
 player = NodePath("../../..")
 
-[node name="Sprite3D" type="Sprite3D" parent="CircleHUD"]
+[node name="Sprite3D" type="Sprite3D" parent="CircleHUD" unique_id=889805575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.56811, 5.41849)
 texture = SubResource("ViewportTexture_oprun")
 
-[node name="SpeedBar" type="Node3D" parent="."]
+[node name="SpeedBar" type="Node3D" parent="." unique_id=14725571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83886, 0, -6.10254)
 
-[node name="SubViewport" type="SubViewport" parent="SpeedBar"]
+[node name="SubViewport" type="SubViewport" parent="SpeedBar" unique_id=638873391]
 transparent_bg = true
 
-[node name="SpeedBar" type="TextureProgressBar" parent="SpeedBar/SubViewport" node_paths=PackedStringArray("player")]
+[node name="SpeedBar" type="TextureProgressBar" parent="SpeedBar/SubViewport" unique_id=1721167688 node_paths=PackedStringArray("player")]
 offset_right = 40.0
 offset_bottom = 40.0
 min_value = 1.0
@@ -270,21 +270,21 @@ texture_progress = ExtResource("15_a8ls1")
 script = ExtResource("16_qfm1y")
 player = NodePath("../../..")
 
-[node name="Sprite3D" type="Sprite3D" parent="SpeedBar"]
+[node name="Sprite3D" type="Sprite3D" parent="SpeedBar" unique_id=472859708]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.29763, 0, 0)
 texture = SubResource("ViewportTexture_fulsm")
 
-[node name="PointDisplay" type="Node3D" parent="."]
+[node name="PointDisplay" type="Node3D" parent="." unique_id=2074195697]
 
-[node name="Sprite3D2" type="Sprite3D" parent="PointDisplay"]
+[node name="Sprite3D2" type="Sprite3D" parent="PointDisplay" unique_id=551232314]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.5, 0.5, -12.122)
 modulate = Color(0.41808584, 0.99934345, 0, 1)
 texture = ExtResource("20_l71n6")
 
-[node name="SubViewport" type="SubViewport" parent="PointDisplay"]
+[node name="SubViewport" type="SubViewport" parent="PointDisplay" unique_id=512956085]
 transparent_bg = true
 
-[node name="PointDisplay" type="Label" parent="PointDisplay/SubViewport"]
+[node name="PointDisplay" type="Label" parent="PointDisplay/SubViewport" unique_id=1572943422]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.34902, 0.956863, 0.372549, 1)
@@ -292,25 +292,25 @@ theme_override_font_sizes/font_size = 50
 text = "Points: 0"
 script = ExtResource("17_qfm1y")
 
-[node name="Sprite3D" type="Sprite3D" parent="PointDisplay"]
+[node name="Sprite3D" type="Sprite3D" parent="PointDisplay" unique_id=1523901580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75683, 0, -6.06086)
 texture = SubResource("ViewportTexture_qfm1y")
 
-[node name="ShipBodyCollisionShape" type="CollisionShape3D" parent="."]
+[node name="ShipBodyCollisionShape" type="CollisionShape3D" parent="." unique_id=1097972205]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.8503e-08, -0.615732)
 shape = SubResource("CapsuleShape3D_fulsm")
 
-[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="." unique_id=1297085952]
 stream = ExtResource("19_4r5pv")
 bus = &"SFX"
 
-[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="." unique_id=1348819725]
 stream = ExtResource("20_60mlk")
 volume_db = 5.0
 autoplay = true
 bus = &"SFX"
 
-[node name="Explosion" parent="." instance=ExtResource("18_fulsm")]
+[node name="Explosion" parent="." unique_id=1254396355 instance=ExtResource("18_fulsm")]
 
 [connection signal="newColor" from="." to="ModelContainer" method="_on_character_body_3d_2_new_color"]
 [connection signal="takeDamageSignal" from="." to="Area3D" method="_on_character_body_3d_2_take_damage_signal"]

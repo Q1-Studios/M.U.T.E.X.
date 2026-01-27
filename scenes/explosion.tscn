@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvwnv2lgiecdf"]
+[gd_scene format=3 uid="uid://cvwnv2lgiecdf"]
 
 [ext_resource type="Script" uid="uid://crtx6qkunlcp5" path="res://scripts/explosion.gd" id="1_nfeox"]
 [ext_resource type="AudioStream" uid="uid://1gw744hujikf" path="res://assets/sounds/explosion.wav" id="2_nfeox"]
@@ -101,10 +101,10 @@ scale_curve = SubResource("CurveTexture_fasmd")
 color = Color(0.36471254, 0.24402708, 2.8878452e-07, 1)
 alpha_curve = SubResource("CurveTexture_xe657")
 
-[node name="Explosion" type="Node3D"]
+[node name="Explosion" type="Node3D" unique_id=274281251]
 script = ExtResource("1_nfeox")
 
-[node name="Debris" type="GPUParticles3D" parent="."]
+[node name="Debris" type="GPUParticles3D" parent="." unique_id=757415206]
 emitting = false
 amount = 24
 lifetime = 0.05
@@ -114,7 +114,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_xfoey")
 draw_pass_1 = SubResource("CylinderMesh_cun36")
 
-[node name="Fire" type="GPUParticles3D" parent="."]
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=1587342532]
 emitting = false
 amount = 15
 one_shot = true
@@ -123,7 +123,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_dcqkm")
 draw_pass_1 = SubResource("SphereMesh_x2c5d")
 
-[node name="Smoke" type="GPUParticles3D" parent="."]
+[node name="Smoke" type="GPUParticles3D" parent="." unique_id=730696334]
 emitting = false
 amount = 25
 lifetime = 5.0
@@ -133,9 +133,9 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_h461u")
 draw_pass_1 = SubResource("SphereMesh_x2c5d")
 
-[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="." unique_id=887476781]
 stream = ExtResource("2_nfeox")
 volume_db = 5.0
 
-[node name="Explosion" type="AudioStreamPlayer" parent="."]
+[node name="Explosion" type="AudioStreamPlayer" parent="." unique_id=1087799261]
 stream = ExtResource("2_nfeox")

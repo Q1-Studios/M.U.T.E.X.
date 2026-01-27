@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cduaufs6120d2"]
+[gd_scene format=3 uid="uid://cduaufs6120d2"]
 
 [ext_resource type="Texture2D" uid="uid://dqwa42jtr1sqb" path="res://assets/models/thruster_exhaust/particle1.png" id="1_kjhec"]
 
@@ -29,9 +29,9 @@ material = SubResource("StandardMaterial3D_kjhec")
 size = Vector2(0.06, 0.06)
 orientation = 2
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=547588703]
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1318545744]
 amount = 1496
 lifetime = 0.04
 randomness = 0.15

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1bt2wphhu40a"]
+[gd_scene format=3 uid="uid://d1bt2wphhu40a"]
 
 [ext_resource type="PackedScene" uid="uid://ctqp8yhnra6jl" path="res://assets/models/ship/Spaceship_Player.glb" id="1_l3nam"]
 [ext_resource type="Material" uid="uid://bcskukux6fk2m" path="res://assets/models/thruster_exhaust/xray_pass1.tres" id="2_mrcso"]
@@ -53,7 +53,7 @@ _data = {
 &"Shooting": SubResource("Animation_l3nam")
 }
 
-[node name="Spaceship_Player" instance=ExtResource("1_l3nam")]
+[node name="Spaceship_Player" unique_id=58932890 instance=ExtResource("1_l3nam")]
 
 [node name="Ship A" parent="." index="0"]
 material_overlay = SubResource("ShaderMaterial_ro7x6")
@@ -64,7 +64,5 @@ transform = Transform3D(0.70710725, -0.7071062, 0, 0.7071057, 0.7071077, 0, 0, 0
 [node name="RocketLauncher2" parent="." index="2"]
 transform = Transform3D(0.7071077, -0.7071062, 0, 0.7071062, 0.7071077, 0, 0, 0, 1, 0.721545, 2.71879, -0.629959)
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="4"]
-libraries = {
-&"": SubResource("AnimationLibrary_mrcso")
-}
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="4" unique_id=1968194069]
+libraries/ = SubResource("AnimationLibrary_mrcso")

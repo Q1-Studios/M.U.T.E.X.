@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cin7k7075t28o"]
+[gd_scene format=4 uid="uid://cin7k7075t28o"]
 
 [ext_resource type="PackedScene" uid="uid://nx6niris3iu1" path="res://scenes/Rocket_Exhaust.tscn" id="1_3341w"]
 
@@ -98,13 +98,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_s8smt")
 
-[node name="Rocket" type="Node3D"]
+[node name="Rocket" type="Node3D" unique_id=21352977]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="ThrusterExhaust" parent="." instance=ExtResource("1_3341w")]
+[node name="ThrusterExhaust" parent="." unique_id=1595502609 instance=ExtResource("1_3341w")]
 transform = Transform3D(0.14, 0, 0, 0, -6.11959e-09, -0.14, 0, 0.14, -6.11959e-09, 0, 0, -1.32985)
 
-[node name="Rocket" type="MeshInstance3D" parent="."]
+[node name="Rocket" type="MeshInstance3D" parent="." unique_id=1405574069]
 transform = Transform3D(0, 0, -0.176992, -0.176992, 0, 0, 0, 1.37586, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3341w")
-skeleton = NodePath("")

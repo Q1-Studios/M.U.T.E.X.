@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crgueyuwsvter"]
 
-[node name="ColorPicker" type="ColorPicker"]
+[node name="ColorPicker" type="ColorPicker" unique_id=215600871]
 offset_right = 300.00006
 offset_bottom = 291.0
 mouse_filter = 2

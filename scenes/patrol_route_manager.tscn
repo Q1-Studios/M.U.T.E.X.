@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcglhcauxwnwl"]
+[gd_scene format=3 uid="uid://bcglhcauxwnwl"]
 
-[ext_resource type="Script" path="res://scripts/patrol_route_manager.gd" id="1_qcgb2"]
+[ext_resource type="Script" uid="uid://dsq6s28dc6y3a" path="res://scripts/patrol_route_manager.gd" id="1_qcgb2"]
 
 [sub_resource type="Curve3D" id="Curve3D_jo8ho"]
 closed = true
@@ -82,35 +82,35 @@ _data = {
 }
 point_count = 13
 
-[node name="PatrolRouteManager" type="Node3D"]
+[node name="PatrolRouteManager" type="Node3D" unique_id=274971958]
 script = ExtResource("1_qcgb2")
 
-[node name="PatrolPathA" type="Path3D" parent="." groups=["PatrolPaths"]]
+[node name="PatrolPathA" type="Path3D" parent="." unique_id=573966352 groups=["PatrolPaths"]]
 curve = SubResource("Curve3D_jo8ho")
 
-[node name="PatrolPathB" type="Path3D" parent="." groups=["PatrolPaths"]]
+[node name="PatrolPathB" type="Path3D" parent="." unique_id=1419487814 groups=["PatrolPaths"]]
 curve = SubResource("Curve3D_qcgb2")
 
-[node name="PatrolPathC" type="Path3D" parent="." groups=["PatrolPaths"]]
+[node name="PatrolPathC" type="Path3D" parent="." unique_id=1412440255 groups=["PatrolPaths"]]
 curve = SubResource("Curve3D_01hsn")
 
-[node name="PatrolPathD" type="Path3D" parent="."]
+[node name="PatrolPathD" type="Path3D" parent="." unique_id=316678236]
 curve = SubResource("Curve3D_q3bkq")
 
-[node name="PatrolPathE" type="Path3D" parent="."]
+[node name="PatrolPathE" type="Path3D" parent="." unique_id=2055081809]
 curve = SubResource("Curve3D_0tcoy")
 
-[node name="PatrolPathF" type="Path3D" parent="."]
+[node name="PatrolPathF" type="Path3D" parent="." unique_id=590708735]
 curve = SubResource("Curve3D_atf20")
 
-[node name="PatrolPathG" type="Path3D" parent="."]
+[node name="PatrolPathG" type="Path3D" parent="." unique_id=930934979]
 curve = SubResource("Curve3D_xe72w")
 
-[node name="PatrolPathH" type="Path3D" parent="."]
+[node name="PatrolPathH" type="Path3D" parent="." unique_id=572848956]
 curve = SubResource("Curve3D_mhw8n")
 
-[node name="PatrolPathI" type="Path3D" parent="."]
+[node name="PatrolPathI" type="Path3D" parent="." unique_id=772409996]
 curve = SubResource("Curve3D_5ouom")
 
-[node name="PatrolPathJ" type="Path3D" parent="."]
+[node name="PatrolPathJ" type="Path3D" parent="." unique_id=781002158]
 curve = SubResource("Curve3D_ku7ej")

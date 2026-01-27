@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bcskukux6fk2m"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bcskukux6fk2m"]
 
 [ext_resource type="Material" uid="uid://33gm7rwljbbs" path="res://assets/models/thruster_exhaust/xray_pass2.tres" id="1_5eikd"]
 

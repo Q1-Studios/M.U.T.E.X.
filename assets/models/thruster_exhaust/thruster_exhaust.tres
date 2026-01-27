@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://do6gmpgv16hde"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://do6gmpgv16hde"]
 
 [ext_resource type="Texture2D" uid="uid://ckjniha0gujd3" path="res://assets/models/thruster_exhaust/particle2.png" id="1_pgif2"]
 
