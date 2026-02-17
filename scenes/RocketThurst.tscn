@@ -5,8 +5,8 @@
 
 [node name="thruster_exhaust" unique_id=1291996638 instance=ExtResource("1_h7ay5")]
 
-[node name="SIDE" parent="." index="0"]
+[node name="SIDE" parent="." index="0" unique_id=1471225265]
 material_override = ExtResource("2_4mpp8")
 
-[node name="TOP" parent="." index="1"]
+[node name="TOP" parent="." index="1" unique_id=1575204982]
 material_override = ExtResource("2_4mpp8")

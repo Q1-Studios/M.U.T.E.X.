@@ -8,13 +8,13 @@
 
 [node name="thruster_exhaust" parent="." unique_id=534745095 instance=ExtResource("1_uqbgk")]
 
-[node name="SIDE" parent="thruster_exhaust" index="0"]
+[node name="SIDE" parent="thruster_exhaust" index="0" unique_id=1471225265]
 material_override = ExtResource("2_c1mik")
 
-[node name="TOP" parent="thruster_exhaust" index="1"]
+[node name="TOP" parent="thruster_exhaust" index="1" unique_id=1575204982]
 material_override = ExtResource("2_c1mik")
 
-[node name="AnimationPlayer" parent="thruster_exhaust" index="2"]
+[node name="AnimationPlayer" parent="thruster_exhaust" index="2" unique_id=1773371457]
 autoplay = &"Action"
 speed_scale = 5.0
 

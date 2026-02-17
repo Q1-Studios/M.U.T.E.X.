@@ -20,13 +20,13 @@ transform = Transform3D(0.1, 0, 0, 0, -8.74228e-09, -0.6, 0, 0.2, -2.62268e-08, 
 
 [node name="thruster_exhaust" parent="." unique_id=1794115358 instance=ExtResource("1_atucc")]
 
-[node name="SIDE" parent="thruster_exhaust" index="0"]
+[node name="SIDE" parent="thruster_exhaust" index="0" unique_id=1471225265]
 material_override = SubResource("StandardMaterial3D_kh57b")
 
-[node name="TOP" parent="thruster_exhaust" index="1"]
+[node name="TOP" parent="thruster_exhaust" index="1" unique_id=1575204982]
 material_override = SubResource("StandardMaterial3D_kh57b")
 
-[node name="AnimationPlayer" parent="thruster_exhaust" index="2"]
+[node name="AnimationPlayer" parent="thruster_exhaust" index="2" unique_id=1773371457]
 autoplay = &"Action"
 speed_scale = 5.0
 
