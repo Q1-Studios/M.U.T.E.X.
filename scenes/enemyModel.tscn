@@ -14,5 +14,5 @@ shader_parameter/constant_width = true
 
 [node name="enemy" unique_id=1514420304 instance=ExtResource("1_06tp7")]
 
-[node name="Cylinder_005" parent="." index="0" unique_id=55055725]
+[node name="Cylinder_005" parent="." index="0" unique_id=1692823000]
 material_overlay = SubResource("ShaderMaterial_42toi")

@@ -55,13 +55,13 @@ _data = {
 
 [node name="Spaceship_Player" unique_id=58932890 instance=ExtResource("1_l3nam")]
 
-[node name="Ship A" parent="." index="0" unique_id=1577425154]
+[node name="Ship A" parent="." index="0" unique_id=1596614506]
 material_overlay = SubResource("ShaderMaterial_ro7x6")
 
-[node name="RocketLauncher" parent="." index="1" unique_id=269344129]
+[node name="RocketLauncher" parent="." index="1" unique_id=1526480208]
 transform = Transform3D(0.70710725, -0.7071062, 0, 0.7071057, 0.7071077, 0, 0, 0, 1, -1.88606, 0.0916786, -0.626113)
 
-[node name="RocketLauncher2" parent="." index="2" unique_id=831403446]
+[node name="RocketLauncher2" parent="." index="2" unique_id=1703110830]
 transform = Transform3D(0.7071077, -0.7071062, 0, 0.7071062, 0.7071077, 0, 0, 0, 1, 0.721545, 2.71879, -0.629959)
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="4" unique_id=1968194069]

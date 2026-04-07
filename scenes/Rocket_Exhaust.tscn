@@ -16,13 +16,13 @@ disable_receive_shadows = true
 
 [node name="thruster_exhaust" parent="." unique_id=1778734946 instance=ExtResource("1_cvcbv")]
 
-[node name="SIDE" parent="thruster_exhaust" index="0" unique_id=1471225265]
+[node name="SIDE" parent="thruster_exhaust" index="0" unique_id=421051996]
 material_override = SubResource("StandardMaterial3D_te1p6")
 
-[node name="TOP" parent="thruster_exhaust" index="1" unique_id=1575204982]
+[node name="TOP" parent="thruster_exhaust" index="1" unique_id=826713362]
 material_override = SubResource("StandardMaterial3D_te1p6")
 
-[node name="AnimationPlayer" parent="thruster_exhaust" index="2" unique_id=1773371457]
+[node name="AnimationPlayer" parent="thruster_exhaust" index="2" unique_id=1880935543]
 autoplay = &"Action"
 speed_scale = 5.0
 
