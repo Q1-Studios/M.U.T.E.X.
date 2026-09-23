@@ -16,13 +16,13 @@ func refresh_ips() -> void:
 	
 	for ip_res in IP.get_local_addresses():
 		var ip = ip_res.to_lower()
-		if is_ipv4(ip) and (ip.begins_with("10.") or is_in_ipv4_range(ip, "172.", 16, 31) or ip.begins_with("192.168.")):
+		if is_ipv4(ip) and is_ipv4_local(ip):
 			local_ipv4s.append(ip)
-		elif is_ipv4(ip) and ip != "127.0.0.1":
+		elif is_ipv4(ip) and not is_ipv4_loopback(ip):
 			public_ipv4s.append(ip)
-		elif is_ipv6(ip) and (ip.begins_with("fe80:") or ip.begins_with("fd00:")) and ip != "fe80:0:0:0:0:0:0:1":
+		elif is_ipv6(ip) and is_ipv6_local(ip):
 			local_ipv6s.append(ip)
-		elif is_ipv6(ip) and ip != "0:0:0:0:0:0:0:1" and ip != "fe80:0:0:0:0:0:0:1":
+		elif is_ipv6(ip) and not is_ipv6_loopback(ip):
 			public_ipv6s.append(ip)
 
 func is_ipv4(string: String) -> bool:
@@ -42,6 +42,22 @@ func is_ipv6(string: String) -> bool:
 		return true
 	else:
 		return false
+
+func is_ipv4_local(ip: String) -> bool:
+	return (
+		ip.begins_with("10.") or
+		is_in_ipv4_range(ip, "172.", 16, 31) or
+		ip.begins_with("192.168.")
+	)
+
+func is_ipv6_local(ip: String) -> bool:
+	return ip.begins_with("fe80:") or ip.begins_with("fd00:")
+
+func is_ipv4_loopback(ip: String) -> bool: 
+	return ip.begins_with("127.")
+
+func is_ipv6_loopback(ip: String) -> bool:
+	return ip == "0:0:0:0:0:0:0:1"
 
 func is_in_ipv4_range(ip: String, prefix: String, range_start: int, range_end: int) -> bool:
 	for i in range(range_start, range_end + 1):
