@@ -54,3 +54,15 @@ func get_ips(type: AddressType) -> Array[String]:
 		AddressType.PUBLIC_IPV6:
 			return public_ipv6s
 	return []
+
+func get_best_type() -> AddressType:
+	if public_ipv4s.size() > 0:
+		return AddressType.PUBLIC_IPV4
+	if public_ipv6s.size() > 0:
+		return AddressType.PUBLIC_IPV6
+	if local_ipv4s.size() > 0:
+		return AddressType.LOCAL_IPV4
+	if local_ipv6s.size() > 0:
+		return AddressType.LOCAL_IPV6
+		
+	return AddressType.LOCAL_IPV4

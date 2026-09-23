@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://dm14dk4gbd8d6" path="res://scripts/mouse_cursor.gd" id="12_hofui"]
 [ext_resource type="Script" uid="uid://bh2top0jlnc6f" path="res://scripts/ip_address_label.gd" id="13_0fhfr"]
 [ext_resource type="Script" uid="uid://b54548liy8821" path="res://scripts/auto_fadeout.gd" id="14_0fhfr"]
+[ext_resource type="Script" uid="uid://cswun75j80y56" path="res://scripts/ip_mode_button.gd" id="14_p8a51"]
 
 [sub_resource type="GDScript" id="GDScript_j7o8s"]
 resource_name = "gurber"
@@ -883,11 +884,11 @@ offset_left = 134.475
 offset_top = 104.724
 offset_right = 387.475
 offset_bottom = 188.724
-focus_neighbor_left = NodePath(".")
+focus_neighbor_left = NodePath("../IPModeButton")
 focus_neighbor_top = NodePath("../PrimaryColorField")
-focus_neighbor_right = NodePath(".")
+focus_neighbor_right = NodePath("../IPModeButton")
 focus_neighbor_bottom = NodePath("../TeamnameField")
-focus_next = NodePath("../TeamnameField")
+focus_next = NodePath("../IPModeButton")
 focus_previous = NodePath("../SecondaryColorField")
 theme_override_font_sizes/font_size = 75
 text = "<< return >>"
@@ -902,9 +903,9 @@ offset_top = 312.982
 offset_right = 922.995
 offset_bottom = 396.982
 focus_neighbor_left = NodePath("../TeamnameField")
-focus_neighbor_top = NodePath("../CANCELHH")
+focus_neighbor_top = NodePath("../IPModeButton")
 focus_neighbor_right = NodePath("../TeamnameField")
-focus_neighbor_bottom = NodePath("../CANCELHH")
+focus_neighbor_bottom = NodePath("../IPModeButton")
 focus_next = NodePath("../PrimaryColorField")
 focus_previous = NodePath("../TeamnameField")
 theme_override_font_sizes/font_size = 75
@@ -948,7 +949,7 @@ focus_neighbor_top = NodePath("../CANCELHH")
 focus_neighbor_right = NodePath("../START")
 focus_neighbor_bottom = NodePath("../PrimaryColorField")
 focus_next = NodePath("../START")
-focus_previous = NodePath("../CANCELHH")
+focus_previous = NodePath("../IPModeButton")
 theme_override_fonts/font = ExtResource("3_oua23")
 placeholder_text = "ENTER  NAME"
 select_all_on_focus = true
@@ -1125,8 +1126,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 671.1849
 offset_top = 116.62433
-offset_right = 227.98291
-offset_bottom = -797.8712
+offset_right = 632.1848
+offset_bottom = 76.62427
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.751568, 0.751568)
@@ -1134,11 +1135,29 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 70
 text = "Your IP-Address:"
 
+[node name="IPModeButton" type="Button" parent="HOSTINGASHOST" unique_id=1962805571 node_paths=PackedStringArray("ip_label")]
+layout_mode = 0
+offset_left = 904.4336
+offset_top = 124.954636
+offset_right = 1021.05774
+offset_bottom = 168.95464
+focus_neighbor_left = NodePath("../CANCELHH")
+focus_neighbor_top = NodePath("../START")
+focus_neighbor_right = NodePath("../CANCELHH")
+focus_neighbor_bottom = NodePath("../START")
+focus_next = NodePath("../TeamnameField")
+focus_previous = NodePath("../CANCELHH")
+text = "Auto"
+script = ExtResource("14_p8a51")
+ip_label = NodePath("../IPAddress")
+
+[node name="ButtonSoundPlayer" parent="HOSTINGASHOST/IPModeButton" unique_id=660181600 instance=ExtResource("4_qm21r")]
+
 [node name="IPAddress" type="Label" parent="HOSTINGASHOST" unique_id=1664664294 node_paths=PackedStringArray("copied_notification")]
 layout_mode = 1
 offset_left = 670.0
 offset_top = 180.0
-offset_right = 830.0
+offset_right = 1138.684
 offset_bottom = 251.0
 scale = Vector2(0.751568, 0.751568)
 mouse_filter = 0
@@ -1362,5 +1381,6 @@ text = "- PRESS  START -"
 [connection signal="pressed" from="HOSTINGASHOST/START" to="Menu" method="_on_start_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="HOSTINGASHOST" method="_on_start_pressed"]
 [connection signal="pressed" from="HOSTINGASHOST/START" to="PRESSTART" method="_on_start_pressed"]
+[connection signal="pressed" from="HOSTINGASHOST/IPModeButton" to="HOSTINGASHOST/IPModeButton" method="_on_pressed"]
 [connection signal="pressed" from="NETWORKERROR/VBoxContainer/CenterContainer/Exit" to="HOSTING" method="_on_network_error_exit_pressed"]
 [connection signal="pressed" from="NETWORKERROR/VBoxContainer/CenterContainer/Exit" to="NETWORKERROR" method="_on_exit_pressed"]
