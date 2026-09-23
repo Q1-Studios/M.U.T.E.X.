@@ -175,6 +175,7 @@ func _on_cancelhost_pressed() -> void:
 	hide()
 
 func _on_host_pressed() -> void:
+	IpAddressDetector.refresh_ips()
 	ip_addr_label.refresh_ip()
 	show()
 	init_focus.grab_focus()

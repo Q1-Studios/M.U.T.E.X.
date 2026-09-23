@@ -30,6 +30,7 @@ ScoreManager="*res://scripts/scoreManager.gd"
 Global="*res://scripts/Global.gd"
 SceneManager="*res://scenes/scene_manager.tscn"
 Vibration="*res://scripts/vibration.gd"
+IpAddressDetector="*uid://cuk73x0um7fgi"
 
 [display]
 

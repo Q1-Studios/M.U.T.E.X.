@@ -1,12 +1,10 @@
 extends CopyOnClickLabel
 class_name IPAddressLabel
 
+@export var ip_type: IpAddressDetector.AddressType
+
 func refresh_ip() -> void:
-	# Find all potential IPs that identify the host's local network adapters
-	var ips: Array = []
-	for ip in IP.get_local_addresses():
-		if ip.begins_with("10.") or ip.begins_with("172.16.") or ip.begins_with("192.168."):
-			ips.append(ip)
+	var ips = IpAddressDetector.get_ips(ip_type)
 	if ips.size() > 0:
 		text = ips[0]
 	else:
