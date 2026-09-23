@@ -16,7 +16,7 @@ func refresh_ips() -> void:
 	
 	for ip_res in IP.get_local_addresses():
 		var ip = ip_res.to_lower()
-		if is_ipv4(ip) and (ip.begins_with("10.") or ip.begins_with("172.16.") or ip.begins_with("192.168.")):
+		if is_ipv4(ip) and (ip.begins_with("10.") or is_in_ipv4_range(ip, "172.", 16, 31) or ip.begins_with("192.168.")):
 			local_ipv4s.append(ip)
 		elif is_ipv4(ip) and ip != "127.0.0.1":
 			public_ipv4s.append(ip)
@@ -42,6 +42,12 @@ func is_ipv6(string: String) -> bool:
 		return true
 	else:
 		return false
+
+func is_in_ipv4_range(ip: String, prefix: String, range_start: int, range_end: int) -> bool:
+	for i in range(range_start, range_end + 1):
+		if ip.begins_with(prefix + str(i) + ".") or ip == prefix + str(i):
+			return true
+	return false
 
 func get_ips(type: AddressType) -> Array[String]:
 	match type:
