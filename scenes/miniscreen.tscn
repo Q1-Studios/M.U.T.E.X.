@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bvh0yqqj2r1ue" path="res://scripts/highscore_label.gd" id="8_irrrk"]
 [ext_resource type="Script" uid="uid://l4t0hvb6p5ct" path="res://scripts/network_error_label.gd" id="8_qm21r"]
 [ext_resource type="Script" uid="uid://dklx4pm5boqr6" path="res://scripts/color_picker_line_edit.gd" id="9_bi3l1"]
+[ext_resource type="Script" uid="uid://b2e27djqtiuic" path="res://scripts/port_info_label.gd" id="10_fhbfy"]
 [ext_resource type="Texture2D" uid="uid://ce5ivqphk25pc" path="res://assets/sprites/cursor.svg" id="11_t6nao"]
 [ext_resource type="Script" uid="uid://dm14dk4gbd8d6" path="res://scripts/mouse_cursor.gd" id="12_hofui"]
 [ext_resource type="Script" uid="uid://bh2top0jlnc6f" path="res://scripts/ip_address_label.gd" id="13_0fhfr"]
@@ -198,6 +199,7 @@ var teamname = \"IJoined\"
 @export var secondary_col_field: LineEdit
 @export var team_error_label: Label
 @export var color_error_label: Label
+@export var port_info_label: Label
 
 var iJoinedNotHosted = true
 
@@ -207,6 +209,7 @@ func _process(_delta: float) -> void:
 	
 	team_error_label.visible = not teamname_ok
 	color_error_label.visible = not color_codes_ok
+	port_info_label.visible = teamname_ok and color_codes_ok
 	
 	if teamname_ok and color_codes_ok:
 		teamname = teamname_field.text
@@ -896,7 +899,7 @@ script = ExtResource("5_ib01u")
 
 [node name="ButtonSoundPlayer" parent="HOSTINGASHOST/CANCELHH" unique_id=858485202 instance=ExtResource("4_qm21r")]
 
-[node name="START" type="Button" parent="HOSTINGASHOST" unique_id=1932400121 node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field", "team_error_label", "color_error_label")]
+[node name="START" type="Button" parent="HOSTINGASHOST" unique_id=1932400121 node_paths=PackedStringArray("teamname_field", "primary_col_field", "secondary_col_field", "team_error_label", "color_error_label", "port_info_label")]
 layout_mode = 0
 offset_left = 669.995
 offset_top = 312.982
@@ -917,13 +920,23 @@ primary_col_field = NodePath("../PrimaryColorField")
 secondary_col_field = NodePath("../SecondaryColorField")
 team_error_label = NodePath("VBoxContainer/TeamNameError")
 color_error_label = NodePath("VBoxContainer/ColorError")
+port_info_label = NodePath("VBoxContainer/PortInfo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HOSTINGASHOST/START" unique_id=218101971]
+custom_maximum_size = Vector2(210, -1)
 layout_mode = 0
 offset_left = 277.2801
-offset_right = 559.3206
-offset_bottom = 82.11267
+offset_top = -38.081787
+offset_right = 487.2801
+offset_bottom = 116.91821
 alignment = 1
+
+[node name="PortInfo" type="Label" parent="HOSTINGASHOST/START/VBoxContainer" unique_id=1196352642]
+visible = false
+layout_mode = 2
+text = "Server will start on port 8080"
+autowrap_mode = 3
+script = ExtResource("10_fhbfy")
 
 [node name="TeamNameError" type="Label" parent="HOSTINGASHOST/START/VBoxContainer" unique_id=1195163327]
 layout_mode = 2
